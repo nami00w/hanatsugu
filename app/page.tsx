@@ -1,3 +1,5 @@
+import DressCard from '@/components/DressCard';
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
@@ -73,28 +75,23 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* ダミー商品カード */}
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-80 bg-gray-200 relative">
-                  <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
-                    <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    ブランド名 ドレスモデル
-                  </h3>
-                  <p className="text-sm text-gray-500 mt-1">サイズ: 9号</p>
-                  <p className="text-2xl font-bold text-pink-600 mt-4">
-                    ¥128,000
-                  </p>
-                  <p className="text-sm text-gray-500 line-through">
-                    定価 ¥380,000
-                  </p>
-                </div>
-              </div>
+            {[
+              { id: "1", brand: "VERA WANG", model: "Liesel", size: "9号", price: 128000, originalPrice: 380000 },
+              { id: "2", brand: "Pronovias", model: "Draco", size: "11号", price: 95000, originalPrice: 280000 },
+              { id: "3", brand: "ANTONIO RIVA", model: "Gemma", size: "7号", price: 168000, originalPrice: 420000 },
+              { id: "4", brand: "Temperley London", model: "Iris", size: "9号", price: 145000, originalPrice: 350000 },
+              { id: "5", brand: "JENNY PACKHAM", model: "Hermione", size: "13号", price: 198000, originalPrice: 480000 },
+              { id: "6", brand: "Marchesa", model: "Grecian", size: "9号", price: 178000, originalPrice: 450000 },
+            ].map((dress) => (
+              <DressCard
+                key={dress.id}
+                id={dress.id}
+                brand={dress.brand}
+                model={dress.model}
+                size={dress.size}
+                price={dress.price}
+                originalPrice={dress.originalPrice}
+              />
             ))}
           </div>
         </div>

@@ -1,0 +1,64 @@
+
+> wedding-dress-market@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.3
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.10.127:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1633ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1083ms (780 modules)
+ GET / 200 in 1299ms
+ GET / 200 in 106ms
+ ✓ Compiled /products/[id] in 484ms (975 modules)
+ GET /products/1 200 in 924ms
+ GET /products/1 200 in 14ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
+ ✓ Compiled in 444ms (975 modules)
+ GET /products/1 200 in 70ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
+ ✓ Compiled in 171ms (975 modules)
+ GET /products/1 200 in 58ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop&crop=center 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop&crop=center 404
+ ✓ Compiled in 186ms (975 modules)
+ GET /products/1 200 in 29ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
+ ✓ Compiled in 165ms (975 modules)
+ GET /products/1 200 in 29ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150 404
+ ✓ Compiled in 152ms (975 modules)
+ GET /products/1 200 in 31ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
+ ✓ Compiled in 184ms (975 modules)
+ GET /products/1 200 in 42ms
+ GET /products/1 200 in 36ms
+ GET /products/2 200 in 19ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ GET /products/3 200 in 20ms
+ GET /products/4 200 in 19ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop 404
+ GET /products/5 200 in 15ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1452033648730-57c06a86db55?w=800&h=1000&fit=crop 404
+ GET /products/6 200 in 11ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
+ GET /products/4 200 in 34ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop 404
+ ✓ Compiled /auth/login in 370ms (968 modules)
+ GET /auth/login 200 in 400ms
+ GET /auth/login 200 in 6ms
+ ✓ Compiled /auth/signup in 203ms (975 modules)
+ GET /auth/signup 200 in 241ms

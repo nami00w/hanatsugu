@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* フォーム要素のスタイル */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  @apply px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
