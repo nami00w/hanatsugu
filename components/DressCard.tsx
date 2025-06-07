@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface DressCardProps {
   id: number;
   brand: string;
@@ -9,7 +11,6 @@ interface DressCardProps {
 }
 
 export default function DressCard({
-  id,
   brand,
   model,
   size,
@@ -20,12 +21,15 @@ export default function DressCard({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
       <div className="h-80 bg-gray-200 relative">
-        {imageUrl && (
-          <img
+        {imageUrl ? (
+          <Image
             src={imageUrl}
             alt={`${brand} ${model}`}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
+        ) : (
+          <div className="w-full h-full bg-gray-200" />
         )}
         <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow">
           <svg
