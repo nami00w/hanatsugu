@@ -6,33 +6,52 @@ import DressCard from '@/components/DressCard'
 import Link from 'next/link'
 
 // ダミーデータ（実際のアプリでは API から取得）
+// ProductList.tsxと同じデータ構造に統一
 const dressesData = [
   {
-    id: 1,
+    id: "1",
     brand: "VERA WANG",
-    model: "Elegant Mermaid",
+    model: "Liesel",
     size: "9号",
-    price: 180000,
+    price: 128000,
+    originalPrice: 380000,
+    imageUrl: "https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200"
+  },
+  {
+    id: "2",
+    brand: "Pronovias",
+    model: "Draco",
+    size: "11号",
+    price: 95000,
+    originalPrice: 280000,
+    imageUrl: "https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200"
+  },
+  {
+    id: "3",
+    brand: "ANTONIO RIVA",
+    model: "Gemma",
+    size: "7号",
+    price: 168000,
+    originalPrice: 420000,
+    imageUrl: "https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200"
+  },
+  {
+    id: "4",
+    brand: "Temperley London",
+    model: "Iris",
+    size: "9号",
+    price: 145000,
     originalPrice: 350000,
     imageUrl: "https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200"
   },
   {
-    id: 2,
-    brand: "Carolina Herrera",
-    model: "Classic Ball Gown",
-    size: "7号",
-    price: 220000,
-    originalPrice: 450000,
+    id: "5",
+    brand: "JENNY PACKHAM",
+    model: "Hermione",
+    size: "13号",
+    price: 198000,
+    originalPrice: 480000,
     imageUrl: "https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200"
-  },
-  {
-    id: 3,
-    brand: "Monique Lhuillier",
-    model: "Romantic A-Line",
-    size: "9号",
-    price: 160000,
-    originalPrice: 320000,
-    imageUrl: "https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200"
   }
 ]
 
@@ -41,16 +60,22 @@ export default function FavoritesPage() {
   const [favoriteDresses, setFavoriteDresses] = useState<typeof dressesData>([])
 
   useEffect(() => {
+    console.log('🔍 Favorites page effect:', { isLoggedIn, favorites, favoritesCount })
+    
     if (isLoggedIn && favorites.length > 0) {
-      // お気に入りのドレスデータを取得
-      const filteredDresses = dressesData.filter(dress => 
-        favorites.includes(dress.id.toString())
-      )
+      // お気に入りのドレスデータを取得（IDは既に文字列なのでそのまま比較）
+      const filteredDresses = dressesData.filter(dress => {
+        const isIncluded = favorites.includes(dress.id)
+        console.log(`📦 Dress ${dress.id} (${dress.brand}):`, { dressId: dress.id, isIncluded, favorites })
+        return isIncluded
+      })
+      console.log('✅ Filtered dresses:', filteredDresses)
       setFavoriteDresses(filteredDresses)
     } else {
+      console.log('❌ No favorites or not logged in')
       setFavoriteDresses([])
     }
-  }, [favorites, isLoggedIn])
+  }, [favorites, isLoggedIn, favoritesCount])
 
   if (!isLoggedIn) {
     return (

@@ -50,8 +50,8 @@ export function useFavorites() {
 
     // localStorage の変更を監視（ダミー認証用）
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'dummyAuth') {
-        console.log('🔄 Storage change detected:', e.newValue)
+      if (e.key === 'dummyAuth' || e.key === 'favorites') {
+        console.log('🔄 Storage change detected:', e.key, e.newValue)
         checkAuthStatus()
       }
     }
@@ -62,8 +62,15 @@ export function useFavorites() {
       checkAuthStatus()
     }
 
+    // favorites変更イベントを監視
+    const handleFavoritesChange = (e: CustomEvent) => {
+      console.log('🔄 Favorites change detected:', e.detail.favorites)
+      setFavorites(e.detail.favorites)
+    }
+
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('dummyAuthChange', handleDummyAuthChange)
+    window.addEventListener('favoritesChange', handleFavoritesChange as EventListener)
 
     // 認証状態の変更を監視
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -84,28 +91,34 @@ export function useFavorites() {
       subscription.unsubscribe()
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('dummyAuthChange', handleDummyAuthChange)
+      window.removeEventListener('favoritesChange', handleFavoritesChange as EventListener)
     }
   }, [])
 
-  const toggleFavorite = async (dressId: string) => {
+  const toggleFavorite = async (dressId: string | number) => {
     if (!isLoggedIn || !userId) {
       return false // ログインが必要
     }
 
-    const isCurrentlyFavorite = favorites.includes(dressId)
+    // IDを文字列に統一
+    const normalizedDressId = dressId.toString()
+    const isCurrentlyFavorite = favorites.includes(normalizedDressId)
+    
+    console.log('🔄 Toggle favorite:', { dressId: normalizedDressId, isCurrentlyFavorite, currentFavorites: favorites })
     
     // まずUIを即座に更新
     const newFavorites = isCurrentlyFavorite
-      ? favorites.filter(id => id !== dressId)
-      : [...favorites, dressId]
+      ? favorites.filter(id => id !== normalizedDressId)
+      : [...favorites, normalizedDressId]
     
+    console.log('✨ New favorites state:', newFavorites)
     setFavorites(newFavorites)
 
     // Supabaseを更新（本番環境）
     if (userId !== 'dummy-user-id') {
       const success = isCurrentlyFavorite
-        ? await favoritesAPI.removeFavorite(userId, dressId)
-        : await favoritesAPI.addFavorite(userId, dressId)
+        ? await favoritesAPI.removeFavorite(userId, normalizedDressId)
+        : await favoritesAPI.addFavorite(userId, normalizedDressId)
       
       if (!success) {
         // エラーの場合は元に戻す
@@ -115,13 +128,27 @@ export function useFavorites() {
     } else {
       // 開発中はlocalStorageに保存
       localStorage.setItem('favorites', JSON.stringify(newFavorites))
+      console.log('💾 Favorites saved to localStorage:', newFavorites)
+      
+      // カスタムイベントを発火して他のコンポーネントに通知
+      window.dispatchEvent(new CustomEvent('favoritesChange', { 
+        detail: { favorites: newFavorites } 
+      }))
+      
+      // 強制的にstorageイベントも発火（同一ページ内での更新通知）
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'favorites',
+        newValue: JSON.stringify(newFavorites),
+        oldValue: JSON.stringify(favorites)
+      }))
     }
     
     return true // 成功
   }
 
-  const isFavorite = (dressId: string) => {
-    return isLoggedIn && favorites.includes(dressId)
+  const isFavorite = (dressId: string | number) => {
+    const normalizedDressId = dressId.toString()
+    return isLoggedIn && favorites.includes(normalizedDressId)
   }
 
   const favoritesCount = isLoggedIn ? favorites.length : 0

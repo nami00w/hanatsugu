@@ -2,9 +2,12 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { DressWithSeller } from '@/lib/types'
 import ContactModal from '@/components/ContactModal'
+import Header from '@/components/Header'
+import { useFavorites } from '@/hooks/useFavorites'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -12,6 +15,12 @@ export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const [loading, setLoading] = useState(true)
   const [showContactModal, setShowContactModal] = useState(false)
+  const [showImageModal, setShowImageModal] = useState(false)
+  const { toggleFavorite, isFavorite } = useFavorites()
+  
+  // スワイプ用の状態管理
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   // ダミーデータ
   const dummyDresses = useMemo(() => [
@@ -157,35 +166,6 @@ export default function ProductDetailPage() {
         created_at: "2024-01-20",
         updated_at: "2024-01-20"
       }
-    },
-    {
-      id: "6",
-      title: "Marchesa Grecian ロイヤルドレス",
-      description: "Marchesaの「Grecian」コレクションより、ロイヤルスタイルのドレスです。\n\n手刺繍のレースとシルクオーガンザを使用した、まさに芸術品のような美しさです。\n2022年にニューヨークで購入いたしました。\n\n着用は挙式当日の1回のみで、専門クリーニング済みです。\n一生に一度の特別な日にふさわしい、最高級のドレスです。",
-      price: 178000,
-      original_price: 450000,
-      images: [
-        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1600298881974-6be191ceeda1?w=800&h=1000&fit=crop"
-      ],
-      size: "9号",
-      brand: "Marchesa",
-      condition: "未使用に近い",
-      color: "オフホワイト",
-      category: "プリンセスライン",
-      seller_id: "seller6",
-      created_at: "2024-02-20",
-      updated_at: "2024-02-20",
-      seller: {
-        id: "seller6",
-        email: "seller6@example.com",
-        name: "伊藤 優香",
-        avatar_url: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
-        bio: "海外の高級ブランドドレスを専門に扱っています。品質にこだわりを持っています。",
-        created_at: "2024-01-25",
-        updated_at: "2024-01-25"
-      }
     }
   ], [])
 
@@ -195,6 +175,31 @@ export default function ProductDetailPage() {
     setDress(foundDress as DressWithSeller || null)
     setLoading(false)
   }, [params.id, dummyDresses])
+  
+  // スワイプハンドラー
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd || !dress || !dress.images) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+    
+    if (isLeftSwipe && selectedImage < dress.images.length - 1) {
+      setSelectedImage(prev => prev + 1)
+    }
+    if (isRightSwipe && selectedImage > 0) {
+      setSelectedImage(prev => prev - 1)
+    }
+  }
 
   if (loading) {
     return (
@@ -213,138 +218,287 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* 画像ギャラリー */}
-        <div className="space-y-4">
-          <div className="relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden">
-            {dress.images && dress.images.length > 0 ? (
-              <Image
-                src={dress.images[selectedImage]}
-                alt={dress.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            ) : (
-              <div className="flex items-center justify-center h-full text-gray-400">
-                画像がありません
-              </div>
-            )}
-          </div>
-          
-          {/* サムネイル */}
-          {dress.images && dress.images.length > 1 && (
-            <div className="grid grid-cols-4 gap-2">
-              {dress.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === index ? 'border-pink-500' : 'border-transparent'
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`${dress.title} ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
+    <div className="bg-white min-h-screen">
+      <Header />
+      
+      {/* パンくずリスト */}
+      <div className="border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <nav className="flex text-sm text-gray-600">
+            <Link href="/" className="hover:text-gray-800">トップ</Link>
+            <span className="mx-2">›</span>
+            <Link href={`/search?brand=${dress.brand}`} className="hover:text-gray-800">{dress.brand}</Link>
+            <span className="mx-2">›</span>
+            <span className="text-gray-800">{dress.title}</span>
+          </nav>
         </div>
+      </div>
 
-        {/* 商品情報 */}
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-2xl font-bold mb-2">{dress.title}</h1>
-            <p className="text-sm text-gray-600">{dress.brand}</p>
-          </div>
-
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-pink-600">
-              ¥{dress.price.toLocaleString()}
-            </span>
-            {dress.original_price && (
-              <span className="text-lg text-gray-500 line-through">
-                ¥{dress.original_price.toLocaleString()}
-              </span>
-            )}
-          </div>
-
-          <div className="space-y-4 pb-6 border-b">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <span className="text-sm text-gray-600">サイズ</span>
-                <p className="font-medium">{dress.size}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">カラー</span>
-                <p className="font-medium">{dress.color}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">状態</span>
-                <p className="font-medium">{dress.condition}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">カテゴリー</span>
-                <p className="font-medium">{dress.category}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <h2 className="text-lg font-semibold">商品説明</h2>
-            <p className="text-gray-700 whitespace-pre-wrap">{dress.description}</p>
-          </div>
-
-          {/* 出品者情報 */}
-          {dress.seller && (
-            <div className="bg-gray-50 rounded-lg p-6 space-y-4">
-              <h2 className="text-lg font-semibold">出品者情報</h2>
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gray-300 rounded-full overflow-hidden">
-                  {dress.seller.avatar_url ? (
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* 画像ギャラリー */}
+          <div className="lg:flex lg:gap-4">
+            {/* サムネイル（PC: 左側縦配置） */}
+            {dress.images && dress.images.length > 1 && (
+              <div className="hidden lg:block lg:w-20 lg:space-y-3">
+                {dress.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`relative w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2 transition-all hover:opacity-80 ${
+                      selectedImage === index ? 'border-pink-500 ring-2 ring-pink-200' : 'border-gray-200'
+                    }`}
+                  >
                     <Image
-                      src={dress.seller.avatar_url}
-                      alt={dress.seller.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
+                      src={image}
+                      alt={`${dress.title} ${index + 1}`}
+                      fill
+                      className="object-cover"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-500">
-                      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                  </button>
+                ))}
+              </div>
+            )}
+            
+            {/* メイン画像 */}
+            <div className="flex-1">
+              <div 
+                className="relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden cursor-zoom-in group"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {dress.images && dress.images.length > 0 ? (
+                  <>
+                    <Image
+                      src={dress.images[selectedImage]}
+                      alt={dress.title}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                      priority
+                      onClick={() => setShowImageModal(true)}
+                    />
+                    {/* PC用拡大アイコン */}
+                    <div className="hidden lg:block absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
                     </div>
-                  )}
-                </div>
-                <div>
-                  <p className="font-medium">{dress.seller.name}</p>
-                  {dress.seller.bio && (
-                    <p className="text-sm text-gray-600 mt-1">{dress.seller.bio}</p>
+                    
+                    {/* モバイル用左右ナビゲーション */}
+                    {dress.images.length > 1 && (
+                      <>
+                        {/* 左矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev > 0 ? prev - 1 : dress.images!.length - 1)
+                          }}
+                          className="lg:hidden absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+                        >
+                          <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        {/* 右矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev < dress.images!.length - 1 ? prev + 1 : 0)
+                          }}
+                          className="lg:hidden absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+                        >
+                          <svg className="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                        
+                        {/* インジケーター */}
+                        <div className="lg:hidden absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                          {dress.images.map((_, index) => (
+                            <div
+                              key={index}
+                              className={`w-2 h-2 rounded-full transition-all ${
+                                selectedImage === index 
+                                  ? 'bg-white w-6' 
+                                  : 'bg-white bg-opacity-60'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <div className="flex items-center justify-center h-full text-gray-400">
+                    画像がありません
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* 商品情報 */}
+          <div className="lg:relative">
+            <div className="lg:sticky lg:top-8 lg:h-fit space-y-8">
+              <div>
+                <h1 className="text-3xl font-bold mb-3 text-gray-800">{dress.title}</h1>
+                <p className="text-lg text-gray-600 mb-4">{dress.brand}</p>
+                
+                {/* 価格 */}
+                <div className="flex items-baseline gap-3 mb-6">
+                  <span className="text-4xl font-bold text-pink-600">
+                    ¥{dress.price.toLocaleString()}
+                  </span>
+                  {dress.original_price && (
+                    <>
+                      <span className="text-xl text-gray-500 line-through">
+                        ¥{dress.original_price.toLocaleString()}
+                      </span>
+                      <span className="bg-red-100 text-red-800 text-sm font-medium px-2 py-1 rounded">
+                        {Math.round((1 - dress.price / dress.original_price) * 100)}% OFF
+                      </span>
+                    </>
                   )}
                 </div>
               </div>
-            </div>
-          )}
 
-          {/* アクションボタン */}
-          <div className="space-y-3">
-            <button 
-              onClick={() => setShowContactModal(true)}
-              className="w-full bg-pink-600 text-white py-3 rounded-lg font-medium hover:bg-pink-700 transition-colors"
-            >
-              お問い合わせする
-            </button>
-            <button className="w-full border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-              お気に入りに追加
-            </button>
+              {/* 商品詳細 */}
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">商品詳細</h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <span className="text-sm text-gray-600 block mb-1">サイズ</span>
+                    <p className="font-semibold text-gray-800">{dress.size}</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-600 block mb-1">カラー</span>
+                    <p className="font-semibold text-gray-800">{dress.color}</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-600 block mb-1">状態</span>
+                    <p className="font-semibold text-gray-800">{dress.condition}</p>
+                  </div>
+                  <div>
+                    <span className="text-sm text-gray-600 block mb-1">カテゴリー</span>
+                    <p className="font-semibold text-gray-800">{dress.category}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 商品説明 */}
+              <div>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">商品説明</h2>
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{dress.description}</p>
+                </div>
+              </div>
+
+              {/* 出品者情報 */}
+              {dress.seller && (
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4">出品者情報</h2>
+                  <div className="flex items-start gap-4">
+                    <div className="w-16 h-16 bg-gray-300 rounded-full overflow-hidden flex-shrink-0">
+                      {dress.seller.avatar_url ? (
+                        <Image
+                          src={dress.seller.avatar_url}
+                          alt={dress.seller.name}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-500">
+                          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-800 text-lg">{dress.seller.name}</p>
+                      {dress.seller.bio && (
+                        <p className="text-gray-600 mt-2 leading-relaxed">{dress.seller.bio}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* 固定アクションボタンエリア（PC版） */}
+            <div className="hidden lg:block lg:sticky lg:bottom-0 bg-white border-t border-gray-200 p-6 shadow-lg mt-8">
+              {/* お気に入り・シェアボタン */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <button 
+                  onClick={() => toggleFavorite(dress.id)}
+                  className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
+                    isFavorite(dress.id) 
+                      ? 'bg-pink-50 border-pink-600 text-pink-600' 
+                      : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {isFavorite(dress.id) ? '❤️' : '🤍'}
+                  <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
+                </button>
+                
+                <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                  <span>🔗</span>
+                  <span>シェア</span>
+                </button>
+              </div>
+              
+              {/* 質問ボタン */}
+              <button 
+                onClick={() => setShowContactModal(true)}
+                className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg hover:shadow-xl"
+              >
+                💌 この商品について質問する
+              </button>
+            </div>
           </div>
         </div>
+        
+        {/* 関連商品セクション */}
+        <div className="mt-16 mb-32 lg:mb-16">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">関連商品</h2>
+          <div className="text-center py-12 bg-gray-50 rounded-lg">
+            <p className="text-gray-600">関連商品を準備中です</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* モバイル用固定ボタン */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
+        {/* お気に入り・シェアボタン */}
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <button 
+            onClick={() => toggleFavorite(dress.id)}
+            className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
+              isFavorite(dress.id) 
+                ? 'bg-pink-50 border-pink-600 text-pink-600' 
+                : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            {isFavorite(dress.id) ? '❤️' : '🤍'}
+            <span className="text-sm">{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入り'}</span>
+          </button>
+          
+          <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+            <span>🔗</span>
+            <span className="text-sm">シェア</span>
+          </button>
+        </div>
+        
+        {/* 質問ボタン */}
+        <button 
+          onClick={() => setShowContactModal(true)}
+          className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg"
+        >
+          💌 この商品について質問する
+        </button>
       </div>
 
       {/* お問い合わせモーダル */}
@@ -355,6 +509,61 @@ export default function ProductDetailPage() {
         dressTitle={dress.title}
         sellerId={dress.seller_id}
       />
+      
+      {/* 画像拡大モーダル */}
+      {showImageModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90" onClick={() => setShowImageModal(false)}>
+          <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center p-4">
+            <button
+              onClick={() => setShowImageModal(false)}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <div className="relative w-full h-full">
+              <Image
+                src={dress.images![selectedImage]}
+                alt={dress.title}
+                fill
+                className="object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+            
+            {/* 画像ナビゲーション */}
+            {dress.images && dress.images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSelectedImage(prev => prev > 0 ? prev - 1 : dress.images!.length - 1)
+                  }}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 bg-black bg-opacity-50 rounded-full p-2"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSelectedImage(prev => prev < dress.images!.length - 1 ? prev + 1 : 0)
+                  }}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 bg-black bg-opacity-50 rounded-full p-2"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
