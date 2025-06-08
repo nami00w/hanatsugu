@@ -51,6 +51,19 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     onClose()
   }
 
+  // デモログイン機能（開発用）
+  const handleDemoLogin = () => {
+    console.log('🔧 Demo login from modal...')
+    localStorage.setItem('dummyAuth', 'true')
+    localStorage.setItem('dummyUserId', 'demo-user-123')
+    
+    // カスタムイベントを発火してコンポーネントに通知
+    window.dispatchEvent(new Event('dummyAuthChange'))
+    
+    console.log('✅ Demo logged in')
+    onClose()
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* 背景オーバーレイ */}
@@ -92,6 +105,12 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
           {/* ボタン */}
           <div className="space-y-3">
+            <button
+              onClick={handleDemoLogin}
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+            >
+              🔧 デモログイン（開発用）
+            </button>
             <button
               onClick={handleLogin}
               className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"

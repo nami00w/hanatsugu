@@ -63,17 +63,15 @@ export default function DressCard({
           )}
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 ${
-              isLoggedIn ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-            }`}
+            className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
           >
             <svg
               className={`w-5 h-5 transition-colors ${
-                isFavorited 
+                isLoggedIn && isFavorited 
                   ? 'text-pink-600 fill-pink-600' 
                   : 'text-gray-600 hover:text-pink-500'
               }`}
-              fill={isFavorited ? "currentColor" : "none"}
+              fill={isLoggedIn && isFavorited ? "currentColor" : "none"}
               stroke="currentColor"
               viewBox="0 0 24 24"
             >

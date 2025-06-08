@@ -16,6 +16,18 @@ export default function Header() {
     console.log('ログアウト（開発中）')
   }
 
+  // ダミーログイン
+  const handleDummyLogin = () => {
+    console.log('🔧 Logging in...')
+    localStorage.setItem('dummyAuth', 'true')
+    localStorage.setItem('dummyUserId', 'demo-user-123')
+    
+    // カスタムイベントを発火してコンポーネントに通知
+    window.dispatchEvent(new Event('dummyAuthChange'))
+    
+    console.log('✅ Logged in as demo user')
+  }
+
   // ダミーログアウト
   const handleDummyLogout = () => {
     console.log('🔧 Logging out...')
@@ -105,6 +117,12 @@ export default function Header() {
                     </button>
                   ) : (
                     <>
+                      <button
+                        onClick={handleDummyLogin}
+                        className="bg-green-600 text-white px-3 py-1 text-sm rounded hover:bg-green-700 transition-colors"
+                      >
+                        🔧 デモログイン
+                      </button>
                       <Link
                         href="/auth/login"
                         className="text-gray-700 hover:text-gray-900"

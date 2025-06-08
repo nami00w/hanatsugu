@@ -32,6 +32,19 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     }
   }, [isOpen, onClose])
 
+  // ダミーログイン
+  const handleDummyLogin = () => {
+    console.log('🔧 Logging in...')
+    localStorage.setItem('dummyAuth', 'true')
+    localStorage.setItem('dummyUserId', 'demo-user-123')
+    
+    // カスタムイベントを発火してコンポーネントに通知
+    window.dispatchEvent(new Event('dummyAuthChange'))
+    
+    console.log('✅ Logged in as demo user')
+    onClose()
+  }
+
   // ダミーログアウト
   const handleDummyLogout = () => {
     console.log('🔧 Logging out...')
@@ -144,6 +157,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </button>
             ) : (
               <div className="space-y-2">
+                <button
+                  onClick={handleDummyLogin}
+                  className="flex items-center gap-3 py-3 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors w-full text-left"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="font-medium">🔧 デモログイン</span>
+                </button>
                 <Link
                   href="/auth/login"
                   onClick={onClose}
