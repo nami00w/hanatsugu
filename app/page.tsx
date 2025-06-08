@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { FilterState } from '@/components/ProductFilter'
@@ -12,7 +12,8 @@ import SearchBar from '@/components/SearchBar'
 // Dynamic rendering を強制
 export const dynamic = 'force-dynamic'
 
-export default function Home() {
+// useSearchParamsを使用するコンポーネントを分離
+function HomeContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
@@ -179,4 +180,17 @@ export default function Home() {
     </main>
     </>
   );
+}
+
+// メインのHomeコンポーネント
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">読み込み中...</div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
+  )
 }

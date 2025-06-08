@@ -1,11 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 import SearchBar from '@/components/SearchBar'
 import { FilterState } from '@/components/ProductFilter'
 import ProductList from '@/components/ProductList'
+
+// Dynamic rendering を強制
+export const dynamic = 'force-dynamic'
 
 // 詳細フィルターの定義
 interface DetailedFilters {
@@ -31,7 +34,8 @@ const FILTER_OPTIONS = {
   shipping: ['送料込み', '送料別', '着払い', '手渡し']
 }
 
-export default function SearchPage() {
+// useSearchParamsを使用するコンポーネントを分離
+function SearchContent() {
   const searchParams = useSearchParams()
   
   const [detailedFilters, setDetailedFilters] = useState<DetailedFilters>({
@@ -280,5 +284,18 @@ export default function SearchPage() {
         </div>
       </main>
     </>
+  )
+}
+
+// メインのSearchPageコンポーネント
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">読み込み中...</div>
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   )
 }
