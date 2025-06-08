@@ -1,0 +1,20 @@
+
+> wedding-dress-market@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.3
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.10.127:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1222ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.7s (994 modules)
+ GET / 200 in 3152ms
+ GET / 200 in 68ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET / 200 in 78ms
+ ✓ Compiled /products/[id] in 416ms (985 modules)
+ GET /products/1 200 in 821ms
+ GET /products/1 200 in 13ms
