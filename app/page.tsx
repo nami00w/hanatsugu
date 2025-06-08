@@ -1,8 +1,96 @@
-import DressCard from '@/components/DressCard';
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { FilterState } from '@/components/ProductFilter'
+import ProductList from '@/components/ProductList'
+import MobileFilterModal from '@/components/MobileFilterModal'
+import Header from '@/components/Header'
+import SearchBar from '@/components/SearchBar'
+
+// Dynamic rendering を強制
+export const dynamic = 'force-dynamic'
 
 export default function Home() {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  
+  const [filters, setFilters] = useState<FilterState>({
+    priceRange: [0, 1000000],
+    sizes: [],
+    conditions: []
+  })
+
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
+  // const [searchFilters] = useState<SearchFilters>({
+  //   brand: '',
+  //   size: '',
+  //   maxPrice: ''
+  // })
+
+  // URLからフィルター状態を復元
+  useEffect(() => {
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const sizes = searchParams.get('sizes')
+    const conditions = searchParams.get('conditions')
+
+    const newFilters: FilterState = {
+      priceRange: [
+        minPrice ? parseInt(minPrice) : 0,
+        maxPrice ? parseInt(maxPrice) : 1000000
+      ],
+      sizes: sizes ? sizes.split(',').filter(s => s) : [],
+      conditions: conditions ? conditions.split(',').filter(c => c) : []
+    }
+
+    setFilters(newFilters)
+  }, [searchParams])
+
+  // フィルター変更時にURLを更新
+  const handleFilterChange = (newFilters: FilterState) => {
+    setFilters(newFilters)
+
+    // URLパラメータを構築
+    const params = new URLSearchParams()
+    
+    // 価格フィルター
+    if (newFilters.priceRange[0] > 0) {
+      params.set('minPrice', newFilters.priceRange[0].toString())
+    }
+    if (newFilters.priceRange[1] < 1000000) {
+      params.set('maxPrice', newFilters.priceRange[1].toString())
+    }
+    
+    // サイズフィルター
+    if (newFilters.sizes.length > 0) {
+      params.set('sizes', newFilters.sizes.join(','))
+    }
+    
+    // 状態フィルター
+    if (newFilters.conditions.length > 0) {
+      params.set('conditions', newFilters.conditions.join(','))
+    }
+
+    // URLを更新（ページリロードなし）
+    const newURL = params.toString() ? `?${params.toString()}` : '/'
+    router.push(newURL, { scroll: false })
+  }
+
+  // 検索実行
+  // const handleSearch = (newSearchFilters: SearchFilters) => {
+  //   // setSearchFilters(newSearchFilters)
+  //   console.log('検索フィルター:', newSearchFilters)
+  //   // TODO: 検索ロジックを実装
+  // }
+
   return (
-    <main className="min-h-screen bg-gray-50">
+    <>
+      {/* ページ固有のヘッダー */}
+      <Header />
+      
+      <main className="min-h-screen bg-gray-50">
       {/* ヒーローセクション */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -20,33 +108,47 @@ export default function Home() {
                 </button>
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-pink-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                <Link href="/sell" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-pink-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
                   ドレスを出品
-                </button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 検索セクション */}
-      <section className="py-12">
+      {/* 検索バーセクション */}
+      <section className="bg-gray-50 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <input
-              type="text"
-              placeholder="ブランド名、スタイル、サイズで検索..."
-              className="w-full px-6 py-4 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-            />
+          <SearchBar />
+          
+          {/* 詳細フィルターボタン */}
+          <div className="mt-4 text-center">
+            <button
+              onClick={() => setIsMobileFilterOpen(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+              </svg>
+              詳細フィルター
+            </button>
           </div>
         </div>
       </section>
 
-      {/* カテゴリーセクション */}
+      {/* 商品一覧セクション */}
+      <section className="py-8">
+        <div className="max-w-[1600px] mx-auto px-4 lg:px-8 xl:px-12">
+          <ProductList filters={filters} />
+        </div>
+      </section>
+
+      {/* 価格帯セクション（簡略化） */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            価格帯から探す
+            人気の価格帯
           </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -66,36 +168,15 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* 商品一覧セクション */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            新着ドレス
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* ダミー商品カード */}
-            {[
-              { id: "1", brand: "VERA WANG", model: "Liesel", size: "9号", price: 128000, originalPrice: 380000 },
-              { id: "2", brand: "Pronovias", model: "Draco", size: "11号", price: 95000, originalPrice: 280000 },
-              { id: "3", brand: "ANTONIO RIVA", model: "Gemma", size: "7号", price: 168000, originalPrice: 420000 },
-              { id: "4", brand: "Temperley London", model: "Iris", size: "9号", price: 145000, originalPrice: 350000 },
-              { id: "5", brand: "JENNY PACKHAM", model: "Hermione", size: "13号", price: 198000, originalPrice: 480000 },
-              { id: "6", brand: "Marchesa", model: "Grecian", size: "9号", price: 178000, originalPrice: 450000 },
-            ].map((dress) => (
-              <DressCard
-                key={dress.id}
-                id={dress.id}
-                brand={dress.brand}
-                model={dress.model}
-                size={dress.size}
-                price={dress.price}
-                originalPrice={dress.originalPrice}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      
+      {/* モバイル用フィルターモーダル */}
+      <MobileFilterModal
+        isOpen={isMobileFilterOpen}
+        onClose={() => setIsMobileFilterOpen(false)}
+        onFilterChange={handleFilterChange}
+        initialFilters={filters}
+      />
     </main>
+    </>
   );
 }

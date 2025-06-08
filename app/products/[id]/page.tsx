@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { DressWithSeller } from '@/lib/types'
@@ -14,7 +14,7 @@ export default function ProductDetailPage() {
   const [showContactModal, setShowContactModal] = useState(false)
 
   // ダミーデータ
-  const dummyDresses = [
+  const dummyDresses = useMemo(() => [
     {
       id: "1",
       title: "VERA WANG Liesel エレガントドレス",
@@ -187,14 +187,14 @@ export default function ProductDetailPage() {
         updated_at: "2024-01-25"
       }
     }
-  ]
+  ], [])
 
   useEffect(() => {
     // ダミーデータから商品を取得
     const foundDress = dummyDresses.find(d => d.id === params.id)
     setDress(foundDress as DressWithSeller || null)
     setLoading(false)
-  }, [params.id])
+  }, [params.id, dummyDresses])
 
   if (loading) {
     return (
