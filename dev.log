@@ -18,3 +18,367 @@
  ✓ Compiled /products/[id] in 416ms (985 modules)
  GET /products/1 200 in 821ms
  GET /products/1 200 in 13ms
+ ✓ Compiled in 319ms (435 modules)
+ GET /products/1 200 in 119ms
+ ✓ Compiled in 160ms (435 modules)
+ GET /products/1 200 in 18ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled in 716ms (985 modules)
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/products/[id]/page.js:1:27412)
+    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:27464) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/products/1'
+}
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/products/[id]/page.js:1:27412)
+    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:27464) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/products/1'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1052ms (1305 modules)
+ GET /products/1 500 in 1787ms
+ GET /products/1 500 in 1473ms
+ GET /products/1 200 in 236ms
+ ⨯ Failed to generate static paths for /products/[id]:
+[Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/compiled/jest-worker/processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ✓ Compiled /_not-found in 472ms (1309 modules)
+ GET /_next/static/chunks/main-app.js?v=1749395108030 404 in 598ms
+ GET /_next/static/chunks/app/products/%5Bid%5D/page.js 404 in 591ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 594ms
+ ✓ Compiled in 362ms (685 modules)
+ ✓ Compiled in 173ms (685 modules)
+ GET / 200 in 173ms
+ GET /_next/static/chunks/main-app.js?v=1749395127372 404 in 56ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 58ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ ✓ Compiled in 803ms (1325 modules)
+ ✓ Compiled in 325ms (1325 modules)
+ ✓ Compiled in 188ms (686 modules)
+ ✓ Compiled in 111ms (686 modules)
+ ✓ Compiled in 281ms (1325 modules)
+ ⨯ [Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/compiled/jest-worker/processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/products/1'
+}
+ GET /products/1 500 in 622ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 892ms (1321 modules)
+ GET /products/1 200 in 73ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json'] {
+  type: 'Error',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json',
+  page: '/products/1'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json'] {
+  type: 'Error',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json',
+  page: '/products/1'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json'] {
+  type: 'Error',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json',
+  page: '/products/1'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/pages-manifest.json'
+}
+ GET /products/1 500 in 991ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json'] {
+  type: 'Error',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/build-manifest.json',
+  page: '/products/1'
+}
+ ⨯ Error: Cannot find module './548.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/pages/_document.js:1:335)
+    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /products/1 500 in 5874ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/cache/webpack/client-development-fallback/0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/Users/namiwatanabe/Desktop/wedding-dress-market/.next/cache/webpack/client-development-fallback/0.pack.gz'
+ GET /products/1 200 in 439ms
+ ✓ Compiled /_not-found in 128ms (1311 modules)
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/_not-found/page.js:1:3003)
+    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3044) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/_not-found/page.js:1:3003)
+    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3044) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /_next/static/css/app/layout.css?v=1749395223958 500 in 173ms
+ GET /_next/static/chunks/webpack.js?v=1749395223958 500 in 172ms
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/_not-found/page.js:1:3003)
+    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3044) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/_not-found/page.js:1:3003)
+    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3044) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/_not-found/page.js:1:3003)
+    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3044) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /_next/static/chunks/main-app.js?v=1749395223958 500 in 52ms
+ GET /_next/static/chunks/app-pages-internals.js 500 in 52ms
+ GET /_next/static/chunks/app/products/%5Bid%5D/page.js 500 in 51ms
+ ⨯ Error: Cannot find module './985.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/app/products/[id]/page.js:1:21558)
+    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:21614) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array],
+  page: '/products/1'
+}
+ ⨯ Error: Cannot find module './548.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/.next/server/app/_not-found/page.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/options.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/swc/index.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/config.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/next.js
+- /Users/namiwatanabe/Desktop/wedding-dress-market/node_modules/next/dist/server/lib/start-server.js
+    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
+    at <unknown> (.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
+    at <unknown> (.next/server/pages/_document.js:1:335)
+    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /products/1 500 in 75ms

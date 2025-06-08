@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { FilterState } from '@/components/ProductFilter'
 import ProductList from '@/components/ProductList'
 import MobileFilterModal from '@/components/MobileFilterModal'
@@ -37,7 +36,6 @@ function HomeContent() {
     const maxPrice = searchParams.get('maxPrice')
     const sizes = searchParams.get('sizes')
     const conditions = searchParams.get('conditions')
-    const brand = searchParams.get('brand')
 
     const newFilters: FilterState = {
       priceRange: [
@@ -45,8 +43,7 @@ function HomeContent() {
         maxPrice ? parseInt(maxPrice) : 1000000
       ],
       sizes: sizes ? sizes.split(',').filter(s => s) : [],
-      conditions: conditions ? conditions.split(',').filter(c => c) : [],
-      brand: brand || undefined
+      conditions: conditions ? conditions.split(',').filter(c => c) : []
     }
 
     setFilters(newFilters)
@@ -96,50 +93,47 @@ function HomeContent() {
       
       <main className="min-h-screen bg-gray-50">
       {/* ヒーローセクション */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-pink-50 via-white to-purple-50 py-20 sm:py-32">
+        {/* 装飾的な背景要素 */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
+          <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
-              大切なドレスに、次の物語を
+            <h1 className="text-5xl font-bold text-gray-900 sm:text-6xl lg:text-7xl">
+              大切なドレスに、<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+                次の物語を
+              </span>
             </h1>
-            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-600 sm:text-xl lg:text-2xl">
               あなたの特別な一着が、次の花嫁の特別な一日を彩ります
             </p>
-            <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-              <div className="rounded-md shadow">
-                <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 md:py-4 md:text-lg md:px-10">
-                  ドレスを探す
+            
+            {/* 検索バーを中央に統合 */}
+            <div className="mt-12 max-w-2xl mx-auto">
+              <SearchBar />
+              
+              {/* 詳細フィルターボタン */}
+              <div className="mt-6">
+                <button
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-sm text-gray-700 rounded-full shadow-lg hover:shadow-xl hover:bg-white transition-all duration-300 border border-gray-200"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                  </svg>
+                  詳細フィルター
                 </button>
-              </div>
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Link href="/sell" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-pink-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                  ドレスを出品
-                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 検索バーセクション */}
-      <section className="bg-gray-50 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SearchBar />
-          
-          {/* 詳細フィルターボタン */}
-          <div className="mt-4 text-center">
-            <button
-              onClick={() => setIsMobileFilterOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-              </svg>
-              詳細フィルター
-            </button>
-          </div>
-        </div>
-      </section>
 
       {/* ブランドカルーセルセクション */}
       <BrandCarousel />
