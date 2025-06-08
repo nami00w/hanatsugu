@@ -96,47 +96,42 @@ function HomeContent() {
       
       <main className="min-h-screen bg-gray-50">
       {/* ヒーローセクション */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
+        {/* 背景装飾 */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-pink-300 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-300 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
-              大切なドレスに、次の物語を
+            <h1 className="text-5xl font-bold text-gray-900 sm:text-6xl lg:text-7xl leading-tight">
+              大切なドレスに、<br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+                次の物語を
+              </span>
             </h1>
-            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-600 sm:text-2xl leading-relaxed">
               あなたの特別な一着が、次の花嫁の特別な一日を彩ります
             </p>
-            <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-              <div className="rounded-md shadow">
-                <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 md:py-4 md:text-lg md:px-10">
-                  ドレスを探す
+            
+            {/* 検索バー */}
+            <div className="mt-12 max-w-3xl mx-auto">
+              <SearchBar />
+              
+              {/* 詳細フィルターボタン */}
+              <div className="mt-6">
+                <button
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 text-sm text-gray-600 hover:text-gray-800 transition-colors bg-white/60 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                  </svg>
+                  詳細フィルター
                 </button>
               </div>
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <Link href="/sell" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-pink-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                  ドレスを出品
-                </Link>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 検索バーセクション */}
-      <section className="bg-gray-50 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SearchBar />
-          
-          {/* 詳細フィルターボタン */}
-          <div className="mt-4 text-center">
-            <button
-              onClick={() => setIsMobileFilterOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-              </svg>
-              詳細フィルター
-            </button>
           </div>
         </div>
       </section>

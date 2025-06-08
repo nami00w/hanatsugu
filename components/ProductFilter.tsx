@@ -6,6 +6,7 @@ export interface FilterState {
   priceRange: [number, number]
   sizes: string[]
   conditions: string[]
+  brand?: string
 }
 
 interface ProductFilterProps {

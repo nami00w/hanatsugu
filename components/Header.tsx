@@ -3,10 +3,12 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useFavorites } from '@/hooks/useFavorites'
+import MobileMenu from './MobileMenu'
 
 export default function Header() {
   // 開発中はダミーの認証状態を使用
   const [user] = useState<null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isLoggedIn, favoritesCount } = useFavorites()
 
   const handleLogout = async () => {
@@ -42,12 +44,35 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
+        <div className="flex justify-between items-center h-16 lg:justify-between">
+          {/* モバイル版レイアウト */}
+          <div className="lg:hidden flex items-center justify-between w-full">
+            {/* ハンバーガーメニュー（左） */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            
+            {/* ロゴ（中央） */}
+            <Link href="/" className="absolute left-1/2 transform -translate-x-1/2 text-2xl font-bold text-gray-900">
+              Hanatsugu
+            </Link>
+            
+            {/* 空のスペース（右） */}
+            <div className="w-10"></div>
+          </div>
+
+          {/* PC版レイアウト */}
+          <Link href="/" className="hidden lg:block text-2xl font-bold text-gray-900">
             Hanatsugu
           </Link>
 
-          <div className="flex items-center gap-4">
+          {/* PC版ナビゲーション */}
+          <div className="hidden lg:flex items-center gap-4">
             {/* お気に入りアイコン（ログイン時のみ） */}
             {isLoggedIn && (
               <Link 
@@ -65,30 +90,30 @@ export default function Header() {
               </Link>
             )}
             
+            {/* 出品ボタン */}
+            <Link
+              href="/sell"
+              className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors font-medium shadow-sm hover:shadow-md"
+            >
+              出品
+            </Link>
+            
             {user ? (
-              <>
-                <Link
-                  href="/sell"
-                  className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"
-                >
-                  ドレスを出品
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  ログアウト
-                </button>
-              </>
+              <button
+                onClick={handleLogout}
+                className="text-gray-700 hover:text-gray-900"
+              >
+                ログアウト
+              </button>
             ) : (
               <>
                 {/* ダミー認証がログイン状態の場合、ログアウトボタンを表示 */}
                 {isLoggedIn ? (
                   <button
                     onClick={handleDummyLogout}
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                    className="text-gray-700 hover:text-gray-900"
                   >
-                    🔧 ダミーログアウト
+                    ログアウト
                   </button>
                 ) : (
                   <>
@@ -100,7 +125,7 @@ export default function Header() {
                     </Link>
                     <Link
                       href="/auth/signup"
-                      className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+                      className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors border border-gray-200"
                     >
                       新規登録
                     </Link>
@@ -111,6 +136,12 @@ export default function Header() {
           </div>
         </div>
       </nav>
+      
+      {/* モバイルメニュー */}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen} 
+        onClose={() => setIsMobileMenuOpen(false)} 
+      />
     </header>
   )
 }

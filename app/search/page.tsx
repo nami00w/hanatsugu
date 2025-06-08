@@ -143,7 +143,8 @@ function SearchContent() {
     return {
       priceRange: detailedFilters.priceRange,
       sizes: detailedFilters.size,
-      conditions: detailedFilters.condition
+      conditions: detailedFilters.condition,
+      brand: detailedFilters.brand.length > 0 ? detailedFilters.brand[0] : undefined
     }
   }
 

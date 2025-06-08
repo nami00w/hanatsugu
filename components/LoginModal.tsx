@@ -55,7 +55,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* 背景オーバーレイ */}
       <div 
-        className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-200"
         onClick={onClose}
       />
       

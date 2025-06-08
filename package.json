@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:safe": "./dev-server.sh start",
+    "dev:stop": "./dev-server.sh stop",
+    "dev:restart": "./dev-server.sh restart",
+    "dev:status": "./dev-server.sh status"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.10.0",

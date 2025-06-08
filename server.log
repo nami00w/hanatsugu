@@ -8,1044 +8,86 @@
    - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 1633ms
+ ✓ Ready in 1247ms
  ○ Compiling / ...
- ✓ Compiled / in 1083ms (780 modules)
- GET / 200 in 1299ms
- GET / 200 in 106ms
- ✓ Compiled /products/[id] in 484ms (975 modules)
- GET /products/1 200 in 924ms
- GET /products/1 200 in 14ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
- ✓ Compiled in 444ms (975 modules)
- GET /products/1 200 in 70ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop 404
- ✓ Compiled in 171ms (975 modules)
- GET /products/1 200 in 58ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop&crop=center 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1000&fit=crop&crop=center 404
- ✓ Compiled in 186ms (975 modules)
- GET /products/1 200 in 29ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face 404
- ✓ Compiled in 165ms (975 modules)
- GET /products/1 200 in 29ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150 404
- ✓ Compiled in 152ms (975 modules)
- GET /products/1 200 in 31ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150 404
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
- ✓ Compiled in 184ms (975 modules)
- GET /products/1 200 in 42ms
- GET /products/1 200 in 36ms
- GET /products/2 200 in 19ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- GET /products/3 200 in 20ms
- GET /products/4 200 in 19ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop 404
- GET /products/5 200 in 15ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1452033648730-57c06a86db55?w=800&h=1000&fit=crop 404
- GET /products/6 200 in 11ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1000&fit=crop 404
- GET /products/4 200 in 34ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop 404
- ✓ Compiled /auth/login in 370ms (968 modules)
- GET /auth/login 200 in 400ms
- GET /auth/login 200 in 6ms
- ✓ Compiled /auth/signup in 203ms (975 modules)
- GET /auth/signup 200 in 241ms
- ✓ Compiled in 212ms (427 modules)
- ✓ Compiled in 73ms (427 modules)
- ✓ Compiled in 276ms (984 modules)
- ✓ Compiled in 130ms (427 modules)
- ✓ Compiled in 61ms (427 modules)
- ✓ Compiled in 525ms (979 modules)
- GET / 200 in 197ms
- GET /products/1 200 in 34ms
- GET /products/1 200 in 39ms
- GET / 200 in 87ms
- ✓ Compiled in 353ms (979 modules)
- GET / 200 in 45ms
- ✓ Compiled in 186ms (979 modules)
- GET / 200 in 29ms
- ✓ Compiled in 181ms (979 modules)
- GET / 200 in 27ms
- ✓ Compiled in 142ms (979 modules)
- GET / 200 in 31ms
- ✓ Compiled in 237ms (979 modules)
- GET / 200 in 44ms
- GET / 200 in 138ms
- GET /?sizes=XL 200 in 15ms
- GET / 200 in 14ms
- GET /?sizes=S 200 in 14ms
- GET /?sizes=S&conditions=%E6%9C%AA%E4%BD%BF%E7%94%A8%E3%81%AB%E8%BF%91%E3%81%84 200 in 13ms
- GET /?sizes=S 200 in 13ms
- GET / 200 in 14ms
- GET /?sizes=9%E5%8F%B7 200 in 15ms
- GET /?sizes=9%E5%8F%B7&conditions=%E6%9C%AA%E4%BD%BF%E7%94%A8%E3%81%AB%E8%BF%91%E3%81%84 200 in 14ms
- GET /?sizes=9%E5%8F%B7 200 in 18ms
- GET /?sizes=9%E5%8F%B7%2CS 200 in 12ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM 200 in 16ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM&conditions=%E7%9B%AE%E7%AB%8B%E3%81%A3%E3%81%9F%E5%82%B7%E3%82%84%E6%B1%9A%E3%82%8C%E3%81%AA%E3%81%97 200 in 13ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM 200 in 13ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM&conditions=%E6%9C%AA%E4%BD%BF%E7%94%A8%E3%81%AB%E8%BF%91%E3%81%84 200 in 14ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM 200 in 19ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM 200 in 82ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM&conditions=%E6%9C%AA%E4%BD%BF%E7%94%A8%E3%81%AB%E8%BF%91%E3%81%84 200 in 15ms
- GET /?sizes=9%E5%8F%B7%2CS%2CM&conditions=%E6%9C%AA%E4%BD%BF%E7%94%A8%E3%81%AB%E8%BF%91%E3%81%84 200 in 82ms
- GET / 200 in 23ms
- ✓ Compiled in 449ms (979 modules)
- GET / 200 in 51ms
- ✓ Compiled in 141ms (979 modules)
- GET / 200 in 38ms
- ⨯ ./components/ProductFilter.tsx
-Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
-     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/components/ProductFilter.tsx[0m:102:1]
- [2m 99[0m |   }
- [2m100[0m | 
- [2m101[0m |   return (
- [2m102[0m |     <div className={`bg-white rounded-lg shadow-md ${isModal ? '' : 'p-6'}`}>
-     : [35;1m     ^^^[0m
- [2m103[0m |       {isModal && (
- [2m104[0m |         <div className="flex items-center justify-between p-4 border-b">
- [2m105[0m |           <h2 className="text-lg font-bold">フィルター</h2>
-     `----
-
-Caused by:
-    Syntax Error
-
-Import trace for requested module:
-./components/ProductFilter.tsx
-./app/page.tsx
- ⨯ ./components/ProductFilter.tsx
-Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
-     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/components/ProductFilter.tsx[0m:102:1]
- [2m 99[0m |   }
- [2m100[0m | 
- [2m101[0m |   return (
- [2m102[0m |     <div className={`bg-white rounded-lg shadow-md ${isModal ? '' : 'p-6'}`}>
-     : [35;1m     ^^^[0m
- [2m103[0m |       {isModal && (
- [2m104[0m |         <div className="flex items-center justify-between p-4 border-b">
- [2m105[0m |           <h2 className="text-lg font-bold">フィルター</h2>
-     `----
-
-Caused by:
-    Syntax Error
-
-Import trace for requested module:
-./components/ProductFilter.tsx
-./app/page.tsx
- ⨯ ./components/ProductFilter.tsx
-Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
-     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/components/ProductFilter.tsx[0m:102:1]
- [2m 99[0m |   }
- [2m100[0m | 
- [2m101[0m |   return (
- [2m102[0m |     <div className={`bg-white rounded-lg shadow-md ${isModal ? '' : 'p-6'}`}>
-     : [35;1m     ^^^[0m
- [2m103[0m |       {isModal && (
- [2m104[0m |         <div className="flex items-center justify-between p-4 border-b">
- [2m105[0m |           <h2 className="text-lg font-bold">フィルター</h2>
-     `----
-
-Caused by:
-    Syntax Error
-
-Import trace for requested module:
-./components/ProductFilter.tsx
-./app/page.tsx
- ✓ Compiled in 151ms (979 modules)
- GET / 200 in 63ms
- ✓ Compiled in 198ms (979 modules)
- GET / 200 in 28ms
- ✓ Compiled in 152ms (431 modules)
- GET / 200 in 12ms
- ✓ Compiled in 447ms (979 modules)
- GET / 200 in 46ms
- GET / 200 in 121ms
- ✓ Compiled in 167ms (979 modules)
- GET / 200 in 34ms
- ✓ Compiled in 271ms (979 modules)
- GET / 200 in 32ms
- ✓ Compiled in 132ms (979 modules)
- GET / 200 in 27ms
- ⨯ ./app/page.tsx
-Error:   [31mx[0m Expression expected
-    ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/page.tsx[0m:73:1]
- [2m70[0m |   }
- [2m71[0m | 
- [2m72[0m |   return (
- [2m73[0m |     <>
-    : [35;1m     ^[0m
- [2m74[0m |       {/* ページ固有のヘッダー */}
- [2m75[0m |       <Header 
- [2m76[0m |         showFilterButton={true}
-    `----
-  [31mx[0m Expected ',', got '< (jsx tag start)'
-    ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/page.tsx[0m:75:1]
- [2m72[0m |   return (
- [2m73[0m |     <>
- [2m74[0m |       {/* ページ固有のヘッダー */}
- [2m75[0m |       <Header 
-    : [35;1m      ^[0m
- [2m76[0m |         showFilterButton={true}
- [2m77[0m |         onFilterClick={() => setIsMobileFilterOpen(true)}
- [2m78[0m |       />
-    `----
-
-Caused by:
-    Syntax Error
-
-Import trace for requested module:
-./app/page.tsx
- ⨯ ./app/page.tsx
-Error:   [31mx[0m Expression expected
-    ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/page.tsx[0m:73:1]
- [2m70[0m |   }
- [2m71[0m | 
- [2m72[0m |   return (
- [2m73[0m |     <>
-    : [35;1m     ^[0m
- [2m74[0m |       {/* ページ固有のヘッダー */}
- [2m75[0m |       <Header 
- [2m76[0m |         showFilterButton={true}
-    `----
-  [31mx[0m Expected ',', got '< (jsx tag start)'
-    ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/page.tsx[0m:75:1]
- [2m72[0m |   return (
- [2m73[0m |     <>
- [2m74[0m |       {/* ページ固有のヘッダー */}
- [2m75[0m |       <Header 
-    : [35;1m      ^[0m
- [2m76[0m |         showFilterButton={true}
- [2m77[0m |         onFilterClick={() => setIsMobileFilterOpen(true)}
- [2m78[0m |       />
-    `----
-
-Caused by:
-    Syntax Error
-
-Import trace for requested module:
-./app/page.tsx
- ○ Compiling /_error ...
- GET / 500 in 1046ms
- GET / 500 in 5ms
- GET / 500 in 7ms
- GET / 500 in 6ms
- ✓ Compiled /_not-found in 528ms (1305 modules)
- GET /_next/static/webpack/1ebbbeafb2f93ab3.webpack.hot-update.json 404 in 627ms
- ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- GET / 200 in 61ms
- ✓ Compiled in 144ms (1318 modules)
- ⨯ ReferenceError: Header is not defined
-    at RootLayout (app/layout.tsx:30:9)
-  28 |         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-  29 |       >
-> 30 |         <Header />
-     |         ^
-  31 |         {children}
-  32 |       </body>
-  33 |     </html> {
-  digest: '3450716346'
-}
- GET / 200 in 40ms
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ✓ Compiled in 194ms (1318 modules)
- GET / 200 in 230ms
- GET / 200 in 89ms
- GET / 200 in 99ms
- ✓ Compiled in 1569ms (1271 modules)
- GET / 200 in 101ms
- GET / 200 in 170ms
- ✓ Compiled in 633ms (1271 modules)
- GET / 200 in 62ms
- ✓ Compiled in 163ms (1271 modules)
- GET / 200 in 27ms
- ✓ Compiled in 142ms (1271 modules)
- GET / 200 in 21ms
- ✓ Compiled in 181ms (1271 modules)
- GET / 200 in 24ms
- ✓ Compiled in 282ms (1271 modules)
- GET / 200 in 22ms
- ✓ Compiled in 183ms (1271 modules)
- GET / 200 in 20ms
- ✓ Compiled in 200ms (1271 modules)
- GET / 200 in 21ms
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⨯ ReferenceError: showFilterButton is not defined
-    at Header (components/Header.tsx:25:13)
-  23 |           <div className="flex items-center gap-4">
-  24 |             {/* モバイル用フィルターボタン */}
-> 25 |             {showFilterButton && (
-     |             ^
-  26 |               <button
-  27 |                 onClick={onFilterClick}
-  28 |                 className="lg:hidden flex items-center gap-2 px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50" {
-  digest: '3901157343'
-}
- GET / 500 in 79ms
- ✓ Compiled in 210ms (1271 modules)
- GET / 200 in 8ms
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- GET / 200 in 120ms
- ✓ Compiled in 336ms (1271 modules)
- GET / 200 in 26ms
- GET / 200 in 109ms
- ✓ Compiled in 208ms (678 modules)
- GET / 200 in 23ms
- ✓ Compiled in 310ms (1271 modules)
- GET / 200 in 47ms
- ✓ Compiled in 155ms (1271 modules)
- GET / 200 in 23ms
- ✓ Compiled in 208ms (1271 modules)
- GET / 200 in 24ms
- ✓ Compiled in 318ms (1273 modules)
- GET / 200 in 29ms
- ✓ Compiled in 412ms (1273 modules)
- GET / 200 in 37ms
- ✓ Compiled in 225ms (1273 modules)
- GET / 200 in 30ms
- ✓ Compiled in 149ms (1273 modules)
- GET / 200 in 19ms
- ✓ Compiled in 205ms (1273 modules)
- GET / 200 in 27ms
- ✓ Compiled in 257ms (1273 modules)
- GET / 200 in 35ms
- ✓ Compiled in 198ms (679 modules)
- GET / 200 in 106ms
- GET / 200 in 183ms
- ✓ Compiled in 396ms (1273 modules)
- GET / 200 in 20ms
- ✓ Compiled in 213ms (1273 modules)
- GET / 200 in 29ms
- ✓ Compiled /search in 475ms (1266 modules)
- GET /search?brand=VERA+WANG 200 in 523ms
- GET /search 200 in 52ms
- GET / 200 in 156ms
- ✓ Compiled in 415ms (1280 modules)
- GET / 200 in 41ms
- ✓ Compiled in 180ms (1280 modules)
- GET / 200 in 19ms
- ✓ Compiled in 236ms (1280 modules)
- GET / 200 in 27ms
- ✓ Compiled in 197ms (1280 modules)
- GET / 200 in 33ms
- ✓ Compiled in 209ms (1280 modules)
- GET / 200 in 21ms
- ✓ Compiled in 222ms (1280 modules)
- GET / 200 in 54ms
- ✓ Compiled in 360ms (1280 modules)
- GET / 200 in 18ms
- ✓ Compiled in 168ms (1280 modules)
- GET / 200 in 22ms
- ✓ Compiled in 313ms (1280 modules)
- GET / 200 in 33ms
- GET / 200 in 127ms
- ✓ Compiled in 163ms (1280 modules)
- GET / 200 in 18ms
- GET / 200 in 140ms
- GET /products/1 200 in 30ms
- GET /products/2 200 in 21ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- GET /products/10 200 in 23ms
- GET /products/4 200 in 22ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop 404
- ✓ Compiled in 560ms (1280 modules)
- GET / 200 in 23ms
- ✓ Compiled in 254ms (1280 modules)
- GET / 200 in 28ms
- GET / 200 in 139ms
- ✓ Compiled in 461ms (1280 modules)
- GET / 200 in 27ms
- ✓ Compiled in 342ms (1280 modules)
- GET / 200 in 25ms
- ✓ Compiled in 305ms (1280 modules)
- GET / 200 in 27ms
- ✓ Compiled in 236ms (1280 modules)
- GET / 200 in 26ms
- GET / 200 in 151ms
- ✓ Compiled in 435ms (1280 modules)
- GET / 200 in 34ms
- ✓ Compiled in 273ms (1280 modules)
- GET / 200 in 23ms
- ✓ Compiled in 355ms (1280 modules)
- GET / 200 in 22ms
- ✓ Compiled in 259ms (1280 modules)
- GET / 200 in 30ms
- GET / 200 in 106ms
- GET / 200 in 112ms
- GET / 200 in 113ms
- ✓ Compiled in 503ms (1280 modules)
- GET / 200 in 37ms
- ✓ Compiled in 566ms (1280 modules)
- GET / 200 in 54ms
- ✓ Compiled in 305ms (1280 modules)
- GET / 200 in 29ms
- ✓ Compiled in 246ms (1280 modules)
- GET / 200 in 21ms
- ✓ Compiled in 394ms (1280 modules)
- GET / 200 in 55ms
- GET / 200 in 154ms
- GET /products/1 200 in 26ms
- ✓ Compiled in 498ms (1280 modules)
- GET / 200 in 45ms
- ✓ Compiled in 259ms (1280 modules)
- GET / 200 in 24ms
- ✓ Compiled in 245ms (1280 modules)
- GET / 200 in 22ms
- ✓ Compiled in 504ms (1280 modules)
- GET / 200 in 38ms
- ✓ Compiled in 262ms (1280 modules)
- GET / 200 in 24ms
- GET /search 200 in 80ms
- GET /search 200 in 14ms
- GET / 200 in 206ms
- GET / 200 in 133ms
- GET /products/3 200 in 39ms
- GET /search?brand=VERA+WANG 200 in 28ms
- GET /search?size=S 200 in 41ms
- ✓ Compiled in 280ms (681 modules)
- GET /search?size=S 200 in 22ms
- ✓ Compiled in 524ms (1280 modules)
- GET /search?size=S 200 in 41ms
- ✓ Compiled in 169ms (1282 modules)
- GET /search?size=S 200 in 19ms
- ✓ Compiled in 270ms (1282 modules)
- GET /search?size=S 200 in 28ms
- GET / 200 in 13ms
- GET /products/2 200 in 24ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- ✓ Compiled in 606ms (1284 modules)
- GET / 200 in 27ms
- ✓ Compiled in 313ms (1284 modules)
- GET / 200 in 48ms
- GET /products/2 200 in 23ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- GET /products/2 200 in 11ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- ✓ Compiled in 286ms (1284 modules)
- GET /products/2 200 in 28ms
- ✓ Compiled in 267ms (1284 modules)
- GET / 200 in 29ms
- ✓ Compiled in 548ms (1284 modules)
- GET / 200 in 47ms
- GET /products/3 200 in 70ms
- ✓ Compiled in 645ms (1284 modules)
- GET / 200 in 50ms
- GET /auth/login 200 in 46ms
- GET /products/1 200 in 46ms
- ✓ Compiled in 409ms (1284 modules)
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- GET / 200 in 74ms
- GET / 200 in 123ms
- ✓ Compiled in 187ms (683 modules)
- GET / 200 in 10ms
- ✓ Compiled in 317ms (1284 modules)
- GET /auth/login 200 in 72ms
- GET /auth/login 200 in 13ms
+ ✓ Compiled / in 2.6s (986 modules)
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET / 200 in 2892ms
+ GET / 200 in 1611ms
+ ✓ Compiled /auth/login in 319ms (975 modules)
+ GET /auth/login 200 in 369ms
  GET /auth/login 200 in 10ms
- GET /auth/login 200 in 42ms
- GET / 200 in 204ms
- ✓ Compiled in 518ms (1284 modules)
- GET /auth/login 200 in 43ms
- ✓ Compiled in 463ms (1284 modules)
- GET / 200 in 49ms
- ✓ Compiled in 193ms (1284 modules)
- GET / 200 in 29ms
- ✓ Compiled in 128ms (683 modules)
- GET / 200 in 11ms
- ✓ Compiled in 93ms (683 modules)
- GET / 200 in 6ms
- GET /auth/login 200 in 42ms
- GET / 200 in 12ms
- GET / 200 in 25ms
-⚠️ Supabase is using dummy credentials. Authentication will not work.
-Please update .env.local with real Supabase credentials.
- GET / 200 in 228ms
- GET /auth/login 200 in 21ms
- GET / 200 in 27ms
- ✓ Compiled in 572ms (1284 modules)
- GET / 200 in 37ms
- ✓ Compiled in 321ms (1284 modules)
- GET / 200 in 28ms
- ✓ Compiled in 172ms (683 modules)
- GET / 200 in 15ms
- GET /auth/login 200 in 25ms
- GET / 200 in 12ms
- ✓ Compiled in 634ms (1284 modules)
- GET / 200 in 39ms
- ✓ Compiled in 300ms (1284 modules)
- GET / 200 in 29ms
- ✓ Compiled /favorites in 356ms (1277 modules)
- GET /favorites 200 in 392ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
- GET /favorites 200 in 20ms
- ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
+ GET / 200 in 21ms
+ ✓ Compiled /favorites in 225ms (968 modules)
+ GET /favorites 200 in 259ms
+ GET /favorites 200 in 17ms
  ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
- GET /auth/login 200 in 70ms
+ GET /favorites 200 in 21ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 337ms (972 modules)
+ GET / 200 in 64ms
+ ✓ Compiled in 135ms (972 modules)
+ GET / 200 in 21ms
+ ✓ Compiled in 268ms (972 modules)
+ GET / 200 in 27ms
+ ✓ Compiled in 272ms (972 modules)
+ GET / 200 in 29ms
+ ✓ Compiled /favorites in 296ms (545 modules)
+ GET /favorites 200 in 355ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 322ms (972 modules)
+ GET / 200 in 48ms
+ ✓ Compiled in 230ms (972 modules)
  GET / 200 in 23ms
- ✓ Compiled in 489ms (1286 modules)
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/page.js:5:4298)
-    at Object.<anonymous> (.next/server/app/page.js:5:4358) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/'
-}
- ✓ Compiled /_error in 345ms (1329 modules)
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET / 500 in 450ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/page.js:5:4298)
-    at Object.<anonymous> (.next/server/app/page.js:5:4358) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET / 500 in 33ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/page.js:5:4298)
-    at Object.<anonymous> (.next/server/app/page.js:5:4358) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET / 500 in 36ms
- ✓ Compiled /_not-found in 187ms (1319 modules)
- GET /_next/static/chunks/fallback/main.js 404 in 338ms
- GET /_next/static/chunks/fallback/webpack.js 404 in 340ms
- GET /_next/static/chunks/fallback/react-refresh.js 404 in 338ms
- GET /_next/static/chunks/fallback/pages/_error.js 404 in 28ms
- GET /_next/static/chunks/fallback/pages/_app.js 404 in 28ms
- ✓ Compiled in 194ms (1333 modules)
- ✓ Compiled in 208ms (689 modules)
- ✓ Compiled in 100ms (689 modules)
- ✓ Compiled in 98ms (689 modules)
- ✓ Compiled in 133ms (689 modules)
- ✓ Compiled in 274ms (1333 modules)
- ✓ Compiled in 388ms (1333 modules)
- ✓ Compiled in 378ms (1333 modules)
- ✓ Compiled in 259ms (1286 modules)
- ✓ Compiled in 293ms (685 modules)
- ✓ Compiled in 116ms (685 modules)
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json',
-  page: '/'
-}
- ✓ Compiled /_error in 210ms (1315 modules)
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/pages/_document.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET / 500 in 316ms
- ✓ Compiled /_not-found in 127ms (1319 modules)
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/fallback/main.js 500 in 237ms
- GET /_next/static/chunks/fallback/webpack.js 500 in 238ms
- GET /_next/static/chunks/fallback/react-refresh.js 500 in 237ms
- GET /_next/static/chunks/fallback/pages/_error.js 500 in 237ms
- GET /_next/static/chunks/fallback/pages/_app.js 500 in 237ms
- ✓ Compiled in 300ms (1333 modules)
-[Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'
-}
- ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'
-}
- ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'
-}
-[Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'
-}
- ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'
-}
- ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/9.pack.gz'
-}
-[Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'
-}
- ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'
-}
- ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'stat',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/15.pack.gz'
-}
-<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat '/Users/namiwatanabe/Desktop/hanatsugu/.next/cache/webpack/server-development/6.pack.gz'
+ ✓ Compiled in 214ms (432 modules)
+ GET / 200 in 8ms
 ⚠️ Supabase is using dummy credentials. Authentication will not work.
 Please update .env.local with real Supabase credentials.
- GET / 200 in 187ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/css/app/layout.css?v=1749353592687 500 in 27ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/main-app.js?v=1749353592687 500 in 39ms
- GET /_next/static/chunks/app-pages-internals.js 500 in 41ms
- ✓ Compiled in 304ms (1333 modules)
+ GET / 200 in 148ms
+ ✓ Compiled /favorites in 171ms (545 modules)
+ GET /favorites 200 in 194ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ GET /favorites 200 in 15ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 239ms (972 modules)
+ GET / 200 in 24ms
+ ✓ Compiled in 110ms (432 modules)
+ GET / 200 in 6ms
+ ○ Compiling /products/[id] ...
+ ✓ Compiled /products/[id] in 675ms (967 modules)
+ GET /products/2 200 in 1180ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled /favorites in 190ms (551 modules)
+ GET /favorites 200 in 234ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200 404
+ GET /products/3 200 in 45ms
+ GET /favorites 200 in 41ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200 404
+ ✓ Compiled in 368ms (975 modules)
 ⚠️ Supabase is using dummy credentials. Authentication will not work.
 Please update .env.local with real Supabase credentials.
- GET / 200 in 153ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/css/app/layout.css?v=1749353614854 500 in 22ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/main-app.js?v=1749353614854 500 in 28ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/app-pages-internals.js 500 in 22ms
- ✓ Compiled in 186ms (1333 modules)
+ GET / 200 in 221ms
+ ✓ Compiled /products/[id] in 128ms (546 modules)
+ GET /products/1 200 in 177ms
+ GET /products/1 200 in 25ms
+ GET /products/2 200 in 43ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ GET /products/2 200 in 32ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
  ⨯ ./app/products/[id]/page.tsx
-Error:   [31mx[0m Expected ',', got 'useEffect'
-     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:192:1]
- [2m189[0m |     }
- [2m190[0m |   ]
- [2m191[0m | 
- [2m192[0m |   useEffect(() => {
-     : [35;1m  ^^^^^^^^^[0m
- [2m193[0m |     // ダミーデータから商品を取得
- [2m194[0m |     const foundDress = dummyDresses.find(d => d.id === params.id)
- [2m195[0m |     setDress(foundDress as DressWithSeller || null)
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:221:1]
+ [2m218[0m |   }
+ [2m219[0m | 
+ [2m220[0m |   return (
+ [2m221[0m |     <div className="bg-white min-h-screen">
+     : [35;1m     ^^^[0m
+ [2m222[0m |       <Header />
+ [2m223[0m |       
+ [2m224[0m |       {/* パンくずリスト */}
      `----
 
 Caused by:
@@ -1053,343 +95,445 @@ Caused by:
 
 Import trace for requested module:
 ./app/products/[id]/page.tsx
- ✓ Compiled in 483ms (1319 modules)
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- GET / 500 in 73ms
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- ⨯ [Error: ENOENT: no such file or directory, open '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'] {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/Users/namiwatanabe/Desktop/hanatsugu/.next/server/next-font-manifest.json'
-}
- GET /_next/static/chunks/fallback/webpack.js 500 in 110ms
- GET /_next/static/chunks/fallback/react-refresh.js 500 in 109ms
- GET /_next/static/chunks/fallback/main.js 500 in 110ms
- GET /_next/static/chunks/fallback/pages/_error.js 500 in 109ms
- GET /_next/static/chunks/fallback/pages/_app.js 500 in 109ms
- ✓ Compiled in 272ms (1333 modules)
- ✓ Compiled in 226ms (1333 modules)
- ✓ Compiled in 245ms (1333 modules)
- ✓ Compiled in 255ms (1333 modules)
+ ○ Compiling /_error ...
+ ⨯ ./app/products/[id]/page.tsx
+Error:   [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:221:1]
+ [2m218[0m |   }
+ [2m219[0m | 
+ [2m220[0m |   return (
+ [2m221[0m |     <div className="bg-white min-h-screen">
+     : [35;1m     ^^^[0m
+ [2m222[0m |       <Header />
+ [2m223[0m |       
+ [2m224[0m |       {/* パンくずリスト */}
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/products/[id]/page.tsx
+ GET / 500 in 2647ms
+ GET / 500 in 18ms
+ GET / 500 in 15ms
+ GET / 500 in 22ms
+ ✓ Compiled /_not-found in 553ms (1305 modules)
+ GET /_next/static/webpack/ecc7973f070212ee.webpack.hot-update.json 404 in 710ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
 ⚠️ Supabase is using dummy credentials. Authentication will not work.
 Please update .env.local with real Supabase credentials.
- GET / 200 in 95ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/css/app/layout.css?v=1749353697576 500 in 32ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/main-app.js?v=1749353697576 500 in 42ms
- GET /_next/static/chunks/app-pages-internals.js 500 in 40ms
- ✓ Compiled in 368ms (1333 modules)
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/page.js:5:4201)
-    at Object.<anonymous> (.next/server/app/page.js:5:4261) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET / 500 in 85ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/_not-found/page.js:1:2992)
-    at Object.<anonymous> (.next/server/app/_not-found/page.js:1:3033) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /_next/static/chunks/fallback/main.js 500 in 125ms
- GET /_next/static/chunks/fallback/webpack.js 500 in 127ms
- GET /_next/static/chunks/fallback/react-refresh.js 500 in 126ms
- GET /_next/static/chunks/fallback/pages/_app.js 500 in 125ms
- GET /_next/static/chunks/fallback/pages/_error.js 500 in 142ms
- ✓ Compiled in 402ms (1333 modules)
+ GET / 200 in 109ms
+ ✓ Compiled in 247ms (1319 modules)
+ GET / 200 in 35ms
+ ⨯ ./app/products/[id]/page.tsx
+Error:   [31mx[0m Expected ',', got '{'
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:459:1]
+ [2m456[0m |         </div>
+ [2m457[0m |       </div>
+ [2m458[0m | 
+ [2m459[0m |       {/* お問い合わせモーダル */}
+     : [35;1m      ^[0m
+ [2m460[0m |       <ContactModal
+ [2m461[0m |         isOpen={showContactModal}
+ [2m462[0m |         onClose={() => setShowContactModal(false)}
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/products/[id]/page.tsx
+ GET / 500 in 14ms
+ GET / 500 in 45ms
+ GET / 500 in 23ms
+ GET / 500 in 27ms
+ ⨯ ./app/products/[id]/page.tsx
+Error:   [31mx[0m Expected ',', got '{'
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:459:1]
+ [2m456[0m |         </div>
+ [2m457[0m |       </div>
+ [2m458[0m |       
+ [2m459[0m |       {/* モバイル用固定ボタン */}
+     : [35;1m      ^[0m
+ [2m460[0m |       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40" style={{paddingBottom: 'env(safe-area-inset-bottom)'}}>
+ [2m461[0m |         {/* お気に入り・シェアボタン */}
+ [2m462[0m |         <div className="grid grid-cols-2 gap-3 mb-3">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/products/[id]/page.tsx
+ GET /_next/static/webpack/ecc7973f070212ee.webpack.hot-update.json 500 in 286ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 500 in 13ms
+ GET / 500 in 22ms
+ ⨯ ./app/products/[id]/page.tsx
+Error:   [31mx[0m Expected ',', got '{'
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:428:1]
+ [2m425[0m |         </div>
+ [2m426[0m |       </div>
+ [2m427[0m |       
+ [2m428[0m |       {/* モバイル用固定ボタン */}
+     : [35;1m      ^[0m
+ [2m429[0m |       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40" style={{paddingBottom: 'env(safe-area-inset-bottom)'}}>
+ [2m430[0m |         {/* お気に入り・シェアボタン */}
+ [2m431[0m |         <div className="grid grid-cols-2 gap-3 mb-3">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/products/[id]/page.tsx
+ GET /_next/static/webpack/ecc7973f070212ee.webpack.hot-update.json 500 in 307ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 6ms
+ GET / 500 in 18ms
+ ⨯ ./app/products/[id]/page.tsx
+Error:   [31mx[0m Expected ',', got '{'
+     ,-[[36;1;4m/Users/namiwatanabe/Desktop/hanatsugu/app/products/[id]/page.tsx[0m:428:1]
+ [2m425[0m |         </div>
+ [2m426[0m |       </div>
+ [2m427[0m |       
+ [2m428[0m |       {/* モバイル用固定ボタン */}
+     : [35;1m      ^[0m
+ [2m429[0m |       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40 pb-safe">
+ [2m430[0m |         {/* お気に入り・シェアボタン */}
+ [2m431[0m |         <div className="grid grid-cols-2 gap-3 mb-3">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/products/[id]/page.tsx
+ GET /_next/static/webpack/ecc7973f070212ee.webpack.hot-update.json 500 in 301ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 500 in 9ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 790ms (1319 modules)
+ ✓ Compiled (1305 modules)
+ GET /_next/static/webpack/ecc7973f070212ee.webpack.hot-update.json 404 in 877ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
 ⚠️ Supabase is using dummy credentials. Authentication will not work.
 Please update .env.local with real Supabase credentials.
- GET / 200 in 172ms
- GET /auth/login 200 in 35ms
- ✓ Compiled /sell in 228ms (649 modules)
- ✓ Compiled in 175ms (677 modules)
- ⨯ Error: Cannot find module './985.js'
+ GET / 200 in 113ms
+ GET / 200 in 162ms
+ GET /products/1 200 in 57ms
+ ✓ Compiled /search in 428ms (1308 modules)
+ GET /search?brand=VERA+WANG 200 in 515ms
+ GET / 200 in 17ms
+ GET /products/2 200 in 25ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 622ms (1322 modules)
+ GET /products/2 200 in 63ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 497ms (1322 modules)
+ GET /products/2 200 in 57ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 465ms (1322 modules)
+ GET /products/2 200 in 38ms
+ ✓ Compiled in 371ms (1322 modules)
+ GET /products/2 200 in 67ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 299ms (1322 modules)
+ GET /products/2 200 in 37ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 454ms (684 modules)
+ GET /products/2 200 in 225ms
+ ✓ Compiled in 266ms (684 modules)
+ GET /products/2 200 in 23ms
+ ✓ Compiled in 1002ms (1322 modules)
+ ✓ Compiled in 331ms (1322 modules)
+ ✓ Compiled in 387ms (1322 modules)
+ ✓ Compiled in 262ms (1322 modules)
+ ✓ Compiled in 332ms (1322 modules)
+ ✓ Compiled in 282ms (1322 modules)
+ ✓ Compiled in 474ms (1322 modules)
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ✓ Compiled in 427ms (1322 modules)
+ ✓ Compiled in 346ms (1322 modules)
+ ✓ Compiled in 187ms (1322 modules)
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200 404
+ GET / 200 in 97ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET / 200 in 194ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1519657337289-27bde0c0d262?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616690989653-d31665c903a1?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1620019819130-e2e1b6102f1e?w=800&h=1200&fit=crop 404
+ GET / 200 in 84ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616690989653-d31665c903a1?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1519657337289-27bde0c0d262?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1620019819130-e2e1b6102f1e?w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 75ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1519657337289-27bde0c0d262?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1620019819130-e2e1b6102f1e?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616690989653-d31665c903a1?w=800&h=1200&fit=crop 404
+ GET / 200 in 72ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616690989653-d31665c903a1?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1519657337289-27bde0c0d262?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1620019819130-e2e1b6102f1e?w=800&h=1200&fit=crop 404
+ GET /products/7 200 in 11ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1620019819130-e2e1b6102f1e?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1519657337289-27bde0c0d262?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616690989653-d31665c903a1?w=800&h=1200&fit=crop 404
+ ✓ Compiled in 625ms (1322 modules)
+ GET / 200 in 65ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1522563468180-0085c226d571?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596731103839-be7aed8e9e41?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1543201870-7631c6e60e7b?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565804080890-ff6bbfee24ef?w=800&h=1200 404
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET / 200 in 166ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1522563468180-0085c226d571?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596731103839-be7aed8e9e41?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1543201870-7631c6e60e7b?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565804080890-ff6bbfee24ef?w=800&h=1200 404
+ GET / 200 in 101ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1522563468180-0085c226d571?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1543201870-7631c6e60e7b?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565804080890-ff6bbfee24ef?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596731103839-be7aed8e9e41?w=800&h=1200 404
+ GET /products/1 200 in 35ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565804080890-ff6bbfee24ef?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1522563468180-0085c226d571?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1543201870-7631c6e60e7b?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596731103839-be7aed8e9e41?w=800&h=1200 404
+ GET / 200 in 112ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565804080890-ff6bbfee24ef?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1522563468180-0085c226d571?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596731103839-be7aed8e9e41?w=800&h=1200 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1543201870-7631c6e60e7b?w=800&h=1200 404
+ ✓ Compiled in 823ms (1322 modules)
+ GET / 200 in 28ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616165415772-88e8dd813f01?q=80&w=800 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616150840448-f1e4b2502b1f?q=80&w=800 404
+ GET /products/1 200 in 81ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616165415772-88e8dd813f01?q=80&w=800 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616150840448-f1e4b2502b1f?q=80&w=800 404
+ GET /products/9 200 in 20ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616150840448-f1e4b2502b1f?q=80&w=800 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616165415772-88e8dd813f01?q=80&w=800 404
+ GET /products/1 200 in 18ms
+ GET / 200 in 42ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616165415772-88e8dd813f01?q=80&w=800 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1616150840448-f1e4b2502b1f?q=80&w=800 404
+ GET /products/1 200 in 23ms
+ ✓ Compiled in 520ms (1322 modules)
+ GET /products/1 200 in 56ms
+ ✓ Compiled in 736ms (1322 modules)
+ GET /products/1 200 in 46ms
+ ✓ Compiled in 301ms (1322 modules)
+ GET /products/1 200 in 29ms
+ ✓ Compiled in 300ms (1322 modules)
+ GET /products/1 200 in 52ms
+ ✓ Compiled in 224ms (1322 modules)
+ GET /products/1 200 in 24ms
+ ✓ Compiled in 315ms (1322 modules)
+ GET /products/1 200 in 46ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET /products/1 200 in 155ms
+ ✓ Compiled in 354ms (1322 modules)
+ GET /products/1 200 in 27ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET /products/1 200 in 126ms
+ ✓ Compiled in 391ms (1322 modules)
+ GET /products/1 200 in 27ms
+ ✓ Compiled in 606ms (1322 modules)
+ GET /products/1 200 in 26ms
+ GET / 200 in 18ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1606800052052-a3b87400edf4?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1596131397499-91c2eb85c76d?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1594736797933-d0801ba5fe65?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1551062780-b5bdfe5c2b38?w=800&h=1200&fit=crop 404
+ ✓ Compiled in 661ms (1322 modules)
+ GET / 200 in 23ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /search?brand=VERA+WANG 200 in 59ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 70ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET /products/1 200 in 174ms
+ ✓ Compiled in 278ms (684 modules)
+ GET /products/1 200 in 26ms
+ ✓ Compiled in 711ms (1322 modules)
+ GET /products/1 200 in 29ms
+ ✓ Compiled in 458ms (1330 modules)
+ GET /products/1 200 in 83ms
+ GET / 200 in 44ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 30ms
+ ✓ Compiled in 595ms (1330 modules)
+ GET /products/1 200 in 92ms
+ ✓ Compiled in 375ms (1330 modules)
+ GET /products/1 200 in 58ms
+ ✓ Compiled in 357ms (1330 modules)
+ GET /products/1 200 in 28ms
+ ✓ Compiled in 339ms (1330 modules)
+ GET /products/1 200 in 86ms
+ ✓ Compiled in 725ms (1330 modules)
+ GET /products/1 200 in 31ms
+ ✓ Compiled in 278ms (1330 modules)
+ GET /products/1 200 in 34ms
+ GET / 200 in 39ms
+ ✓ Compiled in 354ms (1330 modules)
+ GET / 200 in 37ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /search 200 in 32ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET / 200 in 29ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 37ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/7 200 in 21ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/3 200 in 25ms
+ GET / 200 in 44ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 59ms
+ ✓ Compiled in 607ms (688 modules)
+ GET /products/1 200 in 130ms
+ ✓ Compiled in 205ms (688 modules)
+ GET /products/1 200 in 9ms
+ ✓ Compiled in 204ms (688 modules)
+ GET /products/1 200 in 71ms
+ ✓ Compiled in 118ms (688 modules)
+ GET /products/1 200 in 25ms
+ ✓ Compiled in 289ms (688 modules)
+ GET /products/1 200 in 142ms
+ ✓ Compiled in 202ms (688 modules)
+ GET /products/1 200 in 40ms
+ ✓ Compiled in 491ms (1330 modules)
+ GET /products/1 200 in 55ms
+ ✓ Compiled in 686ms (1332 modules)
+ GET /products/1 200 in 37ms
+ ✓ Compiled in 334ms (1332 modules)
+ GET /products/1 200 in 31ms
+ ✓ Compiled in 358ms (1332 modules)
+ GET /products/1 200 in 39ms
+ ✓ Compiled in 475ms (1334 modules)
+ GET /products/1 200 in 41ms
+ ✓ Compiled in 285ms (1334 modules)
+ GET /products/1 200 in 60ms
+ ✓ Compiled in 327ms (1336 modules)
+ GET /products/1 200 in 28ms
+ GET / 200 in 88ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/3 200 in 34ms
+ GET / 200 in 55ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ ✓ Compiled in 627ms (1336 modules)
+ GET / 200 in 64ms
+ GET /products/1 200 in 55ms
+ ✓ Compiled in 444ms (1336 modules)
+ GET /products/1 200 in 38ms
+ ✓ Compiled in 727ms (1336 modules)
+ GET /products/1 200 in 45ms
+ ✓ Compiled in 261ms (1336 modules)
+ GET /products/1 200 in 27ms
+ ✓ Compiled in 537ms (1336 modules)
+ GET /products/1 200 in 45ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET /products/1 200 in 177ms
+ GET / 200 in 86ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/2 200 in 18ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ✓ Compiled in 560ms (1336 modules)
+ GET /products/2 200 in 84ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET /products/2 200 in 167ms
+ GET /products/2 200 in 52ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ GET / 200 in 39ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 18ms
+ GET / 200 in 30ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET / 200 in 240ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ ✓ Compiled in 511ms (1336 modules)
+ GET / 200 in 49ms
+ ✓ Compiled in 269ms (1336 modules)
+ GET / 200 in 25ms
+⚠️ Supabase is using dummy credentials. Authentication will not work.
+Please update .env.local with real Supabase credentials.
+ GET / 200 in 173ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/1 200 in 49ms
+ GET /products/13 200 in 40ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/3 200 in 29ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/2 200 in 20ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/7 200 in 38ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop 404
+ GET /products/2 200 in 17ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ✓ Compiled in 601ms (1336 modules)
+ GET /products/2 200 in 37ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop 404
+ ⨯ Failed to generate static paths for /products/[id]:
+[Error: Cannot find module './vendor-chunks/next.js'
 Require stack:
 - /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
 - /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/compiled/jest-worker/processChild.js] {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ✓ Compiled /_not-found in 406ms (1340 modules)
+ GET /_next/static/css/app/layout.css?v=1749390488701 404 in 486ms
+ ⨯ [Error: Cannot find module './vendor-chunks/next.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/compiled/jest-worker/processChild.js] {
+  type: 'Error',
   code: 'MODULE_NOT_FOUND',
   requireStack: [Array],
   page: '/products/2'
 }
- ⨯ Error: Cannot find module './985.js'
+ ⨯ Error: Cannot find module './548.js'
 Require stack:
 - /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
@@ -1405,16 +549,30 @@ Require stack:
     at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
     at Array.map (<anonymous>)
     at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
+    at <unknown> (.next/server/pages/_document.js:1:335)
+    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /products/2 500 in 207ms
+ ⨯ [Error: Cannot find module './vendor-chunks/next.js'
+Require stack:
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/dev/static-paths-worker.js
+- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/compiled/jest-worker/processChild.js] {
+  type: 'Error',
   code: 'MODULE_NOT_FOUND',
   requireStack: [Array],
-  page: '/products/1'
+  page: '/products/2'
 }
  ⨯ Error: Cannot find module './548.js'
 Require stack:
 - /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
+- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/_not-found/page.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
 - /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
@@ -1435,550 +593,10 @@ Require stack:
   code: 'MODULE_NOT_FOUND',
   requireStack: [Array]
 }
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /products/2 500 in 550ms
- GET /products/1 500 in 550ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/3'
-}
- GET /auth/signup 200 in 587ms
- GET /sell 200 in 587ms
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /products/3 500 in 561ms
- ✓ Compiled /favorites in 110ms (659 modules)
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/5'
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/4'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /products/5 500 in 296ms
- GET /products/4 500 in 297ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/6'
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/7'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /favorites 200 in 368ms
- GET /products/6 500 in 264ms
- GET /products/7 500 in 265ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/8'
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/9'
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/10'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /products/8 500 in 104ms
- GET /products/9 500 in 104ms
- GET /products/10 500 in 94ms
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/11'
-}
- ⨯ Error: Cannot find module './985.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/app/products/[id]/page.js:1:17241)
-    at Object.<anonymous> (.next/server/app/products/[id]/page.js:1:17289) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array],
-  page: '/products/12'
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- ⨯ Error: Cannot find module './548.js'
-Require stack:
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/webpack-runtime.js
-- /Users/namiwatanabe/Desktop/hanatsugu/.next/server/app/products/[id]/page.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/require.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/load-components.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/utils.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/options.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/swc/index.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/build/next-config-ts/transpile-config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/config.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/next.js
-- /Users/namiwatanabe/Desktop/hanatsugu/node_modules/next/dist/server/lib/start-server.js
-    at __webpack_require__.f.require (.next/server/webpack-runtime.js:198:28)
-    at <unknown> (.next/server/webpack-runtime.js:111:40)
-    at Array.reduce (<anonymous>)
-    at __webpack_require__.e (.next/server/webpack-runtime.js:110:67)
-    at Array.map (<anonymous>)
-    at __webpack_require__.X (.next/server/webpack-runtime.js:162:22)
-    at <unknown> (.next/server/pages/_document.js:1:335)
-    at Object.<anonymous> (.next/server/pages/_document.js:1:376) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [Array]
-}
- GET /products/11 500 in 152ms
- GET /products/12 500 in 153ms
- ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
-   ▲ Next.js 15.3.3
-   - Local:        http://localhost:3000
-   - Network:      http://192.168.10.127:3000
-   - Environments: .env.local
-
- ✓ Starting...
- ✓ Ready in 1279ms
- ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
-node:internal/process/promises:394
-    triggerUncaughtException(err, true /* fromPromise */);
-    ^
-
-[CanaryOnlyError: The experimental feature "experimental.dynamicIO" can only be enabled when using the latest canary version of Next.js.]
-
-Node.js v22.16.0
+ GET /products/2 500 in 211ms
+ GET /_next/static/chunks/fallback/main.js 404 in 44ms
+ GET /_next/static/chunks/fallback/react-refresh.js 404 in 43ms
+ GET /_next/static/chunks/fallback/webpack.js 404 in 45ms
+ GET /_next/static/chunks/fallback/pages/_error.js 404 in 27ms
+ GET /_next/static/chunks/fallback/pages/_app.js 404 in 29ms
 [?25h

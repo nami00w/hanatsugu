@@ -8,6 +8,9 @@ import { DressWithSeller } from '@/lib/types'
 import ContactModal from '@/components/ContactModal'
 import Header from '@/components/Header'
 import { useFavorites } from '@/hooks/useFavorites'
+import { useShareProduct } from '@/hooks/useShareProduct'
+import ShareModal from '@/components/ShareModal'
+import RelatedProductsCarousel from '@/components/RelatedProductsCarousel'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -16,7 +19,9 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true)
   const [showContactModal, setShowContactModal] = useState(false)
   const [showImageModal, setShowImageModal] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false)
   const { toggleFavorite, isFavorite } = useFavorites()
+  const { shareProduct } = useShareProduct()
   
   // スワイプ用の状態管理
   const [touchStart, setTouchStart] = useState<number | null>(null)
@@ -177,6 +182,186 @@ export default function ProductDetailPage() {
     setDress(foundDress as DressWithSeller || null)
     setLoading(false)
   }, [params.id, dummyDresses])
+
+  // 関連商品用のデータ（ProductListと同じ構造＋各ブランドに複数商品）
+  const allProducts = useMemo(() => [
+    { 
+      id: "1", 
+      brand: "VERA WANG", 
+      model: "Liesel", 
+      size: "9号", 
+      price: 128000, 
+      originalPrice: 380000, 
+      imageUrl: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "13", 
+      brand: "VERA WANG", 
+      model: "Eleanor", 
+      size: "7号", 
+      price: 155000, 
+      originalPrice: 420000, 
+      imageUrl: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "14", 
+      brand: "VERA WANG", 
+      model: "Diana", 
+      size: "11号", 
+      price: 185000, 
+      originalPrice: 480000, 
+      imageUrl: "https://images.unsplash.com/photo-1518136247453-74e7b5265980?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "2", 
+      brand: "Pronovias", 
+      model: "Draco", 
+      size: "11号", 
+      price: 95000, 
+      originalPrice: 280000, 
+      imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "15", 
+      brand: "Pronovias", 
+      model: "Atelier", 
+      size: "9号", 
+      price: 125000, 
+      originalPrice: 320000, 
+      imageUrl: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "3", 
+      brand: "ANTONIO RIVA", 
+      model: "Gemma", 
+      size: "7号", 
+      price: 168000, 
+      originalPrice: 420000, 
+      imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "16", 
+      brand: "ANTONIO RIVA", 
+      model: "Sophia", 
+      size: "13号", 
+      price: 198000, 
+      originalPrice: 450000, 
+      imageUrl: "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "4", 
+      brand: "Temperley London", 
+      model: "Iris", 
+      size: "9号", 
+      price: 145000, 
+      originalPrice: 350000, 
+      imageUrl: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "17", 
+      brand: "Temperley London", 
+      model: "Rose", 
+      size: "S", 
+      price: 165000, 
+      originalPrice: 380000, 
+      imageUrl: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "5", 
+      brand: "JENNY PACKHAM", 
+      model: "Hermione", 
+      size: "13号", 
+      price: 198000, 
+      originalPrice: 480000, 
+      imageUrl: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "18", 
+      brand: "JENNY PACKHAM", 
+      model: "Luna", 
+      size: "M", 
+      price: 175000, 
+      originalPrice: 420000, 
+      imageUrl: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "6", 
+      brand: "Marchesa", 
+      model: "Grecian", 
+      size: "9号", 
+      price: 178000, 
+      originalPrice: 450000, 
+      imageUrl: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "7", 
+      brand: "Oscar de la Renta", 
+      model: "Botanical", 
+      size: "7号", 
+      price: 85000, 
+      originalPrice: 250000, 
+      imageUrl: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "8", 
+      brand: "Monique Lhuillier", 
+      model: "Swan", 
+      size: "S", 
+      price: 220000, 
+      originalPrice: 550000, 
+      imageUrl: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "9", 
+      brand: "Carolina Herrera", 
+      model: "Grace", 
+      size: "M", 
+      price: 135000, 
+      originalPrice: 320000, 
+      imageUrl: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "10", 
+      brand: "Elie Saab", 
+      model: "Dream", 
+      size: "L", 
+      price: 195000, 
+      originalPrice: 480000, 
+      imageUrl: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "11", 
+      brand: "Reem Acra", 
+      model: "Enchanted", 
+      size: "XS", 
+      price: 75000, 
+      originalPrice: 180000, 
+      imageUrl: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+    { 
+      id: "12", 
+      brand: "Hayley Paige", 
+      model: "Cosmos", 
+      size: "15号", 
+      price: 110000, 
+      originalPrice: 280000, 
+      imageUrl: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+    },
+  ], [])
+
+  // シェア機能
+  const handleShare = async () => {
+    const shareData = {
+      title: dress?.title || '素敵なウェディングドレス',
+      text: 'Hanatsuguで見つけた素敵なドレス',
+      url: window.location.href,
+    }
+
+    const result = await shareProduct(shareData)
+    if (!result.success && result.method === 'fallback') {
+      setShowShareModal(true)
+    }
+  }
   
   // スワイプハンドラー
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -293,6 +478,37 @@ export default function ProductDetailPage() {
                       </svg>
                     </div>
                     
+                    {/* PC用左右ナビゲーション */}
+                    {dress.images.length > 1 && (
+                      <>
+                        {/* 左矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev > 0 ? prev - 1 : dress.images!.length - 1)
+                          }}
+                          className="hidden lg:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-90 rounded-full p-3 shadow-md opacity-0 group-hover:opacity-100 transition-all hover:bg-opacity-100 hover:shadow-lg"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        {/* 右矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev < dress.images!.length - 1 ? prev + 1 : 0)
+                          }}
+                          className="hidden lg:block absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-90 rounded-full p-3 shadow-md opacity-0 group-hover:opacity-100 transition-all hover:bg-opacity-100 hover:shadow-lg"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </>
+                    )}
+                    
                     {/* モバイル用左右ナビゲーション */}
                     {dress.images.length > 1 && (
                       <>
@@ -387,7 +603,10 @@ export default function ProductDetailPage() {
                       <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
                     </button>
                     
-                    <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      onClick={handleShare}
+                      className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                    >
                       <span>🔗</span>
                       <span>シェア</span>
                     </button>
@@ -470,13 +689,14 @@ export default function ProductDetailPage() {
           </div>
         </div>
         
-        {/* 関連商品セクション */}
-        <div className="mt-16 mb-32 lg:mb-16">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">関連商品</h2>
-          <div className="text-center py-12 bg-gray-50 rounded-lg">
-            <p className="text-gray-600">関連商品を準備中です</p>
-          </div>
-        </div>
+        {/* 関連商品カルーセル */}
+        {dress && (
+          <RelatedProductsCarousel 
+            currentProductId={dress.id}
+            currentBrand={dress.brand}
+            allProducts={allProducts}
+          />
+        )}
       </div>
       
       {/* モバイル用固定ボタン */}
@@ -495,7 +715,10 @@ export default function ProductDetailPage() {
             <span className="text-sm">{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入り'}</span>
           </button>
           
-          <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+          <button 
+            onClick={handleShare}
+            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+          >
             <span>🔗</span>
             <span className="text-sm">シェア</span>
           </button>
@@ -521,7 +744,7 @@ export default function ProductDetailPage() {
       
       {/* 画像拡大モーダル */}
       {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90" onClick={() => setShowImageModal(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-200" onClick={() => setShowImageModal(false)}>
           <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center p-4">
             <button
               onClick={() => setShowImageModal(false)}
@@ -572,6 +795,19 @@ export default function ProductDetailPage() {
             )}
           </div>
         </div>
+      )}
+
+      {/* シェアモーダル */}
+      {dress && (
+        <ShareModal
+          isOpen={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          shareData={{
+            title: dress.title,
+            text: 'Hanatsuguで見つけた素敵なドレス',
+            url: typeof window !== 'undefined' ? window.location.href : '',
+          }}
+        />
       )}
     </div>
   )
