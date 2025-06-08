@@ -35,7 +35,7 @@ export default function MobileFilterModal({
     <div className="fixed inset-0 z-50 lg:hidden">
       {/* 背景オーバーレイ */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50"
+        className="fixed inset-0 bg-black/50"
         onClick={onClose}
       />
       

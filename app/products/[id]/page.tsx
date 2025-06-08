@@ -293,6 +293,37 @@ export default function ProductDetailPage() {
                       </svg>
                     </div>
                     
+                    {/* PC用左右ナビゲーション */}
+                    {dress.images.length > 1 && (
+                      <>
+                        {/* 左矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev > 0 ? prev - 1 : dress.images!.length - 1)
+                          }}
+                          className="hidden lg:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        {/* 右矢印 */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedImage(prev => prev < dress.images!.length - 1 ? prev + 1 : 0)
+                          }}
+                          className="hidden lg:block absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
+                        >
+                          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </>
+                    )}
+                    
                     {/* モバイル用左右ナビゲーション */}
                     {dress.images.length > 1 && (
                       <>
@@ -521,7 +552,7 @@ export default function ProductDetailPage() {
       
       {/* 画像拡大モーダル */}
       {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90" onClick={() => setShowImageModal(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowImageModal(false)}>
           <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center p-4">
             <button
               onClick={() => setShowImageModal(false)}
