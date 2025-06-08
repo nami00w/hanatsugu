@@ -29,14 +29,19 @@ export default function DressCard({
   const dressId = id.toString()
   const isFavorited = isFavorite(dressId)
 
-  const handleFavoriteClick = (e: React.MouseEvent) => {
+  const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault() // Linkの遷移を防ぐ
     e.stopPropagation()
     
-    const success = toggleFavorite(dressId)
+    console.log('🔍 Favorite button clicked:', { dressId, isLoggedIn })
+    
+    const success = await toggleFavorite(dressId)
     if (!success) {
       // ログインが必要な場合、モーダルを表示
+      console.log('❌ Login required, showing modal')
       setShowLoginModal(true)
+    } else {
+      console.log('✅ Favorite toggled successfully')
     }
   }
   return (

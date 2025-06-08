@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase, favoritesAPI } from '@/lib/supabase'
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<string[]>([])
@@ -9,40 +8,36 @@ export function useFavorites() {
   const [userId, setUserId] = useState<string | null>(null)
 
   useEffect(() => {
-    const checkAuthStatus = async () => {
-      // Supabase認証状態をチェック
-      const { data: { user } } = await supabase.auth.getUser()
+    const checkAuthStatus = () => {
+      // クライアントサイドでのみ実行
+      if (typeof window === 'undefined') return
       
-      if (user) {
+      // ダミー実装: localStorageでログイン状態を管理
+      const authStatus = localStorage.getItem('dummyAuth')
+      const dummyUserId = localStorage.getItem('dummyUserId') || 'dummy-user-id'
+      
+      console.log('🔍 Checking dummy auth:', authStatus)
+      
+      if (authStatus === 'true') {
         setIsLoggedIn(true)
-        setUserId(user.id)
+        setUserId(dummyUserId)
         
-        // Supabaseからお気に入り一覧を取得
-        const userFavorites = await favoritesAPI.getFavorites(user.id)
-        setFavorites(userFavorites)
-      } else {
-        // ダミー実装（開発中）: localStorageでログイン状態を管理
-        const authStatus = localStorage.getItem('dummyAuth')
-        const dummyUserId = localStorage.getItem('dummyUserId') || 'dummy-user-id'
-        
-        console.log('🔍 Checking dummy auth:', authStatus)
-        
-        if (authStatus === 'true') {
-          setIsLoggedIn(true)
-          setUserId(dummyUserId)
-          
-          // 開発中はlocalStorageから取得
-          const savedFavorites = localStorage.getItem('favorites')
-          if (savedFavorites) {
+        // 開発中はlocalStorageから取得
+        const savedFavorites = localStorage.getItem('favorites')
+        if (savedFavorites) {
+          try {
             setFavorites(JSON.parse(savedFavorites))
+          } catch (e) {
+            console.error('Failed to parse favorites:', e)
+            setFavorites([])
           }
-          console.log('✅ Dummy auth: logged in')
-        } else {
-          setIsLoggedIn(false)
-          setUserId(null)
-          setFavorites([])
-          console.log('❌ Dummy auth: not logged in')
         }
+        console.log('✅ Dummy auth: logged in')
+      } else {
+        setIsLoggedIn(false)
+        setUserId(null)
+        setFavorites([])
+        console.log('❌ Dummy auth: not logged in')
       }
     }
 
@@ -72,23 +67,7 @@ export function useFavorites() {
     window.addEventListener('dummyAuthChange', handleDummyAuthChange)
     window.addEventListener('favoritesChange', handleFavoritesChange as EventListener)
 
-    // 認証状態の変更を監視
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session?.user) {
-          setIsLoggedIn(true)
-          setUserId(session.user.id)
-          const userFavorites = await favoritesAPI.getFavorites(session.user.id)
-          setFavorites(userFavorites)
-        } else {
-          // Supabaseログアウト時はダミー認証もチェック
-          checkAuthStatus()
-        }
-      }
-    )
-
     return () => {
-      subscription.unsubscribe()
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('dummyAuthChange', handleDummyAuthChange)
       window.removeEventListener('favoritesChange', handleFavoritesChange as EventListener)
@@ -96,6 +75,8 @@ export function useFavorites() {
   }, [])
 
   const toggleFavorite = async (dressId: string | number) => {
+    if (typeof window === 'undefined') return false
+    
     if (!isLoggedIn || !userId) {
       return false // ログインが必要
     }
@@ -114,19 +95,8 @@ export function useFavorites() {
     console.log('✨ New favorites state:', newFavorites)
     setFavorites(newFavorites)
 
-    // Supabaseを更新（本番環境）
-    if (userId !== 'dummy-user-id') {
-      const success = isCurrentlyFavorite
-        ? await favoritesAPI.removeFavorite(userId, normalizedDressId)
-        : await favoritesAPI.addFavorite(userId, normalizedDressId)
-      
-      if (!success) {
-        // エラーの場合は元に戻す
-        setFavorites(favorites)
-        return false
-      }
-    } else {
-      // 開発中はlocalStorageに保存
+    // 開発中はlocalStorageに保存
+    try {
       localStorage.setItem('favorites', JSON.stringify(newFavorites))
       console.log('💾 Favorites saved to localStorage:', newFavorites)
       
@@ -141,6 +111,8 @@ export function useFavorites() {
         newValue: JSON.stringify(newFavorites),
         oldValue: JSON.stringify(favorites)
       }))
+    } catch (e) {
+      console.error('Failed to save favorites:', e)
     }
     
     return true // 成功
