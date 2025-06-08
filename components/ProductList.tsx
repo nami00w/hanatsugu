@@ -3,20 +3,128 @@
 import DressCard from './DressCard'
 import { FilterState } from './ProductFilter'
 
-// ダミーデータを拡張
+// ダミーデータを拡張（画像URL追加）
 const allProducts = [
-  { id: "1", brand: "VERA WANG", model: "Liesel", size: "9号", price: 128000, originalPrice: 380000, condition: "未使用に近い" },
-  { id: "2", brand: "Pronovias", model: "Draco", size: "11号", price: 95000, originalPrice: 280000, condition: "未使用に近い" },
-  { id: "3", brand: "ANTONIO RIVA", model: "Gemma", size: "7号", price: 168000, originalPrice: 420000, condition: "未使用に近い" },
-  { id: "4", brand: "Temperley London", model: "Iris", size: "9号", price: 145000, originalPrice: 350000, condition: "未使用に近い" },
-  { id: "5", brand: "JENNY PACKHAM", model: "Hermione", size: "13号", price: 198000, originalPrice: 480000, condition: "未使用に近い" },
-  { id: "6", brand: "Marchesa", model: "Grecian", size: "9号", price: 178000, originalPrice: 450000, condition: "未使用に近い" },
-  { id: "7", brand: "Oscar de la Renta", model: "Botanical", size: "7号", price: 85000, originalPrice: 250000, condition: "目立った傷や汚れなし" },
-  { id: "8", brand: "Monique Lhuillier", model: "Swan", size: "S", price: 220000, originalPrice: 550000, condition: "新品・未使用" },
-  { id: "9", brand: "Carolina Herrera", model: "Grace", size: "M", price: 135000, originalPrice: 320000, condition: "やや傷や汚れあり" },
-  { id: "10", brand: "Elie Saab", model: "Dream", size: "L", price: 195000, originalPrice: 480000, condition: "未使用に近い" },
-  { id: "11", brand: "Reem Acra", model: "Enchanted", size: "XS", price: 75000, originalPrice: 180000, condition: "目立った傷や汚れなし" },
-  { id: "12", brand: "Hayley Paige", model: "Cosmos", size: "15号", price: 110000, originalPrice: 280000, condition: "未使用に近い" },
+  { 
+    id: "1", 
+    brand: "VERA WANG", 
+    model: "Liesel", 
+    size: "9号", 
+    price: 128000, 
+    originalPrice: 380000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "2", 
+    brand: "Pronovias", 
+    model: "Draco", 
+    size: "11号", 
+    price: 95000, 
+    originalPrice: 280000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1594463750939-ebb28c3f7f75?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "3", 
+    brand: "ANTONIO RIVA", 
+    model: "Gemma", 
+    size: "7号", 
+    price: 168000, 
+    originalPrice: 420000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1518136247453-74e7b5265980?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "4", 
+    brand: "Temperley London", 
+    model: "Iris", 
+    size: "9号", 
+    price: 145000, 
+    originalPrice: 350000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "5", 
+    brand: "JENNY PACKHAM", 
+    model: "Hermione", 
+    size: "13号", 
+    price: 198000, 
+    originalPrice: 480000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "6", 
+    brand: "Marchesa", 
+    model: "Grecian", 
+    size: "9号", 
+    price: 178000, 
+    originalPrice: 450000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "7", 
+    brand: "Oscar de la Renta", 
+    model: "Botanical", 
+    size: "7号", 
+    price: 85000, 
+    originalPrice: 250000, 
+    condition: "目立った傷や汚れなし",
+    imageUrl: "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "8", 
+    brand: "Monique Lhuillier", 
+    model: "Swan", 
+    size: "S", 
+    price: 220000, 
+    originalPrice: 550000, 
+    condition: "新品・未使用",
+    imageUrl: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "9", 
+    brand: "Carolina Herrera", 
+    model: "Grace", 
+    size: "M", 
+    price: 135000, 
+    originalPrice: 320000, 
+    condition: "やや傷や汚れあり",
+    imageUrl: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "10", 
+    brand: "Elie Saab", 
+    model: "Dream", 
+    size: "L", 
+    price: 195000, 
+    originalPrice: 480000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1495298599282-d8920eb5009b?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "11", 
+    brand: "Reem Acra", 
+    model: "Enchanted", 
+    size: "XS", 
+    price: 75000, 
+    originalPrice: 180000, 
+    condition: "目立った傷や汚れなし",
+    imageUrl: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
+  { 
+    id: "12", 
+    brand: "Hayley Paige", 
+    model: "Cosmos", 
+    size: "15号", 
+    price: 110000, 
+    originalPrice: 280000, 
+    condition: "未使用に近い",
+    imageUrl: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&w=800&h=1200&fit=crop"
+  },
 ]
 
 interface ProductListProps {
@@ -25,6 +133,11 @@ interface ProductListProps {
 
 export default function ProductList({ filters }: ProductListProps) {
   const filteredProducts = allProducts.filter(product => {
+    // ブランドフィルター
+    if (filters.brand && product.brand.toLowerCase() !== filters.brand.toLowerCase()) {
+      return false
+    }
+
     // 価格フィルター
     if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
       return false
@@ -75,6 +188,7 @@ export default function ProductList({ filters }: ProductListProps) {
               size={product.size}
               price={product.price}
               originalPrice={product.originalPrice}
+              imageUrl={product.imageUrl}
             />
           ))}
         </div>

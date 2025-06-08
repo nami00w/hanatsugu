@@ -31,9 +31,9 @@ export default function ProductDetailPage() {
       price: 128000,
       original_price: 380000,
       images: [
-        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&h=1200",
-        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1200",
-        "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1200"
+        "https://images.unsplash.com/photo-1594552072238-b8a33785b261?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1200&fit=crop"
       ],
       size: "9号",
       brand: "VERA WANG",
@@ -47,7 +47,7 @@ export default function ProductDetailPage() {
         id: "seller1",
         email: "seller1@example.com",
         name: "田中 美咲",
-        avatar_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150",
+        avatar_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         bio: "結婚式を終えた素敵なドレスをお譲りしています。大切に使っていただける方にお渡しできれば嬉しいです。",
         created_at: "2024-01-01",
         updated_at: "2024-01-01"
@@ -60,8 +60,9 @@ export default function ProductDetailPage() {
       price: 95000,
       original_price: 280000,
       images: [
-        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=1200",
-        "https://images.unsplash.com/photo-1525258801829-654deb0e0a5e?w=800&h=1200"
+        "https://images.unsplash.com/photo-1565378781267-616ed0977ce5?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1522621032211-ac0031dfbddc?w=800&h=1200&fit=crop"
       ],
       size: "11号",
       brand: "Pronovias",
@@ -88,9 +89,9 @@ export default function ProductDetailPage() {
       price: 168000,
       original_price: 420000,
       images: [
-        "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=800&h=1000&fit=crop"
+        "https://images.unsplash.com/photo-1522653216850-4f1415a174fb?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=800&h=1200&fit=crop"
       ],
       size: "7号",
       brand: "ANTONIO RIVA",
@@ -117,8 +118,9 @@ export default function ProductDetailPage() {
       price: 145000,
       original_price: 350000,
       images: [
-        "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1000&fit=crop"
+        "https://images.unsplash.com/photo-1596783074918-c84cb06531ca?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1623470638880-e39bf6b83ff9?w=800&h=1200&fit=crop"
       ],
       size: "9号",
       brand: "Temperley London",
@@ -145,9 +147,9 @@ export default function ProductDetailPage() {
       price: 198000,
       original_price: 480000,
       images: [
-        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop",
-        "https://images.unsplash.com/photo-1452033648730-57c06a86db55?w=800&h=1000&fit=crop"
+        "https://images.unsplash.com/photo-1522621032211-ac0031dfbddc?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1200&fit=crop",
+        "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1200&fit=crop"
       ],
       size: "13号",
       brand: "JENNY PACKHAM",
@@ -234,8 +236,8 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 py-4 lg:py-8">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-12">
           {/* 画像ギャラリー */}
           <div className="lg:flex lg:gap-4">
             {/* サムネイル（PC: 左側縦配置） */}
@@ -263,7 +265,13 @@ export default function ProductDetailPage() {
             {/* メイン画像 */}
             <div className="flex-1">
               <div 
-                className="relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden cursor-zoom-in group"
+                className="relative bg-gray-100 rounded-lg overflow-hidden cursor-zoom-in group 
+                          w-full aspect-[3/4] 
+                          lg:aspect-[3/4]"
+                style={{
+                  maxHeight: 'min(45vh, calc(100vw - 2rem))',
+                  minHeight: '250px'
+                }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
@@ -340,27 +348,58 @@ export default function ProductDetailPage() {
           </div>
 
           {/* 商品情報 */}
-          <div className="lg:relative">
-            <div className="lg:sticky lg:top-8 lg:h-fit space-y-8">
+          <div className="lg:relative mt-3 lg:mt-0">
+            <div className="lg:sticky lg:top-8 lg:h-fit space-y-4 lg:space-y-8">
               <div>
-                <h1 className="text-3xl font-bold mb-3 text-gray-800">{dress.title}</h1>
-                <p className="text-lg text-gray-600 mb-4">{dress.brand}</p>
+                <h1 className="text-lg sm:text-xl lg:text-3xl font-bold mb-1 lg:mb-3 text-gray-800 leading-tight">{dress.title}</h1>
+                <p className="text-sm lg:text-lg text-gray-600 mb-2 lg:mb-4">{dress.brand}</p>
                 
                 {/* 価格 */}
-                <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-4xl font-bold text-pink-600">
+                <div className="flex items-baseline gap-1 sm:gap-2 lg:gap-3 mb-3 lg:mb-6 flex-wrap">
+                  <span className="text-lg sm:text-xl lg:text-4xl font-bold text-pink-600">
                     ¥{dress.price.toLocaleString()}
                   </span>
                   {dress.original_price && (
                     <>
-                      <span className="text-xl text-gray-500 line-through">
+                      <span className="text-sm sm:text-base lg:text-xl text-gray-500 line-through">
                         ¥{dress.original_price.toLocaleString()}
                       </span>
-                      <span className="bg-red-100 text-red-800 text-sm font-medium px-2 py-1 rounded">
+                      <span className="bg-red-100 text-red-800 text-xs lg:text-sm font-medium px-1.5 py-0.5 lg:px-2 lg:py-1 rounded">
                         {Math.round((1 - dress.price / dress.original_price) * 100)}% OFF
                       </span>
                     </>
                   )}
+                </div>
+
+                {/* お気に入り・シェア・質問ボタン（PC版のみ） */}
+                <div className="hidden lg:block lg:mb-6">
+                  {/* お気に入り・シェアボタン */}
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    <button 
+                      onClick={() => toggleFavorite(dress.id)}
+                      className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
+                        isFavorite(dress.id) 
+                          ? 'bg-pink-50 border-pink-600 text-pink-600' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {isFavorite(dress.id) ? '❤️' : '🤍'}
+                      <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
+                    </button>
+                    
+                    <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                      <span>🔗</span>
+                      <span>シェア</span>
+                    </button>
+                  </div>
+                  
+                  {/* 質問ボタン */}
+                  <button 
+                    onClick={() => setShowContactModal(true)}
+                    className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg hover:shadow-xl"
+                  >
+                    💌 この商品について質問する
+                  </button>
                 </div>
               </div>
 
@@ -428,36 +467,6 @@ export default function ProductDetailPage() {
               )}
             </div>
             
-            {/* 固定アクションボタンエリア（PC版） */}
-            <div className="hidden lg:block lg:sticky lg:bottom-0 bg-white border-t border-gray-200 p-6 shadow-lg mt-8">
-              {/* お気に入り・シェアボタン */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <button 
-                  onClick={() => toggleFavorite(dress.id)}
-                  className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
-                    isFavorite(dress.id) 
-                      ? 'bg-pink-50 border-pink-600 text-pink-600' 
-                      : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  {isFavorite(dress.id) ? '❤️' : '🤍'}
-                  <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
-                </button>
-                
-                <button className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
-                  <span>🔗</span>
-                  <span>シェア</span>
-                </button>
-              </div>
-              
-              {/* 質問ボタン */}
-              <button 
-                onClick={() => setShowContactModal(true)}
-                className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                💌 この商品について質問する
-              </button>
-            </div>
           </div>
         </div>
         

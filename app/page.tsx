@@ -8,6 +8,7 @@ import ProductList from '@/components/ProductList'
 import MobileFilterModal from '@/components/MobileFilterModal'
 import Header from '@/components/Header'
 import SearchBar from '@/components/SearchBar'
+import BrandCarousel from '@/components/BrandCarousel'
 
 // Dynamic rendering を強制
 export const dynamic = 'force-dynamic'
@@ -36,6 +37,7 @@ function HomeContent() {
     const maxPrice = searchParams.get('maxPrice')
     const sizes = searchParams.get('sizes')
     const conditions = searchParams.get('conditions')
+    const brand = searchParams.get('brand')
 
     const newFilters: FilterState = {
       priceRange: [
@@ -43,7 +45,8 @@ function HomeContent() {
         maxPrice ? parseInt(maxPrice) : 1000000
       ],
       sizes: sizes ? sizes.split(',').filter(s => s) : [],
-      conditions: conditions ? conditions.split(',').filter(c => c) : []
+      conditions: conditions ? conditions.split(',').filter(c => c) : [],
+      brand: brand || undefined
     }
 
     setFilters(newFilters)
@@ -138,35 +141,13 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* ブランドカルーセルセクション */}
+      <BrandCarousel />
+
       {/* 商品一覧セクション */}
-      <section className="py-8">
+      <section className="py-8" data-section="products">
         <div className="max-w-[1600px] mx-auto px-4 lg:px-8 xl:px-12">
           <ProductList filters={filters} />
-        </div>
-      </section>
-
-      {/* 価格帯セクション（簡略化） */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            人気の価格帯
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { price: "〜10万円", count: "234" },
-              { price: "10〜20万円", count: "456" },
-              { price: "20〜30万円", count: "189" },
-              { price: "30万円〜", count: "87" },
-            ].map((category) => (
-              <div
-                key={category.price}
-                className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow cursor-pointer"
-              >
-                <p className="text-2xl font-bold text-gray-900">{category.price}</p>
-                <p className="text-sm text-gray-500 mt-2">{category.count}着</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
       
