@@ -88,7 +88,7 @@ export default function BrandCarousel() {
             className="flex gap-8 overflow-x-auto scrollbar-hide px-12 py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {brands.map((brand, index) => (
+            {brands.map((brand) => (
               <div
                 key={brand.name}
                 onClick={() => handleBrandClick(brand)}
