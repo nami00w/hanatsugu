@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import Image from 'next/image'
@@ -8,6 +8,8 @@ import Image from 'next/image'
 export default function SellPage() {
   const router = useRouter()
   const supabase = createClient()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   const [formData, setFormData] = useState({
     title: '',
@@ -25,6 +27,16 @@ export default function SellPage() {
   const [previews, setPreviews] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const user = localStorage.getItem('dummyUser')
+    if (!user) {
+      router.push('/auth/login?redirect=/sell')
+    } else {
+      setIsAuthenticated(true)
+      setIsLoading(false)
+    }
+  }, [router])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -114,6 +126,21 @@ export default function SellPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+          <p className="mt-4 text-gray-600">読み込み中...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return null
   }
 
   return (
