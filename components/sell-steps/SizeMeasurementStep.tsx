@@ -57,7 +57,7 @@ export default function SizeMeasurementStep({
             id="size"
             value={size}
             onChange={handleSizeChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            className="form-input"
           >
             <option value="" className="text-gray-500">サイズを選択してください</option>
             <option value="XS">XS</option>
@@ -87,7 +87,7 @@ export default function SizeMeasurementStep({
               value={bust}
               onChange={(e) => handleMeasurementChange('bust', e.target.value)}
               placeholder="例: 83"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -100,7 +100,7 @@ export default function SizeMeasurementStep({
               value={waist}
               onChange={(e) => handleMeasurementChange('waist', e.target.value)}
               placeholder="例: 63"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -113,7 +113,7 @@ export default function SizeMeasurementStep({
               value={hip}
               onChange={(e) => handleMeasurementChange('hip', e.target.value)}
               placeholder="例: 88"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function SizeMeasurementStep({
               value={height}
               onChange={(e) => handleMeasurementChange('height', e.target.value)}
               placeholder="例: 160"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -152,7 +152,7 @@ export default function SizeMeasurementStep({
               value={shoulderWidth}
               onChange={(e) => handleMeasurementChange('shoulderWidth', e.target.value)}
               placeholder="例: 36"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -165,7 +165,7 @@ export default function SizeMeasurementStep({
               value={sleeveLength}
               onChange={(e) => handleMeasurementChange('sleeveLength', e.target.value)}
               placeholder="例: 58"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -178,7 +178,7 @@ export default function SizeMeasurementStep({
               value={totalLength}
               onChange={(e) => handleMeasurementChange('totalLength', e.target.value)}
               placeholder="例: 155"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
             <p className="text-xs text-gray-500 mt-1">
               肩から裾までの長さ

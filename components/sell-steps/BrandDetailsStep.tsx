@@ -61,7 +61,7 @@ export default function BrandDetailsStep({
             value={title}
             onChange={(e) => handleInputChange('title', e.target.value)}
             placeholder="例：VERA WANG バレリーナ ウェディングドレス"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            className="form-input"
           />
           <p className="text-xs text-gray-500 mt-1">
             ブランド名とモデル名を含めると良いです
@@ -78,7 +78,7 @@ export default function BrandDetailsStep({
               value={brand}
               onChange={(e) => handleInputChange('brand', e.target.value)}
               placeholder="例：VERA WANG、Pronovias"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -89,7 +89,7 @@ export default function BrandDetailsStep({
             <select
               value={color}
               onChange={(e) => handleInputChange('color', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="白">白</option>
@@ -109,7 +109,7 @@ export default function BrandDetailsStep({
           <select
             value={condition}
             onChange={(e) => handleInputChange('condition', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            className="form-input"
           >
             <option value="" className="text-gray-500">選択してください</option>
             <option value="新品・未使用">新品・未使用</option>
@@ -137,7 +137,7 @@ export default function BrandDetailsStep({
               value={modelName}
               onChange={(e) => handleInputChange('modelName', e.target.value)}
               placeholder="例：バレリーナ、スタイル12345"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -152,7 +152,7 @@ export default function BrandDetailsStep({
               placeholder="例：2023"
               min="2000"
               max="2024"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             />
           </div>
 
@@ -163,7 +163,7 @@ export default function BrandDetailsStep({
             <select
               value={silhouette}
               onChange={(e) => handleInputChange('silhouette', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="Aライン">Aライン</option>
@@ -182,7 +182,7 @@ export default function BrandDetailsStep({
             <select
               value={neckline}
               onChange={(e) => handleInputChange('neckline', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="ストラップレス">ストラップレス</option>
@@ -201,7 +201,7 @@ export default function BrandDetailsStep({
             <select
               value={sleeveStyle}
               onChange={(e) => handleInputChange('sleeveStyle', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="ノースリーブ">ノースリーブ</option>
@@ -220,7 +220,7 @@ export default function BrandDetailsStep({
             <select
               value={skirtLength}
               onChange={(e) => handleInputChange('skirtLength', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="フロアレングス">フロアレングス</option>
@@ -242,7 +242,7 @@ export default function BrandDetailsStep({
             value={features}
             onChange={(e) => handleInputChange('features', e.target.value)}
             placeholder="例：ビーズ、レース、刺繍、パール"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            className="form-input"
           />
         </div>
       </div>

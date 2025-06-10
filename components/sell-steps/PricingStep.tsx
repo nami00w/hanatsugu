@@ -84,7 +84,7 @@ export default function PricingStep({
 ・挙式と披露宴で1回のみ着用
 ・クリーニング済み
 ・付属品：ベール、グローブ付き"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            className="form-input"
           />
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>詳しい説明は購入者の安心につながります</span>
@@ -100,7 +100,7 @@ export default function PricingStep({
             <select
               value={wearCount}
               onChange={(e) => handleInputChange('wearCount', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+              className="form-input"
             >
               <option value="" className="text-gray-500">選択してください</option>
               <option value="0回">0回（未着用）</option>
@@ -159,7 +159,7 @@ export default function PricingStep({
                 value={price}
                 onChange={(e) => handleInputChange('price', e.target.value)}
                 placeholder="150000"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-lg text-gray-900"
+                className="form-input text-lg pl-10"
               />
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function PricingStep({
                 value={originalPrice}
                 onChange={(e) => handleInputChange('originalPrice', e.target.value)}
                 placeholder="300000"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-lg text-gray-900"
+                className="form-input text-lg pl-10"
               />
             </div>
           </div>
