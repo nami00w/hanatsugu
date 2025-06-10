@@ -6,6 +6,10 @@ import Image from 'next/image'
 interface PricingStepProps {
   price: string
   originalPrice: string
+  description: string
+  wearCount: string
+  isCleaned: boolean
+  acceptOffers: boolean
   updateFormData: (updates: any) => void
   formData: any
   uploadProgress: number
@@ -15,13 +19,17 @@ interface PricingStepProps {
 export default function PricingStep({
   price,
   originalPrice,
+  description,
+  wearCount,
+  isCleaned,
+  acceptOffers,
   updateFormData,
   formData,
   uploadProgress,
   loading
 }: PricingStepProps) {
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | boolean) => {
     updateFormData({ [field]: value })
   }
 
@@ -54,6 +62,85 @@ export default function PricingStep({
         </p>
       </div>
 
+      {/* 商品説明 */}
+      <div className="bg-gray-50 rounded-xl p-6 space-y-6">
+        <div className="flex items-center">
+          <h4 className="text-lg font-semibold text-gray-900">商品説明</h4>
+          <span className="ml-2 text-sm text-gray-500">(任意)</span>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            詳細説明 <span className="text-gray-500">(任意)</span>
+          </label>
+          <textarea
+            value={description}
+            onChange={(e) => handleInputChange('description', e.target.value)}
+            rows={6}
+            placeholder="購入時期、着用回数、保管状態、付属品などを詳しく記載してください。
+
+例：
+・2023年6月に購入
+・挙式と披露宴で1回のみ着用
+・クリーニング済み
+・付属品：ベール、グローブ付き"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+          />
+          <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <span>詳しい説明は購入者の安心につながります</span>
+            <span>{description.length}/1000</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              着用回数 <span className="text-gray-500">(任意)</span>
+            </label>
+            <select
+              value={wearCount}
+              onChange={(e) => handleInputChange('wearCount', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="0回">0回（未着用）</option>
+              <option value="1回">1回</option>
+              <option value="2回">2回</option>
+              <option value="3回">3回</option>
+              <option value="4回以上">4回以上</option>
+            </select>
+          </div>
+
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="isCleaned"
+                checked={isCleaned}
+                onChange={(e) => handleInputChange('isCleaned', e.target.checked)}
+                className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+              />
+              <label htmlFor="isCleaned" className="ml-2 text-sm text-gray-700">
+                クリーニング済み
+              </label>
+            </div>
+
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="acceptOffers"
+                checked={acceptOffers}
+                onChange={(e) => handleInputChange('acceptOffers', e.target.checked)}
+                className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+              />
+              <label htmlFor="acceptOffers" className="ml-2 text-sm text-gray-700">
+                価格交渉可
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* 価格設定 */}
       <div className="bg-gray-50 rounded-xl p-6 space-y-6">
         <h4 className="text-lg font-semibold text-gray-900">価格設定</h4>
@@ -72,14 +159,14 @@ export default function PricingStep({
                 value={price}
                 onChange={(e) => handleInputChange('price', e.target.value)}
                 placeholder="150000"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors text-lg"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-lg text-gray-900"
               />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              定価（円）
+              定価（円） <span className="text-gray-500">(任意)</span>
             </label>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500 text-lg">
@@ -90,7 +177,7 @@ export default function PricingStep({
                 value={originalPrice}
                 onChange={(e) => handleInputChange('originalPrice', e.target.value)}
                 placeholder="300000"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors text-lg"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-lg text-gray-900"
               />
             </div>
           </div>

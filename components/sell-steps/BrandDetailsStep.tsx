@@ -5,20 +5,30 @@ import { Tag, FileText } from 'lucide-react'
 interface BrandDetailsStepProps {
   title: string
   brand: string
-  category: string
   color: string
   condition: string
-  description: string
+  modelName: string
+  manufactureYear: string
+  silhouette: string
+  neckline: string
+  sleeveStyle: string
+  skirtLength: string
+  features: string
   updateFormData: (updates: any) => void
 }
 
 export default function BrandDetailsStep({
   title,
   brand,
-  category,
   color,
   condition,
-  description,
+  modelName,
+  manufactureYear,
+  silhouette,
+  neckline,
+  sleeveStyle,
+  skirtLength,
+  features,
   updateFormData
 }: BrandDetailsStepProps) {
 
@@ -38,9 +48,9 @@ export default function BrandDetailsStep({
         </p>
       </div>
 
-      {/* 基本情報 */}
+      {/* 必須情報 */}
       <div className="bg-gray-50 rounded-xl p-6 space-y-6">
-        <h4 className="text-lg font-semibold text-gray-900">基本情報</h4>
+        <h4 className="text-lg font-semibold text-gray-900">必須情報</h4>
         
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -51,58 +61,44 @@ export default function BrandDetailsStep({
             value={title}
             onChange={(e) => handleInputChange('title', e.target.value)}
             placeholder="例：VERA WANG バレリーナ ウェディングドレス"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
           />
           <p className="text-xs text-gray-500 mt-1">
             ブランド名とモデル名を含めると良いです
           </p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            ブランド名 <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            value={brand}
-            onChange={(e) => handleInputChange('brand', e.target.value)}
-            placeholder="例：VERA WANG、Pronovias、Monique Lhuillier"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
-          />
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              カテゴリー <span className="text-red-500">*</span>
+              ブランド名 <span className="text-red-500">*</span>
             </label>
-            <select
-              value={category}
-              onChange={(e) => handleInputChange('category', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
-            >
-              <option value="">選択してください</option>
-              <option value="Aライン">Aライン</option>
-              <option value="プリンセスライン">プリンセスライン</option>
-              <option value="マーメイドライン">マーメイドライン</option>
-              <option value="スレンダーライン">スレンダーライン</option>
-              <option value="エンパイアライン">エンパイアライン</option>
-              <option value="ミニ・ショート">ミニ・ショート</option>
-              <option value="その他">その他</option>
-            </select>
+            <input
+              type="text"
+              value={brand}
+              onChange={(e) => handleInputChange('brand', e.target.value)}
+              placeholder="例：VERA WANG、Pronovias"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               カラー <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
+            <select
               value={color}
               onChange={(e) => handleInputChange('color', e.target.value)}
-              placeholder="例：オフホワイト、アイボリー、シャンパン"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
-            />
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="白">白</option>
+              <option value="オフホワイト">オフホワイト</option>
+              <option value="アイボリー">アイボリー</option>
+              <option value="シャンパン">シャンパン</option>
+              <option value="ピンク">ピンク</option>
+              <option value="その他">その他</option>
+            </select>
           </div>
         </div>
 
@@ -113,69 +109,144 @@ export default function BrandDetailsStep({
           <select
             value={condition}
             onChange={(e) => handleInputChange('condition', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
           >
-            <option value="">選択してください</option>
+            <option value="" className="text-gray-500">選択してください</option>
             <option value="新品・未使用">新品・未使用</option>
             <option value="未使用に近い">未使用に近い</option>
             <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
             <option value="やや傷や汚れあり">やや傷や汚れあり</option>
-            <option value="傷や汚れあり">傷や汚れあり</option>
           </select>
         </div>
       </div>
 
-      {/* 商品説明 */}
-      <div className="bg-gray-50 rounded-xl p-6">
-        <div className="flex items-center mb-4">
-          <FileText className="w-5 h-5 text-gray-700 mr-2" />
-          <h4 className="text-lg font-semibold text-gray-900">商品説明</h4>
+      {/* 任意詳細情報 */}
+      <div className="bg-gray-50 rounded-xl p-6 space-y-6">
+        <div className="flex items-center">
+          <h4 className="text-lg font-semibold text-gray-900">詳細情報</h4>
+          <span className="ml-2 text-sm text-gray-500">(任意)</span>
         </div>
         
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            詳細説明 <span className="text-red-500">*</span>
-          </label>
-          <textarea
-            value={description}
-            onChange={(e) => handleInputChange('description', e.target.value)}
-            rows={8}
-            placeholder="購入時期、着用回数、保管状態、付属品などを詳しく記載してください。
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              モデル名・品番 <span className="text-gray-500">(任意)</span>
+            </label>
+            <input
+              type="text"
+              value={modelName}
+              onChange={(e) => handleInputChange('modelName', e.target.value)}
+              placeholder="例：バレリーナ、スタイル12345"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            />
+          </div>
 
-例：
-・2023年6月に購入
-・挙式と披露宴で1回のみ着用
-・クリーニング済み
-・付属品：ベール、グローブ付き
-・保管は専用のドレスカバーで大切に保管
-・目立った汚れや傷はありません"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors"
-          />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
-            <span>詳しい説明は購入者の安心につながります</span>
-            <span>{description.length}/2000</span>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              製造年 <span className="text-gray-500">(任意)</span>
+            </label>
+            <input
+              type="number"
+              value={manufactureYear}
+              onChange={(e) => handleInputChange('manufactureYear', e.target.value)}
+              placeholder="例：2023"
+              min="2000"
+              max="2024"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              シルエット <span className="text-gray-500">(任意)</span>
+            </label>
+            <select
+              value={silhouette}
+              onChange={(e) => handleInputChange('silhouette', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="Aライン">Aライン</option>
+              <option value="ボールガウン">ボールガウン</option>
+              <option value="マーメイド">マーメイド</option>
+              <option value="スレンダー">スレンダー</option>
+              <option value="エンパイア">エンパイア</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              ネックライン <span className="text-gray-500">(任意)</span>
+            </label>
+            <select
+              value={neckline}
+              onChange={(e) => handleInputChange('neckline', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="ストラップレス">ストラップレス</option>
+              <option value="ハイネック">ハイネック</option>
+              <option value="Vネック">Vネック</option>
+              <option value="ハートシェイプ">ハートシェイプ</option>
+              <option value="オフショルダー">オフショルダー</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              袖スタイル <span className="text-gray-500">(任意)</span>
+            </label>
+            <select
+              value={sleeveStyle}
+              onChange={(e) => handleInputChange('sleeveStyle', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="ノースリーブ">ノースリーブ</option>
+              <option value="半袖">半袖</option>
+              <option value="長袖">長袖</option>
+              <option value="七分袖">七分袖</option>
+              <option value="キャップスリーブ">キャップスリーブ</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              スカート丈 <span className="text-gray-500">(任意)</span>
+            </label>
+            <select
+              value={skirtLength}
+              onChange={(e) => handleInputChange('skirtLength', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+            >
+              <option value="" className="text-gray-500">選択してください</option>
+              <option value="フロアレングス">フロアレングス</option>
+              <option value="チャペルレングス">チャペルレングス</option>
+              <option value="カテドラルレングス">カテドラルレングス</option>
+              <option value="ひざ丈">ひざ丈</option>
+              <option value="ミディ丈">ミディ丈</option>
+              <option value="その他">その他</option>
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* 記載のコツ */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-        <h4 className="text-sm font-semibold text-blue-900 mb-3">💡 記載するとよい情報</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ul className="text-sm text-blue-700 space-y-1">
-            <li>• 購入時期と購入店舗</li>
-            <li>• 着用回数と着用時間</li>
-            <li>• クリーニングの有無</li>
-            <li>• 保管状態（専用ケースなど）</li>
-          </ul>
-          <ul className="text-sm text-blue-700 space-y-1">
-            <li>• 付属品（ベール、グローブなど）</li>
-            <li>• サイズ感（実寸や着用感）</li>
-            <li>• 特徴的なデザインポイント</li>
-            <li>• 購入理由や着用シーン</li>
-          </ul>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            特徴・装飾 <span className="text-gray-500">(任意)</span>
+          </label>
+          <input
+            type="text"
+            value={features}
+            onChange={(e) => handleInputChange('features', e.target.value)}
+            placeholder="例：ビーズ、レース、刺繍、パール"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-gray-900"
+          />
         </div>
       </div>
+
     </div>
   )
 }

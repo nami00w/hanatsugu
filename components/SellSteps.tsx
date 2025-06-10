@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Check, ChevronLeft, ChevronRight, Save } from 'lucide-react'
 import PhotoUploadStep from './sell-steps/PhotoUploadStep'
 import SizeMeasurementStep from './sell-steps/SizeMeasurementStep'
@@ -8,27 +8,40 @@ import BrandDetailsStep from './sell-steps/BrandDetailsStep'
 import PricingStep from './sell-steps/PricingStep'
 
 interface FormData {
-  // 写真
+  // Step 1: 写真 (必須: 1枚以上)
   images: File[]
   previews: string[]
-  // サイズ・採寸
-  size: string
-  customMeasurements: {
-    bust: string
-    waist: string
-    hip: string
-    length: string
-  }
-  // ブランド・詳細
-  title: string
-  brand: string
-  category: string
-  color: string
-  condition: string
-  description: string
-  // 価格
-  price: string
-  originalPrice: string
+  
+  // Step 2: サイズ・採寸
+  size: string // 必須
+  bust: string // 必須（3つのうち最低2つ）
+  waist: string // 必須（3つのうち最低2つ）
+  hip: string // 必須（3つのうち最低2つ）
+  height: string // 任意
+  shoulderWidth: string // 任意
+  sleeveLength: string // 任意
+  totalLength: string // 任意
+  
+  // Step 3: 基本情報
+  title: string // 必須
+  brand: string // 必須
+  color: string // 必須
+  condition: string // 必須
+  modelName: string // 任意
+  manufactureYear: string // 任意
+  silhouette: string // 任意
+  neckline: string // 任意
+  sleeveStyle: string // 任意
+  skirtLength: string // 任意
+  features: string // 任意
+  
+  // Step 4: 価格・その他
+  price: string // 必須
+  originalPrice: string // 任意
+  description: string // 任意
+  wearCount: string // 任意
+  isCleaned: boolean // 任意
+  acceptOffers: boolean // 任意
 }
 
 interface Step {
@@ -49,24 +62,35 @@ interface SellStepsProps {
 
 export default function SellSteps({ onSubmit, loading, error, setError, uploadProgress }: SellStepsProps) {
   const [currentStep, setCurrentStep] = useState(1)
+  const [showDraftModal, setShowDraftModal] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     images: [],
     previews: [],
     size: '',
-    customMeasurements: {
-      bust: '',
-      waist: '',
-      hip: '',
-      length: ''
-    },
+    bust: '',
+    waist: '',
+    hip: '',
+    height: '',
+    shoulderWidth: '',
+    sleeveLength: '',
+    totalLength: '',
     title: '',
     brand: '',
-    category: '',
     color: '',
     condition: '',
-    description: '',
+    modelName: '',
+    manufactureYear: '',
+    silhouette: '',
+    neckline: '',
+    sleeveStyle: '',
+    skirtLength: '',
+    features: '',
     price: '',
-    originalPrice: ''
+    originalPrice: '',
+    description: '',
+    wearCount: '',
+    isCleaned: false,
+    acceptOffers: false
   })
 
   const steps: Step[] = [
@@ -104,20 +128,85 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
     setFormData(prev => ({ ...prev, ...updates }))
   }
 
+  // 下書き保存機能
+  const saveDraft = () => {
+    const draftData = {
+      ...formData,
+      currentStep,
+      savedAt: new Date().toISOString()
+    }
+    localStorage.setItem('sellFormDraft', JSON.stringify(draftData))
+    alert('下書きを保存しました')
+  }
+
+  // 下書き読み込み
+  const loadDraft = () => {
+    const savedDraft = localStorage.getItem('sellFormDraft')
+    if (savedDraft) {
+      try {
+        const draftData = JSON.parse(savedDraft)
+        // 画像以外のデータを復元
+        const { images, previews, currentStep: savedStep, savedAt, ...restData } = draftData
+        setFormData(prev => ({ ...prev, ...restData }))
+        setCurrentStep(savedStep || 1)
+        setShowDraftModal(false)
+        alert('下書きを復元しました')
+      } catch (error) {
+        console.error('下書きの読み込みに失敗しました:', error)
+      }
+    }
+  }
+
+  // 下書き削除
+  const deleteDraft = () => {
+    localStorage.removeItem('sellFormDraft')
+    setShowDraftModal(false)
+  }
+
+  // ページロード時に下書きの存在をチェック
+  React.useEffect(() => {
+    const savedDraft = localStorage.getItem('sellFormDraft')
+    if (savedDraft) {
+      setShowDraftModal(true)
+    }
+  }, [])
+
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
         return formData.images.length > 0
       case 2:
-        return formData.size !== ''
+        // サイズ必須 + バスト・ウエスト・ヒップのうち最低2つ
+        const measurements = [formData.bust, formData.waist, formData.hip].filter(m => m.trim() !== '')
+        return formData.size !== '' && measurements.length >= 2
       case 3:
         return formData.title.trim() !== '' && formData.brand.trim() !== '' && 
-               formData.category !== '' && formData.color.trim() !== '' && 
-               formData.condition !== '' && formData.description.trim() !== ''
+               formData.color.trim() !== '' && formData.condition !== ''
       case 4:
         return formData.price.trim() !== '' && parseInt(formData.price) > 0
       default:
         return false
+    }
+  }
+
+  const getRequiredFieldsCount = (step: number): { completed: number; total: number } => {
+    switch (step) {
+      case 1:
+        return { completed: formData.images.length > 0 ? 1 : 0, total: 1 }
+      case 2:
+        const measurements = [formData.bust, formData.waist, formData.hip].filter(m => m.trim() !== '')
+        const sizeCompleted = formData.size !== '' ? 1 : 0
+        const measurementsCompleted = measurements.length >= 2 ? 1 : 0
+        return { completed: sizeCompleted + measurementsCompleted, total: 2 }
+      case 3:
+        const step3Fields = [formData.title, formData.brand, formData.color, formData.condition]
+        const completed3 = step3Fields.filter(field => typeof field === 'string' ? field.trim() !== '' : field !== '').length
+        return { completed: completed3, total: 4 }
+      case 4:
+        const priceCompleted = formData.price.trim() !== '' && parseInt(formData.price) > 0 ? 1 : 0
+        return { completed: priceCompleted, total: 1 }
+      default:
+        return { completed: 0, total: 0 }
     }
   }
 
@@ -174,7 +263,13 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
         return (
           <SizeMeasurementStep
             size={formData.size}
-            customMeasurements={formData.customMeasurements}
+            bust={formData.bust}
+            waist={formData.waist}
+            hip={formData.hip}
+            height={formData.height}
+            shoulderWidth={formData.shoulderWidth}
+            sleeveLength={formData.sleeveLength}
+            totalLength={formData.totalLength}
             updateFormData={updateFormData}
           />
         )
@@ -183,10 +278,15 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
           <BrandDetailsStep
             title={formData.title}
             brand={formData.brand}
-            category={formData.category}
             color={formData.color}
             condition={formData.condition}
-            description={formData.description}
+            modelName={formData.modelName}
+            manufactureYear={formData.manufactureYear}
+            silhouette={formData.silhouette}
+            neckline={formData.neckline}
+            sleeveStyle={formData.sleeveStyle}
+            skirtLength={formData.skirtLength}
+            features={formData.features}
             updateFormData={updateFormData}
           />
         )
@@ -195,6 +295,10 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
           <PricingStep
             price={formData.price}
             originalPrice={formData.originalPrice}
+            description={formData.description}
+            wearCount={formData.wearCount}
+            isCleaned={formData.isCleaned}
+            acceptOffers={formData.acceptOffers}
             updateFormData={updateFormData}
             formData={formData}
             uploadProgress={uploadProgress}
@@ -263,6 +367,14 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
           <p className="text-xs text-gray-400">
             ステップ {currentStep} / {steps.length}
           </p>
+          {(() => {
+            const progress = getRequiredFieldsCount(currentStep)
+            return (
+              <p className="text-xs text-gray-500 mt-1">
+                必須項目 {progress.completed}/{progress.total} 完了
+              </p>
+            )
+          })()}
         </div>
       </div>
 
@@ -273,8 +385,55 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
         </div>
       )}
 
+      {/* 下書き復元モーダル */}
+      {showDraftModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              下書きが見つかりました
+            </h3>
+            <p className="text-gray-600 mb-6">
+              前回の入力内容が保存されています。復元しますか？
+            </p>
+            <div className="flex space-x-3">
+              <button
+                onClick={loadDraft}
+                className="flex-1 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+              >
+                復元する
+              </button>
+              <button
+                onClick={deleteDraft}
+                className="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                新規作成
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ステップコンテンツ */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            {(() => {
+              const progress = getRequiredFieldsCount(currentStep)
+              return (
+                <p className="text-sm text-gray-500">
+                  必須項目 {progress.completed}/{progress.total} 完了
+                </p>
+              )
+            })()}
+          </div>
+          <button
+            onClick={saveDraft}
+            className="flex items-center px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            <Save className="w-4 h-4 mr-1" />
+            下書き保存
+          </button>
+        </div>
         {renderCurrentStep()}
       </div>
 
