@@ -62,19 +62,28 @@ export default function DressCard({
   
   const conditionBadge = getConditionBadge(condition)
 
-  const handleFavoriteClick = async (e: React.MouseEvent) => {
+  const handleFavoriteClick = async (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault() // Linkの遷移を防ぐ
     e.stopPropagation()
     
-    console.log('Favorite button clicked:', { dressId, isLoggedIn })
-    
-    const success = await toggleFavorite(dressId)
-    if (!success) {
-      // ログインが必要な場合、モーダルを表示
-      console.log('Login required, showing modal')
-      setShowLoginModal(true)
-    } else {
-      console.log('Favorite toggled successfully')
+    try {
+      console.log('🔄 [Mobile Debug] Favorite button clicked:', { 
+        dressId, 
+        isLoggedIn, 
+        eventType: e.type,
+        isMobile: /Mobi|Android/i.test(navigator.userAgent)
+      })
+      
+      const success = await toggleFavorite(dressId)
+      if (!success) {
+        // ログインが必要な場合、モーダルを表示
+        console.log('❌ [Mobile Debug] Login required, showing modal')
+        setShowLoginModal(true)
+      } else {
+        console.log('✅ [Mobile Debug] Favorite toggled successfully')
+      }
+    } catch (error) {
+      console.error('🚨 [Mobile Debug] Favorite click handler failed:', error)
     }
   }
   return (
@@ -90,7 +99,13 @@ export default function DressCard({
           />
           <button
             onClick={handleFavoriteClick}
-            className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
+            onTouchEnd={handleFavoriteClick}
+            className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 touch-manipulation"
+            style={{
+              WebkitTapHighlightColor: 'transparent',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
+            }}
           >
             <Heart
               className={`w-5 h-5 transition-colors ${

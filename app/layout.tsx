@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   description: "大切なドレスに、次の物語を。",
 };
 
+// viewport設定をエクスポート（Next.js 13+での推奨方法）
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
