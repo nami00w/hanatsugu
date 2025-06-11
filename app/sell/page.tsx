@@ -47,6 +47,10 @@ export default function SellPage() {
   }, [router])
 
   const handleSubmit = async (formData: FormData, isDraft: boolean = false) => {
+    console.log('=== handleSubmit開始 ===')
+    console.log('formData:', formData)
+    console.log('isDraft:', isDraft)
+    
     setError('')
     setLoading(true)
 
@@ -54,14 +58,19 @@ export default function SellPage() {
       // ユーザー確認
       let userId: string
       const dummyAuth = localStorage.getItem('dummyAuth')
+      console.log('dummyAuth:', dummyAuth)
       
       if (dummyAuth) {
         // ダミー認証の場合
         userId = localStorage.getItem('dummyUserId') || 'dummy-user-id'
+        console.log('ダミー認証使用 - userId:', userId)
       } else {
         // 実際の認証の場合
+        console.log('Supabase認証確認中...')
         const { data: { user } } = await supabase.auth.getUser()
+        console.log('Supabase user:', user)
         if (!user) {
+          console.log('ユーザー未認証 - ログインページへリダイレクト')
           router.push('/auth/login')
           return
         }
@@ -71,23 +80,31 @@ export default function SellPage() {
       // 画像をアップロード
       const imageUrls: string[] = []
       const totalImages = formData.images.length
+      console.log('画像アップロード開始 - 画像数:', totalImages)
       
       for (let i = 0; i < formData.images.length; i++) {
         const image = formData.images[i]
         const fileName = `${userId}/${Date.now()}_${image.name}`
+        console.log(`画像 ${i + 1}/${totalImages} - ファイル名:`, fileName)
         
         // 進捗を更新
         setUploadProgress(Math.round(((i + 1) / totalImages) * 100))
         
+        console.log('Supabaseストレージにアップロード中...')
         const { error: uploadError } = await supabase.storage
           .from('dress-images')
           .upload(fileName, image)
 
-        if (uploadError) throw uploadError
+        if (uploadError) {
+          console.error('画像アップロードエラー:', uploadError)
+          throw uploadError
+        }
+        console.log('画像アップロード成功')
 
         const { data: { publicUrl } } = supabase.storage
           .from('dress-images')
           .getPublicUrl(fileName)
+        console.log('公開URL:', publicUrl)
 
         imageUrls.push(publicUrl)
       }
@@ -111,17 +128,30 @@ export default function SellPage() {
                            formData.customMeasurements.hip || formData.customMeasurements.length ? 
                            formData.customMeasurements : null,
       }
+      
+      console.log('データベースに保存するデータ:', insertData)
 
       const { error: insertError } = await supabase
         .from('dresses')
         .insert(insertData)
 
-      if (insertError) throw insertError
+      if (insertError) {
+        console.error('データベース挿入エラー:', insertError)
+        throw insertError
+      }
+      console.log('データベース保存成功')
 
       const message = isDraft ? '下書きとして保存しました！' : '出品が完了しました！'
+      console.log('=== handleSubmit完了 ===', message)
       alert(message)
       router.push('/')
     } catch (error) {
+      console.error('=== handleSubmitエラー ===', error)
+      console.error('エラーの詳細:', {
+        name: (error as Error).name,
+        message: (error as Error).message,
+        stack: (error as Error).stack
+      })
       setError((error as Error).message || '出品に失敗しました')
       setUploadProgress(0)
     } finally {

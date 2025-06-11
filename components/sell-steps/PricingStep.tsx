@@ -1,6 +1,6 @@
 'use client'
 
-import { DollarSign, Eye, Save, Upload, Calendar } from 'lucide-react'
+import { Banknote, Eye, Save, Upload } from 'lucide-react'
 import Image from 'next/image'
 
 interface PricingStepProps {
@@ -53,7 +53,7 @@ export default function PricingStep({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <DollarSign className="mx-auto h-12 w-12 text-pink-600 mb-4" />
+        <Banknote className="mx-auto h-12 w-12 text-pink-600 mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           価格設定と出品確認
         </h3>
@@ -151,7 +151,7 @@ export default function PricingStep({
               販売価格（円） <span className="text-red-500">*</span>
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500 text-lg">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-xl font-normal pointer-events-none">
                 ¥
               </span>
               <input
@@ -159,7 +159,8 @@ export default function PricingStep({
                 value={price}
                 onChange={(e) => handleInputChange('price', e.target.value)}
                 placeholder="150000"
-                className="form-input text-lg pl-10"
+                className="form-input text-lg pl-8 pr-4"
+                style={{ paddingLeft: '2.5rem' }}
               />
             </div>
           </div>
@@ -169,7 +170,7 @@ export default function PricingStep({
               定価（円） <span className="text-gray-500">(任意)</span>
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500 text-lg">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-xl font-normal pointer-events-none">
                 ¥
               </span>
               <input
@@ -177,7 +178,8 @@ export default function PricingStep({
                 value={originalPrice}
                 onChange={(e) => handleInputChange('originalPrice', e.target.value)}
                 placeholder="300000"
-                className="form-input text-lg pl-10"
+                className="form-input text-lg pl-8 pr-4"
+                style={{ paddingLeft: '2.5rem' }}
               />
             </div>
           </div>

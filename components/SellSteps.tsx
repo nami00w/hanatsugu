@@ -42,6 +42,15 @@ interface FormData {
   wearCount: string // 任意
   isCleaned: boolean // 任意
   acceptOffers: boolean // 任意
+  
+  // カテゴリーとカスタム採寸情報
+  category: string // 必須
+  customMeasurements: {
+    bust?: string
+    waist?: string
+    hip?: string
+    length?: string
+  }
 }
 
 interface Step {
@@ -90,7 +99,9 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
     description: '',
     wearCount: '',
     isCleaned: false,
-    acceptOffers: false
+    acceptOffers: false,
+    category: 'mermaid',
+    customMeasurements: {}
   })
 
   const steps: Step[] = [
@@ -229,7 +240,19 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
       setError(getValidationError(4))
       return
     }
-    await onSubmit(formData, isDraft)
+    
+    // FormDataを適切な形式に変換
+    const submitData = {
+      ...formData,
+      customMeasurements: {
+        bust: formData.bust || undefined,
+        waist: formData.waist || undefined,
+        hip: formData.hip || undefined,
+        length: formData.totalLength || undefined
+      }
+    }
+    
+    await onSubmit(submitData, isDraft)
   }
 
   const getValidationError = (step: number): string => {
