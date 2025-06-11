@@ -96,22 +96,19 @@ function HomeContent() {
       
       <main className="min-h-screen bg-gray-50">
       {/* ヒーローセクション */}
-      <section className="relative bg-gradient-to-br from-pink-50 via-white to-purple-50 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-green-50 via-white to-green-100 overflow-hidden">
         {/* 背景装飾 */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-pink-300 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-300 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
           <div className="text-center">
-            <h1 className="text-5xl font-bold text-gray-900 sm:text-6xl lg:text-7xl leading-tight">
-              大切なドレスに、<br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-                次の物語を
-              </span>
+            <h1 className="hero-title text-gray-900 font-bold">
+              大切なドレスに、<br className="mobile-break" />次の<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">物語</span>を
             </h1>
-            <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-600 sm:text-2xl leading-relaxed">
+            <p className="mt-6 max-w-2xl mx-auto text-subtitle text-gray-600 leading-relaxed">
               あなたの特別な一着が、次の花嫁の特別な一日を彩ります
             </p>
             
@@ -123,7 +120,7 @@ function HomeContent() {
               <div className="mt-6">
                 <button
                   onClick={() => setIsMobileFilterOpen(true)}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm text-gray-600 hover:text-gray-800 transition-colors bg-white/60 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md"
+                  className="btn-secondary text-sm rounded-full"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />

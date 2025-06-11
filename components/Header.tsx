@@ -77,13 +77,13 @@ export default function Header() {
             {isLoggedIn && (
               <Link 
                 href="/favorites" 
-                className="relative p-2 text-gray-700 hover:text-pink-600 transition-colors"
+                className="relative p-2 text-gray-700 hover:text-primary transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
                 {favoritesCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {favoritesCount > 99 ? '99+' : favoritesCount}
                   </span>
                 )}
@@ -93,7 +93,7 @@ export default function Header() {
             {/* 出品ボタン */}
             <Link
               href="/sell"
-              className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors font-medium shadow-sm hover:shadow-md"
+              className="btn-primary"
             >
               出品
             </Link>
@@ -125,7 +125,7 @@ export default function Header() {
                     </Link>
                     <Link
                       href="/auth/signup"
-                      className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors border border-gray-200"
+                      className="btn-secondary"
                     >
                       新規登録
                     </Link>
