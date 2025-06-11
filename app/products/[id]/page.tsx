@@ -10,6 +10,7 @@ import ContactModal from '@/components/ContactModal'
 import Header from '@/components/Header'
 import { useFavorites } from '@/hooks/useFavorites'
 import { useShareProduct } from '@/hooks/useShareProduct'
+import { useViewHistory } from '@/hooks/useViewHistory'
 import ShareModal from '@/components/ShareModal'
 import RelatedProductsCarousel from '@/components/RelatedProductsCarousel'
 
@@ -23,6 +24,7 @@ export default function ProductDetailPage() {
   const [showShareModal, setShowShareModal] = useState(false)
   const { toggleFavorite, isFavorite } = useFavorites()
   const { shareProduct } = useShareProduct()
+  const { addToHistory } = useViewHistory()
   
   // スワイプ用の状態管理
   const [touchStart, setTouchStart] = useState<number | null>(null)
@@ -182,7 +184,23 @@ export default function ProductDetailPage() {
     const foundDress = dummyDresses.find(d => d.id === params.id)
     setDress(foundDress as DressWithSeller || null)
     setLoading(false)
-  }, [params.id, dummyDresses])
+    
+    // 商品が見つかった場合、閲覧履歴に追加
+    if (foundDress) {
+      // 少し遅延させて履歴に追加（ページ表示完了後）
+      setTimeout(() => {
+        addToHistory({
+          id: foundDress.id,
+          title: foundDress.title,
+          brand: foundDress.brand,
+          price: foundDress.price,
+          images: foundDress.images,
+          size: foundDress.size,
+          condition: foundDress.condition
+        })
+      }, 1000)
+    }
+  }, [params.id, dummyDresses, addToHistory])
 
   // 関連商品用のデータ（ProductListと同じ構造＋各ブランドに複数商品）
   const allProducts = useMemo(() => [
@@ -627,7 +645,10 @@ export default function ProductDetailPage() {
                   
                   {/* 購入ボタン */}
                   <button 
-                    className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+                    className="w-full text-white py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
+                    style={{ backgroundColor: '#6B8E4A' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#5A7A3A'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B8E4A'}
                   >
                     購入する
                   </button>
@@ -714,12 +735,12 @@ export default function ProductDetailPage() {
       </div>
       
       {/* モバイル用固定ボタン */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 z-40">
         {/* お気に入り・シェア・質問ボタン */}
-        <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="grid grid-cols-3 gap-2 mb-2">
           <button 
             onClick={() => toggleFavorite(dress.id)}
-            className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-1 ${
+            className={`py-2 px-3 rounded-lg font-medium transition-colors border flex items-center justify-center gap-1 ${
               isFavorite(dress.id) 
                 ? 'bg-gray-100 border-gray-400 text-gray-700' 
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -735,7 +756,7 @@ export default function ProductDetailPage() {
           
           <button 
             onClick={handleShare}
-            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
+            className="py-2 px-3 rounded-lg font-medium border bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
           >
             <Share2 className="w-4 h-4" strokeWidth={1.5} />
             <span className="text-xs">シェア</span>
@@ -743,7 +764,7 @@ export default function ProductDetailPage() {
           
           <button 
             onClick={() => setShowContactModal(true)}
-            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
+            className="py-2 px-3 rounded-lg font-medium border bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
           >
             <Mail className="w-4 h-4" strokeWidth={1.5} />
             <span className="text-xs">質問</span>
@@ -752,7 +773,10 @@ export default function ProductDetailPage() {
         
         {/* 購入ボタン */}
         <button 
-          className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg"
+          className="w-full text-white py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
+          style={{ backgroundColor: '#6B8E4A' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#5A7A3A'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B8E4A'}
         >
           購入する
         </button>

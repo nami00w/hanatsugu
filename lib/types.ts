@@ -109,3 +109,39 @@ export const getSizeUS = (size: string): string => {
   const mapping = sizeMapping[size]
   return mapping ? mapping.us : ''
 }
+
+// マイページ関連の型定義
+
+// 閲覧履歴アイテム
+export interface ViewHistoryItem {
+  id: string
+  viewedAt: string
+  dress: {
+    id: string
+    title: string
+    brand: string
+    price: number
+    images: string[]
+    size: string
+    condition: string
+  }
+}
+
+// 出品管理アイテム
+export interface MyListing {
+  id: string
+  status: 'active' | 'sold' | 'draft' | 'inactive'
+  createdAt: string
+  views: number
+  inquiries: number
+  dress: Dress
+}
+
+// ユーザー統計情報
+export interface UserStats {
+  listingsCount: number
+  favoritesCount: number
+  viewHistoryCount: number
+  totalViews: number
+  totalInquiries: number
+}

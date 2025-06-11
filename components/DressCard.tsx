@@ -90,7 +90,7 @@ export default function DressCard({
     <Link href={`/products/${id}`} className="cursor-pointer group block mb-4 min-w-0">
       {/* 画像部分 */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-        <div className="aspect-[2/3] bg-gray-50 relative overflow-hidden">
+        <div className="aspect-[3/4] bg-gray-50 relative overflow-hidden">
           <Image
             src={displayImageUrl}
             alt={displayTitle}

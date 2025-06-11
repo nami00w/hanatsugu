@@ -1,31 +1,39 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { User, ChevronDown, LogOut, Plus } from 'lucide-react'
 import { useFavorites } from '@/hooks/useFavorites'
 import MobileMenu from './MobileMenu'
+import AuthModal from './AuthModal'
 
 export default function Header() {
-  // 開発中はダミーの認証状態を使用
-  const [user] = useState<null>(null)
+  // 開発中はダミーの認証状態を使用（将来の機能拡張用）
+  // const [user] = useState<null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showAccountDropdown, setShowAccountDropdown] = useState(false)
   const { isLoggedIn, favoritesCount } = useFavorites()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const handleLogout = async () => {
-    // 開発中は何もしない
-    console.log('ログアウト（開発中）')
-  }
+  // ドロップダウン外クリックで閉じる
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowAccountDropdown(false)
+      }
+    }
 
-  // テスト用ログイン切り替え
-  // const toggleAuth = () => {
-  //   const currentAuth = localStorage.getItem('dummyAuth')
-  //   const newAuth = currentAuth === 'true' ? 'false' : 'true'
-  //   localStorage.setItem('dummyAuth', newAuth)
-  //   
-  //   // カスタムイベントを発火してコンポーネントに通知
-  //   window.dispatchEvent(new Event('dummyAuthChange'))
-  //   
-  //   console.log('🔄 Auth toggled to:', newAuth)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // 将来の機能拡張用（現在は使用しないためコメントアウト）
+  // const handleLogout = async () => {
+  //   console.log('ログアウト')
+  //   setShowAccountDropdown(false)
   // }
 
   // ダミーログアウト
@@ -39,7 +47,9 @@ export default function Header() {
     window.dispatchEvent(new Event('dummyAuthChange'))
     
     console.log('✅ Logged out')
+    setShowAccountDropdown(false)
   }
+
 
   return (
     <header className="bg-white shadow-sm">
@@ -62,8 +72,24 @@ export default function Header() {
               Hanatsugu
             </Link>
             
-            {/* 空のスペース（右） */}
-            <div className="w-10"></div>
+            {/* 右上アカウントボタン */}
+            <div className="flex items-center">
+              {isLoggedIn ? (
+                <Link
+                  href="/mypage"
+                  className="p-2 text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  <User className="w-6 h-6" />
+                </Link>
+              ) : (
+                <button
+                  onClick={() => setShowAuthModal(true)}
+                  className="p-2 text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  <User className="w-6 h-6" />
+                </button>
+              )}
+            </div>
           </div>
 
           {/* PC版レイアウト */}
@@ -90,47 +116,63 @@ export default function Header() {
               </Link>
             )}
             
-            {/* 出品ボタン */}
-            <Link
-              href="/sell"
-              className="btn-primary"
-            >
-              出品
-            </Link>
-            
-            {user ? (
-              <button
-                onClick={handleLogout}
-                className="text-gray-700 hover:text-gray-900"
-              >
-                ログアウト
-              </button>
-            ) : (
-              <>
-                {/* ダミー認証がログイン状態の場合、ログアウトボタンを表示 */}
-                {isLoggedIn ? (
-                  <button
-                    onClick={handleDummyLogout}
-                    className="text-gray-700 hover:text-gray-900"
-                  >
-                    ログアウト
-                  </button>
-                ) : (
-                  <>
+            {isLoggedIn ? (
+              /* ログイン時：アカウントドロップダウン */
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setShowAccountDropdown(!showAccountDropdown)}
+                  className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100"
+                >
+                  <User className="w-5 h-5" />
+                  <span>アカウント</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showAccountDropdown ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {/* ドロップダウンメニュー */}
+                {showAccountDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
                     <Link
-                      href="/auth/login"
-                      className="text-gray-700 hover:text-gray-900"
+                      href="/mypage"
+                      onClick={() => setShowAccountDropdown(false)}
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
                     >
-                      ログイン
+                      <User className="w-4 h-4" />
+                      <span>マイページ</span>
                     </Link>
                     <Link
-                      href="/auth/signup"
-                      className="btn-secondary"
+                      href="/sell"
+                      onClick={() => setShowAccountDropdown(false)}
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
                     >
-                      新規登録
+                      <Plus className="w-4 h-4" />
+                      <span>出品する</span>
                     </Link>
-                  </>
+                    <hr className="my-2 border-gray-200" />
+                    <button
+                      onClick={handleDummyLogout}
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors w-full text-left"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>ログアウト</span>
+                    </button>
+                  </div>
                 )}
+              </div>
+            ) : (
+              /* 未ログイン時：ログイン・新規登録ボタン */
+              <>
+                <Link
+                  href="/auth/login"
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  ログイン
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="btn-secondary"
+                >
+                  新規登録
+                </Link>
               </>
             )}
           </div>
@@ -141,6 +183,12 @@ export default function Header() {
       <MobileMenu 
         isOpen={isMobileMenuOpen} 
         onClose={() => setIsMobileMenuOpen(false)} 
+      />
+      
+      {/* 認証モーダル */}
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
       />
     </header>
   )
