@@ -1,6 +1,7 @@
 'use client'
 
-import { Banknote, Eye, Save, Upload } from 'lucide-react'
+import { useState } from 'react'
+import { Banknote, Eye, Save, Upload, Sparkles, Lightbulb } from 'lucide-react'
 import Image from 'next/image'
 
 interface PricingStepProps {
@@ -28,9 +29,89 @@ export default function PricingStep({
   uploadProgress,
   loading
 }: PricingStepProps) {
+  const [isGeneratingDescription, setIsGeneratingDescription] = useState(false)
+  const [isSuggestingPrice, setIsSuggestingPrice] = useState(false)
+  const [priceRange, setPriceRange] = useState<{ min: number; max: number } | null>(null)
+  const [aiError, setAiError] = useState<string>('')
 
   const handleInputChange = (field: string, value: string | boolean) => {
     updateFormData({ [field]: value })
+  }
+
+  const generateAIDescription = async () => {
+    setIsGeneratingDescription(true)
+    setAiError('')
+    
+    try {
+      const response = await fetch('/api/ai/generate-description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: formData.title,
+          brand: formData.brand,
+          color: formData.color,
+          condition: formData.condition,
+          ownerHistory: formData.ownerHistory,
+          size: formData.size,
+          wearCount,
+          isCleaned,
+          features: formData.features,
+          modelName: formData.modelName,
+          silhouette: formData.silhouette,
+          neckline: formData.neckline
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        const useDescription = window.confirm('このAI生成説明文を使用しますか？\n\n' + data.description.substring(0, 200) + '...')
+        if (useDescription) {
+          handleInputChange('description', data.description)
+        }
+      } else {
+        setAiError('説明文の生成に失敗しました')
+      }
+    } catch (error) {
+      setAiError('エラーが発生しました')
+    } finally {
+      setIsGeneratingDescription(false)
+    }
+  }
+
+  const suggestPrice = async () => {
+    setIsSuggestingPrice(true)
+    setAiError('')
+    setPriceRange(null)
+    
+    try {
+      const response = await fetch('/api/ai/suggest-price', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brand: formData.brand,
+          condition: formData.condition,
+          ownerHistory: formData.ownerHistory,
+          originalPrice
+        })
+      })
+      
+      const data = await response.json()
+      
+      if (data.success) {
+        setPriceRange(data.priceRange)
+        const usePrice = window.confirm(`AIが提案する適正価格：¥${data.suggestedPrice.toLocaleString()}\n\nこの価格を使用しますか？`)
+        if (usePrice) {
+          handleInputChange('price', data.suggestedPrice.toString())
+        }
+      } else {
+        setAiError('価格提案に失敗しました')
+      }
+    } catch (error) {
+      setAiError('エラーが発生しました')
+    } finally {
+      setIsSuggestingPrice(false)
+    }
   }
 
   const calculateDiscount = () => {
@@ -70,9 +151,29 @@ export default function PricingStep({
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            詳細説明 <span className="text-gray-500">(任意)</span>
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-sm font-medium text-gray-700">
+              詳細説明 <span className="text-gray-500">(任意)</span>
+            </label>
+            <button
+              type="button"
+              onClick={generateAIDescription}
+              disabled={isGeneratingDescription || !formData.brand || !formData.condition}
+              className="flex items-center px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            >
+              {isGeneratingDescription ? (
+                <>
+                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-2" />
+                  生成中...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 mr-1" />
+                  AIで説明文を生成
+                </>
+              )}
+            </button>
+          </div>
           <textarea
             value={description}
             onChange={(e) => handleInputChange('description', e.target.value)}
@@ -143,7 +244,27 @@ export default function PricingStep({
 
       {/* 価格設定 */}
       <div className="bg-gray-50 rounded-xl p-6 space-y-6">
-        <h4 className="text-lg font-semibold text-gray-900">価格設定</h4>
+        <div className="flex items-center justify-between">
+          <h4 className="text-lg font-semibold text-gray-900">価格設定</h4>
+          <button
+            type="button"
+            onClick={suggestPrice}
+            disabled={isSuggestingPrice || !formData.brand || !formData.condition || !formData.ownerHistory}
+            className="flex items-center px-3 py-1.5 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          >
+            {isSuggestingPrice ? (
+              <>
+                <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-2" />
+                分析中...
+              </>
+            ) : (
+              <>
+                <Lightbulb className="w-4 h-4 mr-1" />
+                適正価格を提案
+              </>
+            )}
+          </button>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -184,6 +305,24 @@ export default function PricingStep({
             </div>
           </div>
         </div>
+
+        {/* AI エラーメッセージ */}
+        {aiError && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <p className="text-sm text-red-700">{aiError}</p>
+          </div>
+        )}
+
+        {/* AI価格提案範囲 */}
+        {priceRange && (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h5 className="text-sm font-medium text-blue-900 mb-2">💡 AI価格提案</h5>
+            <div className="text-sm text-blue-800">
+              <p>相場価格帯: ¥{priceRange.min.toLocaleString()} 〜 ¥{priceRange.max.toLocaleString()}</p>
+              <p className="text-xs text-blue-600 mt-1">ブランド、状態、オーナー履歴を考慮した適正価格です</p>
+            </div>
+          </div>
+        )}
 
         {/* 価格情報表示 */}
         {price && (
