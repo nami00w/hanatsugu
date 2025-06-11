@@ -1,6 +1,7 @@
 'use client'
 
 import { Ruler, Info } from 'lucide-react'
+import { sizeMapping, getSizeGou, getSizeUS } from '@/lib/types'
 
 interface SizeMeasurementStepProps {
   size: string
@@ -27,7 +28,13 @@ export default function SizeMeasurementStep({
 }: SizeMeasurementStepProps) {
 
   const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateFormData({ size: e.target.value })
+    const selectedSize = e.target.value
+    updateFormData({ 
+      size: selectedSize,
+      // 自動で号数・USサイズ設定
+      sizeGou: getSizeGou(selectedSize),
+      sizeUS: getSizeUS(selectedSize)
+    })
   }
 
   const handleMeasurementChange = (field: string, value: string) => {
@@ -60,13 +67,17 @@ export default function SizeMeasurementStep({
             className="form-input"
           >
             <option value="" className="text-gray-500">サイズを選択してください</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
+            {Object.keys(sizeMapping).map((sizeKey) => (
+              <option key={sizeKey} value={sizeKey}>
+                {sizeKey} ({sizeMapping[sizeKey].gou}・{sizeMapping[sizeKey].us})
+              </option>
+            ))}
           </select>
+          {size && sizeMapping[size] && (
+            <p className="text-sm text-gray-600 mt-2">
+              選択中: {size} = {sizeMapping[size].gou} = {sizeMapping[size].us}
+            </p>
+          )}
         </div>
       </div>
 
@@ -201,11 +212,12 @@ export default function SizeMeasurementStep({
               </tr>
             </thead>
             <tbody className="divide-y divide-blue-200">
-              <tr><td className="py-1">5号 (XS)</td><td>79cm</td><td>58cm</td><td>82cm</td></tr>
-              <tr><td className="py-1">7号 (S)</td><td>82cm</td><td>61cm</td><td>85cm</td></tr>
-              <tr><td className="py-1">9号 (M)</td><td>85cm</td><td>64cm</td><td>88cm</td></tr>
-              <tr><td className="py-1">11号 (L)</td><td>88cm</td><td>67cm</td><td>91cm</td></tr>
-              <tr><td className="py-1">13号 (XL)</td><td>91cm</td><td>70cm</td><td>94cm</td></tr>
+              <tr><td className="py-1">XS (7号・US 0-2)</td><td>79cm</td><td>58cm</td><td>82cm</td></tr>
+              <tr><td className="py-1">S (9号・US 2-4)</td><td>82cm</td><td>61cm</td><td>85cm</td></tr>
+              <tr><td className="py-1">M (11号・US 6-8)</td><td>85cm</td><td>64cm</td><td>88cm</td></tr>
+              <tr><td className="py-1">L (13号・US 10-12)</td><td>88cm</td><td>67cm</td><td>91cm</td></tr>
+              <tr><td className="py-1">XL (15号・US 14-16)</td><td>91cm</td><td>70cm</td><td>94cm</td></tr>
+              <tr><td className="py-1">XXL (17号・US 18-20)</td><td>94cm</td><td>73cm</td><td>97cm</td></tr>
             </tbody>
           </table>
         </div>

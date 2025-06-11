@@ -46,3 +46,66 @@ export interface User {
 export interface DressWithSeller extends Dress {
   seller: User
 }
+
+// サイズマッピングシステム
+export interface SizeMapping {
+  gou: string
+  us: string
+}
+
+export const sizeMapping: Record<string, SizeMapping> = {
+  'XS': { gou: '7号', us: 'US 0-2' },
+  'S': { gou: '9号', us: 'US 2-4' },
+  'M': { gou: '11号', us: 'US 6-8' },
+  'L': { gou: '13号', us: 'US 10-12' },
+  'XL': { gou: '15号', us: 'US 14-16' },
+  'XXL': { gou: '17号', us: 'US 18-20' }
+}
+
+// サイズ表示用のユーティリティ関数
+export const formatSizeDisplay = (size: string, context: 'detail' | 'card' | 'filter') => {
+  // 既存の号数のみのサイズ（例：9号、11号）をS・M・Lに変換
+  const gouToSize: Record<string, string> = {
+    '7号': 'XS',
+    '9号': 'S', 
+    '11号': 'M',
+    '13号': 'L',
+    '15号': 'XL',
+    '17号': 'XXL'
+  }
+
+  // すでにS・M・L形式の場合はそのまま使用
+  let mainSize = size
+  if (size.includes('号') && gouToSize[size]) {
+    mainSize = gouToSize[size]
+  }
+
+  const mapping = sizeMapping[mainSize]
+  if (!mapping) {
+    // マッピングがない場合は元のサイズをそのまま返す
+    return size
+  }
+
+  switch (context) {
+    case 'detail':
+      return `${mainSize} (${mapping.gou}・${mapping.us})`
+    case 'card':
+      return `${mainSize} (${mapping.gou})`
+    case 'filter':
+      return mainSize
+    default:
+      return size
+  }
+}
+
+// サイズから号数を取得
+export const getSizeGou = (size: string): string => {
+  const mapping = sizeMapping[size]
+  return mapping ? mapping.gou : size
+}
+
+// サイズからUSサイズを取得
+export const getSizeUS = (size: string): string => {
+  const mapping = sizeMapping[size]
+  return mapping ? mapping.us : ''
+}

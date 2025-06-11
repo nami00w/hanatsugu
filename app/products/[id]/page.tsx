@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { Heart, Share2, Mail } from 'lucide-react'
-import { DressWithSeller } from '@/lib/types'
+import { DressWithSeller, formatSizeDisplay } from '@/lib/types'
 import ContactModal from '@/components/ContactModal'
 import Header from '@/components/Header'
 import { useFavorites } from '@/hooks/useFavorites'
@@ -588,24 +588,24 @@ export default function ProductDetailPage() {
                   )}
                 </div>
 
-                {/* お気に入り・シェア・質問ボタン（PC版のみ） */}
+                {/* お気に入り・シェア・質問・購入ボタン（PC版のみ） */}
                 <div className="hidden lg:block lg:mb-6">
-                  {/* お気に入り・シェアボタン */}
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                  {/* お気に入り・シェア・質問ボタン */}
+                  <div className="grid grid-cols-3 gap-3 mb-4">
                     <button 
                       onClick={() => toggleFavorite(dress.id)}
                       className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
                         isFavorite(dress.id) 
-                          ? 'bg-pink-50 border-pink-600 text-pink-600' 
+                          ? 'bg-gray-100 border-gray-400 text-gray-700' 
                           : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       <Heart 
-                        className={`w-5 h-5 ${isFavorite(dress.id) ? 'fill-primary text-primary' : ''}`}
+                        className={`w-5 h-5 ${isFavorite(dress.id) ? 'fill-gray-600 text-gray-600' : ''}`}
                         fill={isFavorite(dress.id) ? "currentColor" : "none"}
                         strokeWidth={1.5}
                       />
-                      <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
+                      <span>お気に入り</span>
                     </button>
                     
                     <button 
@@ -615,15 +615,21 @@ export default function ProductDetailPage() {
                       <Share2 className="w-5 h-5" strokeWidth={1.5} />
                       <span>シェア</span>
                     </button>
+                    
+                    <button 
+                      onClick={() => setShowContactModal(true)}
+                      className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Mail className="w-5 h-5" strokeWidth={1.5} />
+                      <span>質問</span>
+                    </button>
                   </div>
                   
-                  {/* 質問ボタン */}
+                  {/* 購入ボタン */}
                   <button 
-                    onClick={() => setShowContactModal(true)}
-                    className="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl"
+                    className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
                   >
-                    <Mail className="w-5 h-5 mr-2" strokeWidth={1.5} />
-                    この商品について質問する
+                    購入する
                   </button>
                 </div>
               </div>
@@ -634,7 +640,7 @@ export default function ProductDetailPage() {
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <span className="text-sm text-gray-600 block mb-1">サイズ</span>
-                    <p className="font-semibold text-gray-800">{dress.size}</p>
+                    <p className="font-semibold text-gray-800">{formatSizeDisplay(dress.size, 'detail')}</p>
                   </div>
                   <div>
                     <span className="text-sm text-gray-600 block mb-1">カラー</span>
@@ -696,51 +702,59 @@ export default function ProductDetailPage() {
         </div>
         
         {/* 関連商品カルーセル */}
-        {dress && (
-          <RelatedProductsCarousel 
-            currentProductId={dress.id}
-            currentBrand={dress.brand}
-            allProducts={allProducts}
-          />
-        )}
+        <div className="mt-16 lg:mt-20">
+          {dress && (
+            <RelatedProductsCarousel 
+              currentProductId={dress.id}
+              currentBrand={dress.brand}
+              allProducts={allProducts}
+            />
+          )}
+        </div>
       </div>
       
       {/* モバイル用固定ボタン */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
-        {/* お気に入り・シェアボタン */}
-        <div className="grid grid-cols-2 gap-3 mb-3">
+        {/* お気に入り・シェア・質問ボタン */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
           <button 
             onClick={() => toggleFavorite(dress.id)}
-            className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-2 ${
+            className={`py-3 rounded-lg font-medium transition-colors border-2 flex items-center justify-center gap-1 ${
               isFavorite(dress.id) 
-                ? 'bg-pink-50 border-pink-600 text-pink-600' 
+                ? 'bg-gray-100 border-gray-400 text-gray-700' 
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
             <Heart 
-              className={`w-5 h-5 ${isFavorite(dress.id) ? 'fill-primary text-primary' : ''}`}
+              className={`w-4 h-4 ${isFavorite(dress.id) ? 'fill-gray-600 text-gray-600' : ''}`}
               fill={isFavorite(dress.id) ? "currentColor" : "none"}
               strokeWidth={1.5}
             />
-            <span className="text-sm">{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入り'}</span>
+            <span className="text-xs">お気に入り</span>
           </button>
           
           <button 
             onClick={handleShare}
-            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
           >
-            <Share2 className="w-5 h-5" strokeWidth={1.5} />
-            <span className="text-sm">シェア</span>
+            <Share2 className="w-4 h-4" strokeWidth={1.5} />
+            <span className="text-xs">シェア</span>
+          </button>
+          
+          <button 
+            onClick={() => setShowContactModal(true)}
+            className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1"
+          >
+            <Mail className="w-4 h-4" strokeWidth={1.5} />
+            <span className="text-xs">質問</span>
           </button>
         </div>
         
-        {/* 質問ボタン */}
+        {/* 購入ボタン */}
         <button 
-          onClick={() => setShowContactModal(true)}
-          className="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors shadow-lg"
+          className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg"
         >
-          <Mail className="w-5 h-5 mr-2" strokeWidth={1.5} />
-          この商品について質問する
+          購入する
         </button>
       </div>
 

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Heart } from 'lucide-react';
 import { useFavorites } from '@/hooks/useFavorites';
+import { formatSizeDisplay } from '@/lib/types';
 import LoginModal from './LoginModal';
 
 interface DressCardProps {
@@ -121,7 +122,7 @@ export default function DressCard({
         <p className="text-sm text-gray-600 truncate">{brand}</p>
         
         <div className="flex items-center justify-between text-sm text-gray-500 pt-1">
-          <span>サイズ {size}</span>
+          <span>サイズ {formatSizeDisplay(size, 'card')}</span>
           {originalPrice && originalPrice > price && (
             <span className="text-green-600">
               Save {Math.round((1 - price / originalPrice) * 100)}%

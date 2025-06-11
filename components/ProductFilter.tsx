@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { sizeMapping, getSizeGou } from '@/lib/types'
 
 export interface FilterState {
   priceRange: [number, number]
@@ -16,7 +17,9 @@ interface ProductFilterProps {
   onClose?: () => void
 }
 
-const SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '5号', '7号', '9号', '11号', '13号', '15号', '17号']
+// 新しいサイズシステム: S・M・L + 号数対応
+const MAIN_SIZES = Object.keys(sizeMapping) // ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+const GOU_SIZES = ['7号', '9号', '11号', '13号', '15号', '17号']
 const CONDITIONS = ['新品・未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり']
 
 export default function ProductFilter({ onFilterChange, initialFilters, isModal = false, onClose }: ProductFilterProps) {
@@ -234,21 +237,48 @@ export default function ProductFilter({ onFilterChange, initialFilters, isModal 
         </button>
         
         {expandedSections.size && (
-          <div className="grid grid-cols-3 gap-2 overflow-hidden transition-all duration-300">
-            {SIZES.map((size) => (
-              <label
-                key={size}
-                className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
-              >
-                <input
-                  type="checkbox"
-                  checked={filters.sizes.includes(size)}
-                  onChange={() => handleSizeToggle(size)}
-                  className="rounded border-gray-300 text-pink-600 focus:ring-pink-500"
-                />
-                <span className="text-sm text-gray-700">{size}</span>
-              </label>
-            ))}
+          <div className="space-y-4 overflow-hidden transition-all duration-300">
+            {/* メインサイズ (S・M・L) */}
+            <div>
+              <h4 className="text-sm font-medium text-gray-600 mb-2">標準サイズ</h4>
+              <div className="grid grid-cols-3 gap-2">
+                {MAIN_SIZES.map((size) => (
+                  <label
+                    key={size}
+                    className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={filters.sizes.includes(size)}
+                      onChange={() => handleSizeToggle(size)}
+                      className="rounded border-gray-300 text-pink-600 focus:ring-pink-500"
+                    />
+                    <span className="text-sm text-gray-700">{size}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* 号数サイズ */}
+            <div>
+              <h4 className="text-sm font-medium text-gray-600 mb-2">号数</h4>
+              <div className="grid grid-cols-3 gap-2">
+                {GOU_SIZES.map((size) => (
+                  <label
+                    key={size}
+                    className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-2 rounded"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={filters.sizes.includes(size)}
+                      onChange={() => handleSizeToggle(size)}
+                      className="rounded border-gray-300 text-pink-600 focus:ring-pink-500"
+                    />
+                    <span className="text-sm text-gray-700">{size}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
