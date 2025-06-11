@@ -7,6 +7,7 @@ interface BrandDetailsStepProps {
   brand: string
   color: string
   condition: string
+  ownerHistory: string
   modelName: string
   manufactureYear: string
   silhouette: string
@@ -22,6 +23,7 @@ export default function BrandDetailsStep({
   brand,
   color,
   condition,
+  ownerHistory,
   modelName,
   manufactureYear,
   silhouette,
@@ -117,6 +119,56 @@ export default function BrandDetailsStep({
             <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
             <option value="やや傷や汚れあり">やや傷や汚れあり</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            オーナー履歴 <span className="text-red-500">*</span>
+          </label>
+          <div className="space-y-3">
+            <label className="flex items-start cursor-pointer">
+              <input
+                type="radio"
+                name="ownerHistory"
+                value="first"
+                checked={ownerHistory === 'first'}
+                onChange={() => handleInputChange('ownerHistory', 'first')}
+                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+              />
+              <div className="ml-3">
+                <span className="block text-sm font-medium text-gray-700">ファーストオーナー</span>
+                <span className="block text-xs text-gray-500">私が最初の持ち主です</span>
+              </div>
+            </label>
+            <label className="flex items-start cursor-pointer">
+              <input
+                type="radio"
+                name="ownerHistory"
+                value="second"
+                checked={ownerHistory === 'second'}
+                onChange={() => handleInputChange('ownerHistory', 'second')}
+                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+              />
+              <div className="ml-3">
+                <span className="block text-sm font-medium text-gray-700">セカンドオーナー</span>
+                <span className="block text-xs text-gray-500">以前に1度譲渡されています</span>
+              </div>
+            </label>
+            <label className="flex items-start cursor-pointer">
+              <input
+                type="radio"
+                name="ownerHistory"
+                value="third_plus"
+                checked={ownerHistory === 'third_plus'}
+                onChange={() => handleInputChange('ownerHistory', 'third_plus')}
+                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+              />
+              <div className="ml-3">
+                <span className="block text-sm font-medium text-gray-700">サードオーナー以上</span>
+                <span className="block text-xs text-gray-500">複数回譲渡されています</span>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
 

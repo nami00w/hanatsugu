@@ -27,6 +27,7 @@ interface FormData {
   brand: string // 必須
   color: string // 必須
   condition: string // 必須
+  ownerHistory: string // 必須
   modelName: string // 任意
   manufactureYear: string // 任意
   silhouette: string // 任意
@@ -87,6 +88,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
     brand: '',
     color: '',
     condition: '',
+    ownerHistory: '',
     modelName: '',
     manufactureYear: '',
     silhouette: '',
@@ -192,7 +194,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
         return formData.size !== '' && measurements.length >= 2
       case 3:
         return formData.title.trim() !== '' && formData.brand.trim() !== '' && 
-               formData.color.trim() !== '' && formData.condition !== ''
+               formData.color.trim() !== '' && formData.condition !== '' && formData.ownerHistory !== ''
       case 4:
         return formData.price.trim() !== '' && parseInt(formData.price) > 0
       default:
@@ -210,9 +212,9 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
         const measurementsCompleted = measurements.length >= 2 ? 1 : 0
         return { completed: sizeCompleted + measurementsCompleted, total: 2 }
       case 3:
-        const step3Fields = [formData.title, formData.brand, formData.color, formData.condition]
+        const step3Fields = [formData.title, formData.brand, formData.color, formData.condition, formData.ownerHistory]
         const completed3 = step3Fields.filter(field => typeof field === 'string' ? field.trim() !== '' : field !== '').length
-        return { completed: completed3, total: 4 }
+        return { completed: completed3, total: 5 }
       case 4:
         const priceCompleted = formData.price.trim() !== '' && parseInt(formData.price) > 0 ? 1 : 0
         return { completed: priceCompleted, total: 1 }
@@ -303,6 +305,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
             brand={formData.brand}
             color={formData.color}
             condition={formData.condition}
+            ownerHistory={formData.ownerHistory}
             modelName={formData.modelName}
             manufactureYear={formData.manufactureYear}
             silhouette={formData.silhouette}

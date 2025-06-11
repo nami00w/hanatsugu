@@ -120,6 +120,7 @@ export default function SellPage() {
         color: formData.color,
         condition: formData.condition,
         category: formData.category,
+        owner_history: formData.ownerHistory,
         images: imageUrls,
         seller_id: userId,
         status: isDraft ? 'draft' : 'published',
