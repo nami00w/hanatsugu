@@ -1,10 +1,13 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import DressCard from './DressCard'
 import { FilterState } from './ProductFilter'
+import { supabase } from '@/lib/supabase'
+import type { Dress } from '@/lib/types'
 
-// ダミーデータを拡張（画像URL追加）
-const allProducts = [
+// フォールバック用ダミーデータ
+const fallbackProducts = [
   { 
     id: "1", 
     brand: "VERA WANG", 
@@ -132,7 +135,72 @@ interface ProductListProps {
 }
 
 export default function ProductList({ filters }: ProductListProps) {
-  const filteredProducts = allProducts.filter(product => {
+  const [products, setProducts] = useState<Dress[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Supabaseからデータを取得
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true)
+        const { data, error: fetchError } = await supabase
+          .from('listings')
+          .select('*')
+          .eq('status', 'published')
+          .order('created_at', { ascending: false })
+          .limit(50)
+
+        if (fetchError) {
+          console.error('商品データ取得エラー:', fetchError)
+          // エラー時はフォールバックデータを使用
+          setProducts(fallbackProducts.map(p => ({
+            ...p,
+            id: p.id,
+            title: `${p.brand} ${p.model}`,
+            description: '',
+            images: [p.imageUrl],
+            category: 'mermaid',
+            seller_id: 'dummy',
+            owner_history: 'first',
+            status: 'published' as const,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            color: '白',
+            original_price: p.originalPrice
+          })))
+          setError('商品データの読み込みに失敗しました（フォールバックデータを表示中）')
+        } else {
+          setProducts(data || [])
+          setError(null)
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err)
+        setProducts(fallbackProducts.map(p => ({
+          ...p,
+          id: p.id,
+          title: `${p.brand} ${p.model}`,
+          description: '',
+          images: [p.imageUrl],
+          category: 'mermaid',
+          seller_id: 'dummy',
+          owner_history: 'first',
+          status: 'published' as const,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          color: '白',
+          original_price: p.originalPrice
+        })))
+        setError('予期しないエラーが発生しました')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
+
+  const filteredProducts = products.filter(product => {
     // ブランドフィルター
     if (filters.brand && product.brand.toLowerCase() !== filters.brand.toLowerCase()) {
       return false
@@ -156,8 +224,37 @@ export default function ProductList({ filters }: ProductListProps) {
     return true
   })
 
+  // ローディング状態の表示
+  if (loading) {
+    return (
+      <div className="flex-1">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">商品一覧</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+              <div className="w-full h-72 bg-gray-200"></div>
+              <div className="p-4 space-y-3">
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex-1">
+      {error && (
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+          <p className="text-sm text-yellow-800">{error}</p>
+        </div>
+      )}
+      
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900">
           商品一覧
@@ -184,11 +281,13 @@ export default function ProductList({ filters }: ProductListProps) {
               key={product.id}
               id={product.id}
               brand={product.brand}
-              model={product.model}
+              model={product.model_name || (product as any).model}
+              title={product.title}
               size={product.size}
               price={product.price}
-              originalPrice={product.originalPrice}
-              imageUrl={product.imageUrl}
+              originalPrice={product.original_price || (product as any).originalPrice}
+              imageUrl={(product as any).imageUrl}
+              images={product.images}
             />
           ))}
         </div>

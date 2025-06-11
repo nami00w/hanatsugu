@@ -7,27 +7,37 @@ import LoginModal from './LoginModal';
 interface DressCardProps {
   id: string | number;
   brand: string;
-  model: string;
+  model?: string;
+  title?: string;
   size: string;
   price: number;
-  originalPrice: number;
+  originalPrice?: number;
   imageUrl?: string;
+  images?: string[];
 }
 
 export default function DressCard({
   id,
   brand,
   model,
+  title,
   size,
   price,
   originalPrice,
   imageUrl,
+  images,
 }: DressCardProps) {
   const { isLoggedIn, isFavorite, toggleFavorite } = useFavorites()
   const [showLoginModal, setShowLoginModal] = useState(false)
   
   const dressId = id.toString()
   const isFavorited = isFavorite(dressId)
+  
+  // 表示用の画像URLを決定
+  const displayImageUrl = imageUrl || (images && images[0]) || '/placeholder-dress.jpg'
+  
+  // 表示用のタイトルを決定
+  const displayTitle = title || (model ? `${brand} ${model}` : brand)
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault() // Linkの遷移を防ぐ
@@ -49,23 +59,12 @@ export default function DressCard({
       {/* 画像部分 */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
         <div className="aspect-[2/3] bg-gray-50 relative overflow-hidden">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={`${brand} ${model}`}
-              fill
-              className="object-cover group-hover:scale-102 transition-transform duration-500"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-              <div className="text-center">
-                <svg className="w-12 h-12 text-gray-300 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                </svg>
-                <p className="text-xs text-gray-400">No Image</p>
-              </div>
-            </div>
-          )}
+          <Image
+            src={displayImageUrl}
+            alt={displayTitle}
+            fill
+            className="object-cover group-hover:scale-102 transition-transform duration-500"
+          />
           <button
             onClick={handleFavoriteClick}
             className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
@@ -94,20 +93,29 @@ export default function DressCard({
       {/* テキスト部分（カード外） */}
       <div className="mt-3 space-y-1">
         <h3 className="font-semibold text-gray-900 text-sm leading-tight truncate">
-          {brand}
+          {displayTitle}
         </h3>
-        <p className="text-sm text-gray-600 truncate">{model}</p>
+        <p className="text-sm text-gray-600 truncate">{brand}</p>
         
         <div className="flex items-center justify-between text-sm text-gray-500 pt-1">
           <span>サイズ {size}</span>
-          <span className="text-green-600">
-            Save {Math.round((1 - price / originalPrice) * 100)}%
-          </span>
+          {originalPrice && originalPrice > price && (
+            <span className="text-green-600">
+              Save {Math.round((1 - price / originalPrice) * 100)}%
+            </span>
+          )}
         </div>
         
-        <p className="text-xl font-bold text-pink-600 pt-1">
-          ¥{price.toLocaleString()}
-        </p>
+        <div className="flex items-center gap-2 pt-1">
+          <p className="text-xl font-bold text-pink-600">
+            ¥{price.toLocaleString()}
+          </p>
+          {originalPrice && originalPrice > price && (
+            <p className="text-sm text-gray-400 line-through">
+              ¥{originalPrice.toLocaleString()}
+            </p>
+          )}
+        </div>
       </div>
       
       {/* ログインモーダル */}

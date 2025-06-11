@@ -46,7 +46,67 @@ export default function SellPage() {
     }
   }, [router])
 
-  const handleSubmit = async (formData: FormData, isDraft: boolean = false) => {
+  // バリデーション関数
+  const validateFormData = (formData: any, isDraft: boolean): string | null => {
+    // 必須項目チェック（下書きでない場合）
+    if (!isDraft) {
+      if (!formData.title?.trim()) return '商品タイトルを入力してください'
+      if (!formData.brand?.trim()) return 'ブランド名を入力してください'
+      if (!formData.color) return 'カラーを選択してください'
+      if (!formData.condition) return '商品の状態を選択してください'
+      if (!formData.ownerHistory) return 'オーナー履歴を選択してください'
+      if (!formData.size) return 'サイズを選択してください'
+      if (!formData.price?.trim()) return '販売価格を入力してください'
+      if (formData.images.length === 0) return '写真を最低1枚アップロードしてください'
+    }
+
+    // 価格のバリデーション
+    if (formData.price?.trim()) {
+      const price = parseInt(formData.price)
+      if (isNaN(price) || price <= 0) return '有効な販売価格を入力してください'
+      if (price > 10000000) return '販売価格は1000万円以下で設定してください'
+    }
+
+    if (formData.originalPrice?.trim()) {
+      const originalPrice = parseInt(formData.originalPrice)
+      if (isNaN(originalPrice) || originalPrice <= 0) return '有効な定価を入力してください'
+    }
+
+    // タイトルの長さチェック
+    if (formData.title && formData.title.length > 100) {
+      return '商品タイトルは100文字以内で入力してください'
+    }
+
+    // 説明文の長さチェック
+    if (formData.description && formData.description.length > 1000) {
+      return '商品説明は1000文字以内で入力してください'
+    }
+
+    // 採寸データのチェック
+    const measurements = [formData.bust, formData.waist, formData.hip].filter(m => m?.trim())
+    if (!isDraft && measurements.length < 2) {
+      return 'バスト・ウエスト・ヒップのうち最低2つの採寸データを入力してください'
+    }
+
+    return null
+  }
+
+  // 画像クリーンアップ関数
+  const cleanupUploadedImages = async (fileNames: string[]) => {
+    console.log('アップロード済み画像のクリーンアップ開始:', fileNames)
+    for (const fileName of fileNames) {
+      try {
+        await supabase.storage
+          .from('dress-images')
+          .remove([fileName])
+        console.log('削除成功:', fileName)
+      } catch (error) {
+        console.error('削除失敗:', fileName, error)
+      }
+    }
+  }
+
+  const handleSubmit = async (formData: any, isDraft: boolean = false) => {
     console.log('=== handleSubmit開始 ===')
     console.log('formData:', formData)
     console.log('isDraft:', isDraft)
@@ -55,6 +115,12 @@ export default function SellPage() {
     setLoading(true)
 
     try {
+      // データ整合性チェック
+      const validationError = validateFormData(formData, isDraft)
+      if (validationError) {
+        setError(validationError)
+        return
+      }
       // ユーザー確認
       let userId: string
       const dummyAuth = localStorage.getItem('dummyAuth')
@@ -79,40 +145,58 @@ export default function SellPage() {
 
       // 画像をアップロード
       const imageUrls: string[] = []
+      const uploadedFileNames: string[] = []
       const totalImages = formData.images.length
       console.log('画像アップロード開始 - 画像数:', totalImages)
       
-      for (let i = 0; i < formData.images.length; i++) {
-        const image = formData.images[i]
-        const fileName = `${userId}/${Date.now()}_${image.name}`
-        console.log(`画像 ${i + 1}/${totalImages} - ファイル名:`, fileName)
-        
-        // 進捗を更新
-        setUploadProgress(Math.round(((i + 1) / totalImages) * 100))
-        
-        console.log('Supabaseストレージにアップロード中...')
-        const { error: uploadError } = await supabase.storage
-          .from('dress-images')
-          .upload(fileName, image)
+      try {
+        for (let i = 0; i < formData.images.length; i++) {
+          const image = formData.images[i]
+          const fileName = `${userId}/${Date.now()}_${i}_${image.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
+          console.log(`画像 ${i + 1}/${totalImages} - ファイル名:`, fileName)
+          
+          // 進捗を更新
+          setUploadProgress(Math.round(((i + 1) / totalImages) * 50)) // 50%まで（残り50%はデータ保存）
+          
+          console.log('Supabaseストレージにアップロード中...')
+          const { error: uploadError } = await supabase.storage
+            .from('dress-images')
+            .upload(fileName, image, {
+              cacheControl: '3600',
+              upsert: false
+            })
 
-        if (uploadError) {
-          console.error('画像アップロードエラー:', uploadError)
-          throw uploadError
+          if (uploadError) {
+            console.error('画像アップロードエラー:', uploadError)
+            // 部分的にアップロードされた画像を削除
+            await cleanupUploadedImages(uploadedFileNames)
+            throw new Error(`画像のアップロードに失敗しました: ${uploadError.message}`)
+          }
+          console.log('画像アップロード成功')
+
+          uploadedFileNames.push(fileName)
+
+          const { data: { publicUrl } } = supabase.storage
+            .from('dress-images')
+            .getPublicUrl(fileName)
+          console.log('公開URL:', publicUrl)
+
+          imageUrls.push(publicUrl)
         }
-        console.log('画像アップロード成功')
-
-        const { data: { publicUrl } } = supabase.storage
-          .from('dress-images')
-          .getPublicUrl(fileName)
-        console.log('公開URL:', publicUrl)
-
-        imageUrls.push(publicUrl)
+      } catch (uploadError) {
+        // アップロード失敗時のクリーンアップ
+        await cleanupUploadedImages(uploadedFileNames)
+        throw uploadError
       }
+
+      // データ保存進捗を更新
+      setUploadProgress(75)
+      console.log('データベースへの保存開始')
 
       // ドレス情報を保存
       const insertData = {
-        title: formData.title,
-        description: formData.description,
+        title: formData.title.trim(),
+        description: formData.description?.trim() || null,
         price: parseInt(formData.price),
         original_price: formData.originalPrice ? parseInt(formData.originalPrice) : null,
         brand: formData.brand,
@@ -125,27 +209,50 @@ export default function SellPage() {
         seller_id: userId,
         status: isDraft ? 'draft' : 'published',
         // カスタム採寸情報
-        custom_measurements: formData.customMeasurements.bust || formData.customMeasurements.waist || 
-                           formData.customMeasurements.hip || formData.customMeasurements.length ? 
-                           formData.customMeasurements : null,
+        measurements: formData.customMeasurements.bust || formData.customMeasurements.waist || 
+                     formData.customMeasurements.hip || formData.customMeasurements.length ? 
+                     formData.customMeasurements : null,
+        // 詳細情報
+        features: formData.features ? [formData.features] : null,
+        silhouette: formData.silhouette || null,
+        neckline: formData.neckline || null,
+        sleeve_style: formData.sleeveStyle || null,
+        skirt_length: formData.skirtLength || null,
+        model_name: formData.modelName || null,
+        manufacture_year: formData.manufactureYear ? parseInt(formData.manufactureYear) : null,
+        wear_count: formData.wearCount || null,
+        is_cleaned: Boolean(formData.isCleaned),
+        accept_offers: Boolean(formData.acceptOffers)
       }
       
       console.log('データベースに保存するデータ:', insertData)
 
-      const { error: insertError } = await supabase
-        .from('dresses')
+      const { data: insertedData, error: insertError } = await supabase
+        .from('listings')
         .insert(insertData)
+        .select('id')
+        .single()
 
       if (insertError) {
         console.error('データベース挿入エラー:', insertError)
-        throw insertError
+        // データ保存に失敗した場合、アップロードした画像を削除
+        await cleanupUploadedImages(uploadedFileNames)
+        throw new Error(`データの保存に失敗しました: ${insertError.message}`)
       }
-      console.log('データベース保存成功')
+      
+      const listingId = insertedData.id
+      console.log('データベース保存成功 - ID:', listingId)
+      
+      // 完了進捗を更新
+      setUploadProgress(100)
 
-      const message = isDraft ? '下書きとして保存しました！' : '出品が完了しました！'
-      console.log('=== handleSubmit完了 ===', message)
-      alert(message)
-      router.push('/')
+      console.log('=== handleSubmit完了 ===', isDraft ? '下書き保存' : '出品完了')
+      
+      // 下書きデータをクリア
+      localStorage.removeItem('sellFormDraft')
+      
+      // 出品完了ページにリダイレクト
+      router.push(`/sell/complete?id=${listingId}&draft=${isDraft}`)
     } catch (error) {
       console.error('=== handleSubmitエラー ===', error)
       console.error('エラーの詳細:', {
@@ -153,7 +260,21 @@ export default function SellPage() {
         message: (error as Error).message,
         stack: (error as Error).stack
       })
-      setError((error as Error).message || '出品に失敗しました')
+      
+      // エラーメッセージを日本語で表示
+      let errorMessage = '出品に失敗しました'
+      
+      if (error instanceof Error) {
+        if (error.message.includes('storage')) {
+          errorMessage = '画像のアップロードに失敗しました'
+        } else if (error.message.includes('insert')) {
+          errorMessage = 'データの保存に失敗しました'
+        } else if (error.message.includes('auth')) {
+          errorMessage = 'ログインが必要です'
+        }
+      }
+      
+      setError(errorMessage)
       setUploadProgress(0)
     } finally {
       setLoading(false)
