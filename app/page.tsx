@@ -118,7 +118,7 @@ function HomeContent() {
               {/* 詳細フィルターボタン */}
               <div className="mt-6">
                 <button
-                  onClick={() => setIsMobileFilterOpen(true)}
+                  onClick={() => router.push('/search')}
                   className="btn-secondary text-sm rounded-full"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -14,7 +14,7 @@ interface ShareModalProps {
 }
 
 export default function ShareModal({ isOpen, onClose, shareData }: ShareModalProps) {
-  const { shareToLine, shareToTwitter, copyToClipboard } = useShareProduct()
+  const { shareToLine, shareToTwitter, copyToClipboard, shareViaWebAPI } = useShareProduct()
   const [copySuccess, setCopySuccess] = useState(false)
 
   if (!isOpen) return null
@@ -30,11 +30,13 @@ export default function ShareModal({ isOpen, onClose, shareData }: ShareModalPro
     }
   }
 
-  const handleShare = (method: 'line' | 'twitter') => {
+  const handleShare = (method: 'line' | 'twitter' | 'other') => {
     if (method === 'line') {
       shareToLine(shareData)
     } else if (method === 'twitter') {
       shareToTwitter(shareData)
+    } else if (method === 'other') {
+      shareViaWebAPI(shareData)
     }
     onClose()
   }
@@ -86,6 +88,22 @@ export default function ShareModal({ isOpen, onClose, shareData }: ShareModalPro
             <div className="text-left">
               <div className="font-medium text-gray-900">X (Twitter)</div>
               <div className="text-sm text-gray-500">Xでツイート</div>
+            </div>
+          </button>
+
+          {/* その他（Web Share API） */}
+          <button
+            onClick={() => handleShare('other')}
+            className="w-full flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
+          >
+            <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+              </svg>
+            </div>
+            <div className="text-left">
+              <div className="font-medium text-gray-900">その他</div>
+              <div className="text-sm text-gray-500">他のアプリで共有</div>
             </div>
           </button>
 

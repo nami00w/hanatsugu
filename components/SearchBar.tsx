@@ -96,7 +96,7 @@ export default function SearchBar() {
               onChange={(e) => handleInputChange('brand', e.target.value)}
               onKeyPress={handleKeyPress}
               onFocus={() => setShowBrandDropdown(true)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-base"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base"
             />
             
             {/* ブランドドロップダウン（モバイル用） */}
@@ -122,7 +122,7 @@ export default function SearchBar() {
           
           <button
             onClick={handleSearch}
-            className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-3 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            className="bg-primary hover:bg-primary-dark text-white px-4 py-3 rounded-lg transition-colors duration-200 flex items-center justify-center"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -143,7 +143,7 @@ export default function SearchBar() {
             onChange={(e) => handleInputChange('brand', e.target.value)}
             onKeyPress={handleKeyPress}
             onFocus={() => setShowBrandDropdown(true)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-base"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base"
           />
           
           {/* ブランドドロップダウン */}
@@ -172,7 +172,7 @@ export default function SearchBar() {
           <select
             value={filters.size}
             onChange={(e) => handleInputChange('size', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-base bg-white"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base bg-white"
           >
             <option value="">サイズを選択</option>
             {SIZES.slice(1).map((size) => (
@@ -188,7 +188,7 @@ export default function SearchBar() {
           <select
             value={filters.maxPrice}
             onChange={(e) => handleInputChange('maxPrice', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-base bg-white"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base bg-white"
           >
             {PRICE_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -201,7 +201,7 @@ export default function SearchBar() {
         {/* 検索ボタン */}
         <button
           onClick={handleSearch}
-          className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+          className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

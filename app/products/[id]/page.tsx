@@ -573,7 +573,7 @@ export default function ProductDetailPage() {
                 
                 {/* 価格 */}
                 <div className="flex items-baseline gap-1 sm:gap-2 lg:gap-3 mb-3 lg:mb-6 flex-wrap">
-                  <span className="text-lg sm:text-xl lg:text-4xl font-bold text-pink-600">
+                  <span className="text-lg sm:text-xl lg:text-4xl font-bold text-gray-900">
                     ¥{dress.price.toLocaleString()}
                   </span>
                   {dress.original_price && (

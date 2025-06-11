@@ -15,6 +15,7 @@ interface DressCardProps {
   originalPrice?: number;
   imageUrl?: string;
   images?: string[];
+  condition?: string;
 }
 
 export default function DressCard({
@@ -27,6 +28,7 @@ export default function DressCard({
   originalPrice,
   imageUrl,
   images,
+  condition,
 }: DressCardProps) {
   const { isLoggedIn, isFavorite, toggleFavorite } = useFavorites()
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -39,6 +41,25 @@ export default function DressCard({
   
   // 表示用のタイトルを決定
   const displayTitle = title || (model ? `${brand} ${model}` : brand)
+  
+  // 状態バッジの表示テキストとスタイルを決定
+  const getConditionBadge = (condition?: string) => {
+    if (!condition) return null
+    
+    switch (condition) {
+      case '新品・未使用':
+      case '未使用に近い':
+        return { text: '新品', style: 'bg-green-100 text-green-800' }
+      case '目立った傷や汚れなし':
+        return { text: '美品', style: 'bg-blue-100 text-blue-800' }
+      case 'やや傷や汚れあり':
+        return { text: '使用感あり', style: 'bg-orange-100 text-orange-800' }
+      default:
+        return { text: '美品', style: 'bg-blue-100 text-blue-800' }
+    }
+  }
+  
+  const conditionBadge = getConditionBadge(condition)
 
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault() // Linkの遷移を防ぐ
@@ -80,6 +101,15 @@ export default function DressCard({
               strokeWidth={1.5}
             />
           </button>
+          
+          {/* 状態バッジ */}
+          {conditionBadge && (
+            <div className="absolute top-3 left-3">
+              <span className={`badge ${conditionBadge.style}`}>
+                {conditionBadge.text}
+              </span>
+            </div>
+          )}
         </div>
       </div>
       

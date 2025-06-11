@@ -288,6 +288,7 @@ export default function ProductList({ filters }: ProductListProps) {
               originalPrice={product.original_price || (product as any).originalPrice}
               imageUrl={(product as any).imageUrl}
               images={product.images}
+              condition={product.condition}
             />
           ))}
         </div>
