@@ -113,33 +113,26 @@ body {
 .dress-grid {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(2, 1fr); /* モバイル: 2列 */
+  grid-template-columns: repeat(2, 1fr);
   justify-content: center;
 }
 
 @media (min-width: 640px) {
   .dress-grid {
-    grid-template-columns: repeat(3, 1fr); /* タブレット: 3列 */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .dress-grid {
-    grid-template-columns: repeat(5, 1fr); /* PC: 5列 */
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (min-width: 1440px) {
   .dress-grid {
-    grid-template-columns: repeat(6, 1fr); /* 大画面: 6列 */
-    gap: 1.5rem;
+    grid-template-columns: repeat(6, 1fr);
   }
-}
-
-/* 動的グリッドレイアウト（後方互換性用） */
-.dynamic-grid {
-  @apply dress-grid;
 }
 
 /* Typography System */
@@ -166,7 +159,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Responsive Hero Title */
 .hero-title {
-  @apply text-hero;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
 }
 
 .hero-title .mobile-break {
@@ -197,10 +193,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Button System */
 .btn-primary {
-  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
   background-color: var(--primary);
   color: white;
-  font-weight: 500;
 }
 
 .btn-primary:hover {
@@ -215,11 +216,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
   background-color: transparent;
   color: var(--primary);
   border: 2px solid var(--primary);
-  font-weight: 500;
 }
 
 .btn-secondary:hover {
@@ -230,10 +236,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-accent {
-  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
   background-color: var(--accent);
   color: white;
-  font-weight: 500;
 }
 
 .btn-accent:hover {
@@ -244,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Card Hover Effects */
 .card-hover {
-  @apply transition-all duration-300;
+  transition: all 0.3s;
 }
 
 .card-hover:hover {
@@ -254,12 +265,22 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Focus Ring */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+  outline: none;
+}
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary), 0 0 0 4px rgba(107, 142, 74, 0.2);
 }
 
 /* Badge System */
 .badge {
-  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .badge-success {
