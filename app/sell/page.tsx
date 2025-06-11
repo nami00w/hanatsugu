@@ -286,7 +286,7 @@ export default function SellPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           <p className="mt-4 text-gray-600">読み込み中...</p>
         </div>
       </div>
@@ -304,7 +304,7 @@ export default function SellPage() {
         <div className="mb-6">
           <Link 
             href="/"
-            className="inline-flex items-center text-gray-600 hover:text-pink-600 transition-colors duration-200"
+            className="inline-flex items-center text-gray-600 hover:text-primary transition-colors duration-200"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             <span className="text-sm font-medium">トップページに戻る</span>

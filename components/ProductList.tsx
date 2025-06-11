@@ -275,7 +275,7 @@ export default function ProductList({ filters }: ProductListProps) {
           <p className="text-gray-500">フィルターを調整してもう一度お試しください</p>
         </div>
       ) : (
-        <div className="dynamic-grid">
+        <div className="dress-grid">
           {filteredProducts.map((product) => (
             <DressCard
               key={product.id}

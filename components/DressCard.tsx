@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Heart } from 'lucide-react';
 import { useFavorites } from '@/hooks/useFavorites';
 import LoginModal from './LoginModal';
 
@@ -43,15 +44,15 @@ export default function DressCard({
     e.preventDefault() // Linkの遷移を防ぐ
     e.stopPropagation()
     
-    console.log('🔍 Favorite button clicked:', { dressId, isLoggedIn })
+    console.log('Favorite button clicked:', { dressId, isLoggedIn })
     
     const success = await toggleFavorite(dressId)
     if (!success) {
       // ログインが必要な場合、モーダルを表示
-      console.log('❌ Login required, showing modal')
+      console.log('Login required, showing modal')
       setShowLoginModal(true)
     } else {
-      console.log('✅ Favorite toggled successfully')
+      console.log('Favorite toggled successfully')
     }
   }
   return (
@@ -69,23 +70,15 @@ export default function DressCard({
             onClick={handleFavoriteClick}
             className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-md hover:shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
           >
-            <svg
+            <Heart
               className={`w-5 h-5 transition-colors ${
                 isLoggedIn && isFavorited 
-                  ? 'text-pink-600 fill-pink-600' 
-                  : 'text-gray-600 hover:text-pink-500'
+                  ? 'text-primary fill-primary' 
+                  : 'text-gray-600 hover:text-primary'
               }`}
               fill={isLoggedIn && isFavorited ? "currentColor" : "none"}
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
+              strokeWidth={1.5}
+            />
           </button>
         </div>
       </div>
@@ -107,7 +100,7 @@ export default function DressCard({
         </div>
         
         <div className="flex items-center gap-2 pt-1">
-          <p className="text-xl font-bold text-pink-600">
+          <p className="text-xl font-bold text-primary">
             ¥{price.toLocaleString()}
           </p>
           {originalPrice && originalPrice > price && (

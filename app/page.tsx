@@ -2,7 +2,6 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { FilterState } from '@/components/ProductFilter'
 import ProductList from '@/components/ProductList'
 import MobileFilterModal from '@/components/MobileFilterModal'

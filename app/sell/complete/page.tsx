@@ -158,7 +158,7 @@ function CompletePageContent() {
                 <>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-green-600">✓</span>
+                      <CheckCircle className="w-4 h-4 text-green-600" strokeWidth={2} />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">購入希望者からの問い合わせに対応</p>
@@ -167,7 +167,7 @@ function CompletePageContent() {
                   </div>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-green-600">✓</span>
+                      <CheckCircle className="w-4 h-4 text-green-600" strokeWidth={2} />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">定期的に商品をチェック</p>
@@ -176,7 +176,7 @@ function CompletePageContent() {
                   </div>
                   <div className="flex items-start">
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-green-600">✓</span>
+                      <CheckCircle className="w-4 h-4 text-green-600" strokeWidth={2} />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">安全な取引を心がける</p>

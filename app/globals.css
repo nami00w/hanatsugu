@@ -254,8 +254,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Focus Ring */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
-  focus:ring-color: var(--primary);
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
 }
 
 /* Badge System */

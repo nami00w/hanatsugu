@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { Heart, Share2, Mail } from 'lucide-react'
 import { DressWithSeller } from '@/lib/types'
 import ContactModal from '@/components/ContactModal'
 import Header from '@/components/Header'
@@ -599,7 +600,11 @@ export default function ProductDetailPage() {
                           : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      {isFavorite(dress.id) ? '❤️' : '🤍'}
+                      <Heart 
+                        className={`w-5 h-5 ${isFavorite(dress.id) ? 'fill-primary text-primary' : ''}`}
+                        fill={isFavorite(dress.id) ? "currentColor" : "none"}
+                        strokeWidth={1.5}
+                      />
                       <span>{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入りに追加'}</span>
                     </button>
                     
@@ -607,7 +612,7 @@ export default function ProductDetailPage() {
                       onClick={handleShare}
                       className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
                     >
-                      <span>🔗</span>
+                      <Share2 className="w-5 h-5" strokeWidth={1.5} />
                       <span>シェア</span>
                     </button>
                   </div>
@@ -615,9 +620,10 @@ export default function ProductDetailPage() {
                   {/* 質問ボタン */}
                   <button 
                     onClick={() => setShowContactModal(true)}
-                    className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg hover:shadow-xl"
+                    className="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl"
                   >
-                    💌 この商品について質問する
+                    <Mail className="w-5 h-5 mr-2" strokeWidth={1.5} />
+                    この商品について質問する
                   </button>
                 </div>
               </div>
@@ -711,7 +717,11 @@ export default function ProductDetailPage() {
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
-            {isFavorite(dress.id) ? '❤️' : '🤍'}
+            <Heart 
+              className={`w-5 h-5 ${isFavorite(dress.id) ? 'fill-primary text-primary' : ''}`}
+              fill={isFavorite(dress.id) ? "currentColor" : "none"}
+              strokeWidth={1.5}
+            />
             <span className="text-sm">{isFavorite(dress.id) ? 'お気に入り済み' : 'お気に入り'}</span>
           </button>
           
@@ -719,7 +729,7 @@ export default function ProductDetailPage() {
             onClick={handleShare}
             className="py-3 rounded-lg font-medium border-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
           >
-            <span>🔗</span>
+            <Share2 className="w-5 h-5" strokeWidth={1.5} />
             <span className="text-sm">シェア</span>
           </button>
         </div>
@@ -727,9 +737,10 @@ export default function ProductDetailPage() {
         {/* 質問ボタン */}
         <button 
           onClick={() => setShowContactModal(true)}
-          className="w-full bg-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors shadow-lg"
+          className="w-full bg-primary text-white py-4 rounded-lg font-semibold text-lg hover:bg-primary-dark transition-colors shadow-lg"
         >
-          💌 この商品について質問する
+          <Mail className="w-5 h-5 mr-2" strokeWidth={1.5} />
+          この商品について質問する
         </button>
       </div>
 

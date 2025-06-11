@@ -17,7 +17,7 @@ export default function LoginPage() {
   useEffect(() => {
     // Supabase設定状態をチェック
     if (!isSupabaseConfigured()) {
-      setError('⚠️ Supabase認証は現在利用できません（ダミー設定のため）')
+      setError('Supabase認証は現在利用できません（ダミー設定のため）')
       setDebugInfo('開発環境：実際のSupabase認証を使用するには .env.local の設定が必要です')
     }
   }, [])
@@ -116,7 +116,7 @@ export default function LoginPage() {
                 onClick={handleDummyLogin}
                 className="w-full flex justify-center py-2 px-4 border border-yellow-300 rounded-md shadow-sm text-sm font-medium text-yellow-800 bg-yellow-100 hover:bg-yellow-200 focus:outline-none"
               >
-                🔧 開発用ダミーログイン
+                開発用ダミーログイン
               </button>
               <p className="text-xs text-gray-500 mt-2 text-center">
                 ※ 開発環境用。実際の認証は Supabase 設定後に利用可能です

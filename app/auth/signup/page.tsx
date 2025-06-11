@@ -19,7 +19,7 @@ export default function SignupPage() {
   useEffect(() => {
     // Supabase設定状態をチェック
     if (!isSupabaseConfigured()) {
-      setError('⚠️ Supabase認証は現在利用できません（ダミー設定のため）')
+      setError('Supabase認証は現在利用できません（ダミー設定のため）')
       setDebugInfo('開発環境：実際のSupabase認証を使用するには .env.local の設定が必要です')
     }
   }, [])

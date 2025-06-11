@@ -281,7 +281,10 @@ export default function PhotoUploadStep({
           </DndContext>
           
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="text-sm font-semibold text-blue-900 mb-2">📸 撮影のコツ</h4>
+            <h4 className="text-sm font-semibold text-blue-900 mb-2 flex items-center gap-2">
+              <Camera className="w-4 h-4" strokeWidth={2} />
+              撮影のコツ
+            </h4>
             <ul className="text-sm text-blue-700 space-y-1">
               <li>• 自然光の下で撮影すると色が美しく写ります</li>
               <li>• 全体、上半身、スカート部分など様々な角度から</li>
