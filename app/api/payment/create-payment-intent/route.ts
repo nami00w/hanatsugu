@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe, calculatePlatformFee } from '@/lib/stripe';
+import { getStripe, calculatePlatformFee } from '@/lib/stripe';
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,6 +14,7 @@ export async function POST(request: NextRequest) {
 
     const platformFee = calculatePlatformFee(amount);
 
+    const stripe = getStripe();
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: 'jpy',
