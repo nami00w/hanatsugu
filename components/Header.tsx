@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
-import { User, ChevronDown, LogOut, Plus } from 'lucide-react'
+import { User, ChevronDown, LogOut, Plus, Settings } from 'lucide-react'
 import { useFavorites } from '@/hooks/useFavorites'
 import { useAuth } from '@/contexts/AuthContext'
+import { isAdmin } from '@/lib/admin'
 import MobileMenu from './MobileMenu'
 import AuthModal from './AuthModal'
 
@@ -133,6 +134,16 @@ export default function Header() {
                       <Plus className="w-4 h-4" />
                       <span>出品する</span>
                     </Link>
+                    {isAdmin(user) && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setShowAccountDropdown(false)}
+                        className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        <Settings className="w-4 h-4" />
+                        <span>管理画面</span>
+                      </Link>
+                    )}
                     <hr className="my-2 border-gray-200" />
                     <button
                       onClick={handleLogout}
