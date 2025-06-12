@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { User, Heart, Eye, Package, Settings, Clock, List } from 'lucide-react'
+import { User, Heart, Eye, Package, Settings, Clock, List, DollarSign } from 'lucide-react'
 import Link from 'next/link'
 import { useFavorites } from '@/hooks/useFavorites'
 import type { UserStats, ViewHistoryItem, MyListing } from '@/lib/types'
@@ -130,6 +130,15 @@ export default function MyPage() {
                   >
                     <Clock className="w-4 h-4" />
                     閲覧履歴
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/mypage/sales"
+                    className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                  >
+                    <DollarSign className="w-4 h-4" />
+                    売上管理
                   </Link>
                 </li>
                 <li>

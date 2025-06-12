@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { Heart, Share2, Mail } from 'lucide-react'
 import { DressWithSeller, formatSizeDisplay } from '@/lib/types'
 import ContactModal from '@/components/ContactModal'
@@ -16,6 +16,7 @@ import RelatedProductsCarousel from '@/components/RelatedProductsCarousel'
 
 export default function ProductDetailPage() {
   const params = useParams()
+  const router = useRouter()
   const [dress, setDress] = useState<DressWithSeller | null>(null)
   const [selectedImage, setSelectedImage] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -645,6 +646,7 @@ export default function ProductDetailPage() {
                   
                   {/* 購入ボタン */}
                   <button 
+                    onClick={() => router.push(`/purchase/${dress.id}`)}
                     className="w-full text-white py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg hover:shadow-xl"
                     style={{ backgroundColor: '#6B8E4A' }}
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#5A7A3A'}
@@ -773,6 +775,7 @@ export default function ProductDetailPage() {
         
         {/* 購入ボタン */}
         <button 
+          onClick={() => router.push(`/purchase/${dress.id}`)}
           className="w-full text-white py-3 rounded-lg font-semibold text-base transition-colors shadow-lg"
           style={{ backgroundColor: '#6B8E4A' }}
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#5A7A3A'}
