@@ -7,6 +7,7 @@ import Header from '@/components/Header'
 import AuthGuard from '@/components/AuthGuard'
 import { useFavorites } from '@/hooks/useFavorites'
 import { useAuth } from '@/contexts/AuthContext'
+import { dressesAPI } from '@/lib/supabase'
 import type { UserStats, ViewHistoryItem, MyListing } from '@/lib/types'
 
 export default function MyPage() {
@@ -35,22 +36,39 @@ export default function MyPage() {
   }
 
   useEffect(() => {
-    // localStorage から統計情報を取得
-    const viewHistory: ViewHistoryItem[] = JSON.parse(localStorage.getItem('viewHistory') || '[]')
-    const myListings: MyListing[] = JSON.parse(localStorage.getItem('myListings') || '[]')
-    
-    // 統計情報を計算
-    const totalViews = myListings.reduce((sum, listing) => sum + listing.views, 0)
-    const totalInquiries = myListings.reduce((sum, listing) => sum + listing.inquiries, 0)
-    
-    setUserStats({
-      listingsCount: myListings.length,
-      favoritesCount,
-      viewHistoryCount: viewHistory.length,
-      totalViews,
-      totalInquiries
-    })
-  }, [favoritesCount])
+    const loadUserStats = async () => {
+      if (!user) return
+      
+      try {
+        // リアルタイムで出品統計を取得
+        const stats = await dressesAPI.getUserStats(user.id)
+        
+        // localStorage から閲覧履歴を取得（軽量）
+        const viewHistory: ViewHistoryItem[] = JSON.parse(localStorage.getItem('viewHistory') || '[]')
+        
+        setUserStats({
+          listingsCount: stats.activeListings, // 出品中のみカウント
+          favoritesCount,
+          viewHistoryCount: viewHistory.length,
+          totalViews: 0, // TODO: 将来的にビュー数トラッキングを実装
+          totalInquiries: 0 // TODO: 将来的に問い合わせ数トラッキングを実装
+        })
+      } catch (error) {
+        console.error('Failed to load user stats:', error)
+        // エラー時はお気に入りと閲覧履歴のみ表示
+        const viewHistory: ViewHistoryItem[] = JSON.parse(localStorage.getItem('viewHistory') || '[]')
+        setUserStats({
+          listingsCount: 0,
+          favoritesCount,
+          viewHistoryCount: viewHistory.length,
+          totalViews: 0,
+          totalInquiries: 0
+        })
+      }
+    }
+
+    loadUserStats()
+  }, [favoritesCount, user])
 
   return (
     <AuthGuard>

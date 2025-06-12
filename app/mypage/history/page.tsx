@@ -3,17 +3,17 @@
 import { useState, useEffect } from 'react'
 import { Clock, ArrowLeft, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import DressCard from '@/components/DressCard'
-import { useFavorites } from '@/hooks/useFavorites'
+import Image from 'next/image'
+import { useAuth } from '@/contexts/AuthContext'
 import type { ViewHistoryItem } from '@/lib/types'
 
 export default function ViewHistoryPage() {
-  const { isLoggedIn } = useFavorites()
+  const { isAuthenticated } = useAuth()
   const [viewHistory, setViewHistory] = useState<ViewHistoryItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       setIsLoading(false)
       return
     }
@@ -34,7 +34,7 @@ export default function ViewHistoryPage() {
       }
     }
     setIsLoading(false)
-  }, [isLoggedIn])
+  }, [isAuthenticated])
 
   const clearHistory = () => {
     if (confirm('閲覧履歴をすべて削除しますか？')) {
@@ -71,7 +71,7 @@ export default function ViewHistoryPage() {
     }
   }
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -145,34 +145,39 @@ export default function ViewHistoryPage() {
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {viewHistory.map((item) => (
               <div key={`${item.id}-${item.viewedAt}`} className="bg-white rounded-lg shadow-sm p-4">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-20 h-20">
-                    <DressCard
-                      id={item.dress.id}
-                      brand={item.dress.brand}
-                      title={item.dress.title}
-                      size={item.dress.size}
-                      price={item.dress.price}
-                      imageUrl={item.dress.images[0]}
-                      condition={item.dress.condition}
-                    />
+                  {/* 商品画像 */}
+                  <div className="flex-shrink-0 w-20 h-20 relative rounded-lg overflow-hidden bg-gray-100">
+                    <Link href={`/products/${item.dress.id}`}>
+                      <Image
+                        src={item.dress.images[0]}
+                        alt={item.dress.title}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-200"
+                      />
+                    </Link>
                   </div>
                   
+                  {/* 商品情報 */}
                   <div className="flex-1 min-w-0">
                     <Link 
                       href={`/products/${item.dress.id}`}
                       className="block hover:bg-gray-50 rounded p-2 -m-2 transition-colors"
                     >
-                      <h3 className="font-medium text-gray-900 truncate">
+                      <h3 className="font-medium text-gray-900 truncate mb-1">
                         {item.dress.title}
                       </h3>
-                      <p className="text-sm text-gray-600 truncate">
-                        {item.dress.brand}
-                      </p>
-                      <div className="flex items-center justify-between mt-2">
+                      <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                        <span>{item.dress.brand}</span>
+                        <span>•</span>
+                        <span>サイズ {item.dress.size}</span>
+                        <span>•</span>
+                        <span>{item.dress.condition}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
                         <p className="text-lg font-bold text-primary">
                           ¥{item.dress.price.toLocaleString()}
                         </p>
@@ -183,9 +188,10 @@ export default function ViewHistoryPage() {
                     </Link>
                   </div>
                   
+                  {/* 削除ボタン */}
                   <button
                     onClick={() => removeHistoryItem(item.id)}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                    className="flex-shrink-0 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                     title="履歴から削除"
                   >
                     <Trash2 className="w-4 h-4" />
