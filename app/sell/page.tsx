@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase'
+import { useAuth } from '@/contexts/AuthContext'
 import SellSteps from '@/components/SellSteps'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-interface FormData {
+interface SellFormData {
   images: File[]
   previews: string[]
   size: string
@@ -29,25 +29,33 @@ interface FormData {
 
 export default function SellPage() {
   const router = useRouter()
-  const supabase = createClient()
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const { isAuthenticated, loading: authLoading } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [uploadProgress, setUploadProgress] = useState<number>(0)
 
   useEffect(() => {
-    const dummyAuth = localStorage.getItem('dummyAuth')
-    if (!dummyAuth) {
-      router.push('/auth/login?redirect=/sell')
-    } else {
-      setIsAuthenticated(true)
-      setIsLoading(false)
+    if (!authLoading && !isAuthenticated) {
+      router.push('/auth/login?returnUrl=/sell')
     }
-  }, [router])
+  }, [authLoading, isAuthenticated, router])
+
+  // ローディング状態をチェック
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-lg">読み込み中...</div>
+      </div>
+    )
+  }
+
+  // 認証状態をチェック
+  if (!isAuthenticated) {
+    return null // useEffectでリダイレクトされる
+  }
 
   // バリデーション関数
-  const validateFormData = (formData: any, isDraft: boolean): string | null => {
+  const validateFormData = (formData: SellFormData, isDraft: boolean): string | null => {
     // 必須項目チェック（下書きでない場合）
     if (!isDraft) {
       if (!formData.title?.trim()) return '商品タイトルを入力してください'
@@ -106,7 +114,7 @@ export default function SellPage() {
     }
   }
 
-  const handleSubmit = async (formData: any, isDraft: boolean = false) => {
+  const handleSubmit = async (formData: SellFormData, isDraft: boolean = false) => {
     console.log('=== handleSubmit開始 ===')
     console.log('formData:', formData)
     console.log('isDraft:', isDraft)

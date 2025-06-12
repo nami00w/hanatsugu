@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import { User, Heart, Eye, Package, Settings, Clock, List, DollarSign } from 'lucide-react'
 import Link from 'next/link'
 import { useFavorites } from '@/hooks/useFavorites'
+import { useAuth } from '@/contexts/AuthContext'
 import type { UserStats, ViewHistoryItem, MyListing } from '@/lib/types'
 
 export default function MyPage() {
   const { isLoggedIn, favoritesCount } = useFavorites()
+  const { user, isAuthenticated } = useAuth()
   const [userStats, setUserStats] = useState<UserStats>({
     listingsCount: 0,
     favoritesCount: 0,
@@ -16,14 +18,18 @@ export default function MyPage() {
     totalInquiries: 0
   })
 
-  // ダミーユーザー情報
-  const dummyUser = {
-    name: '田中花子',
-    email: 'hanako@example.com',
+  // ユーザー情報
+  const displayName = user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'ユーザー'
+  const userEmail = user?.email || ''
+  const joinDate = user?.created_at ? new Date(user.created_at).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long' }) : '2024年1月'
+  
+  const userInfo = {
+    name: displayName,
+    email: userEmail,
     avatar: '/api/placeholder/80/80',
-    joinDate: '2024年1月',
-    totalSales: 12,
-    rating: 4.8
+    joinDate: joinDate + 'から利用',
+    totalSales: 12, // TODO: 実際の取引数を取得
+    rating: 4.8 // TODO: 実際の評価を取得
   }
 
   useEffect(() => {
@@ -46,7 +52,7 @@ export default function MyPage() {
     })
   }, [isLoggedIn, favoritesCount])
 
-  if (!isLoggedIn) {
+  if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,10 +86,10 @@ export default function MyPage() {
               <User className="w-8 h-8 sm:w-10 sm:h-10 text-gray-500" />
             </div>
             <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{dummyUser.name}</h1>
-              <p className="text-sm text-gray-600">{dummyUser.email}</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{userInfo.name}</h1>
+              <p className="text-sm text-gray-600">{userInfo.email}</p>
               <p className="text-xs text-gray-500 mt-1">
-                {dummyUser.joinDate}から利用 • 評価 ⭐ {dummyUser.rating} • 取引完了 {dummyUser.totalSales}件
+                {userInfo.joinDate} • 評価 ⭐ {userInfo.rating} • 取引完了 {userInfo.totalSales}件
               </p>
             </div>
           </div>

@@ -4,16 +4,16 @@ import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
 import { User, ChevronDown, LogOut, Plus } from 'lucide-react'
 import { useFavorites } from '@/hooks/useFavorites'
+import { useAuth } from '@/contexts/AuthContext'
 import MobileMenu from './MobileMenu'
 import AuthModal from './AuthModal'
 
 export default function Header() {
-  // 開発中はダミーの認証状態を使用（将来の機能拡張用）
-  // const [user] = useState<null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [showAccountDropdown, setShowAccountDropdown] = useState(false)
-  const { isLoggedIn, favoritesCount } = useFavorites()
+  const { favoritesCount } = useFavorites()
+  const { user, isAuthenticated, signOut } = useAuth()
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   // ドロップダウン外クリックで閉じる
@@ -30,26 +30,12 @@ export default function Header() {
     }
   }, [])
 
-  // 将来の機能拡張用（現在は使用しないためコメントアウト）
-  // const handleLogout = async () => {
-  //   console.log('ログアウト')
-  //   setShowAccountDropdown(false)
-  // }
-
-  // ダミーログアウト
-  const handleDummyLogout = () => {
-    console.log('🔧 Logging out...')
-    localStorage.setItem('dummyAuth', 'false')
-    localStorage.removeItem('dummyUserId')
-    localStorage.removeItem('favorites')
-    
-    // カスタムイベントを発火してコンポーネントに通知
-    window.dispatchEvent(new Event('dummyAuthChange'))
-    
-    console.log('✅ Logged out')
+  const handleLogout = async () => {
+    await signOut()
     setShowAccountDropdown(false)
   }
 
+  const displayName = user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'ユーザー'
 
   return (
     <header className="bg-white shadow-sm">
@@ -74,7 +60,7 @@ export default function Header() {
             
             {/* 右上アカウントボタン */}
             <div className="flex items-center">
-              {isLoggedIn ? (
+              {isAuthenticated ? (
                 <Link
                   href="/mypage"
                   className="p-2 text-gray-700 hover:text-gray-900 transition-colors"
@@ -100,7 +86,7 @@ export default function Header() {
           {/* PC版ナビゲーション */}
           <div className="hidden lg:flex items-center gap-4">
             {/* お気に入りアイコン（ログイン時のみ） */}
-            {isLoggedIn && (
+            {isAuthenticated && (
               <Link 
                 href="/favorites" 
                 className="relative p-2 text-gray-700 hover:text-primary transition-colors"
@@ -116,7 +102,7 @@ export default function Header() {
               </Link>
             )}
             
-            {isLoggedIn ? (
+            {isAuthenticated ? (
               /* ログイン時：アカウントドロップダウン */
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -124,7 +110,7 @@ export default function Header() {
                   className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100"
                 >
                   <User className="w-5 h-5" />
-                  <span>アカウント</span>
+                  <span>{displayName}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform ${showAccountDropdown ? 'rotate-180' : ''}`} />
                 </button>
                 
@@ -149,7 +135,7 @@ export default function Header() {
                     </Link>
                     <hr className="my-2 border-gray-200" />
                     <button
-                      onClick={handleDummyLogout}
+                      onClick={handleLogout}
                       className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors w-full text-left"
                     >
                       <LogOut className="w-4 h-4" />

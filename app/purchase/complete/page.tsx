@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
-export default function PurchaseCompletePage() {
+function PurchaseCompleteContent() {
   const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState<string>('');
 
@@ -82,5 +82,13 @@ export default function PurchaseCompletePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PurchaseCompletePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-lg">読み込み中...</div></div>}>
+      <PurchaseCompleteContent />
+    </Suspense>
   );
 }

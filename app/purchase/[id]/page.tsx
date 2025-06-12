@@ -35,7 +35,7 @@ interface ShippingAddress {
   phone: string;
 }
 
-function CheckoutForm({ product, shippingAddress }: { product: Product; shippingAddress: ShippingAddress }) {
+function CheckoutForm({ product }: { product: Product; shippingAddress: ShippingAddress }) {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
