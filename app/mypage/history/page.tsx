@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/contexts/AuthContext'
 import type { ViewHistoryItem } from '@/lib/types'
+import Header from '@/components/Header'
 
 export default function ViewHistoryPage() {
   const { isAuthenticated } = useAuth()
@@ -96,7 +97,9 @@ export default function ViewHistoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-8">
@@ -210,5 +213,6 @@ export default function ViewHistoryPage() {
         )}
       </div>
     </div>
+    </>
   )
 }

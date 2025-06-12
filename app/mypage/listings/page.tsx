@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { dressesAPI } from '@/lib/supabase'
 import type { MyListing } from '@/lib/types'
+import Header from '@/components/Header'
 
 type StatusTab = 'all' | 'active' | 'sold' | 'draft' | 'inactive'
 
@@ -275,7 +276,9 @@ export default function MyListingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-8">
@@ -294,7 +297,7 @@ export default function MyListingsPage() {
             </div>
           </div>
           
-          <Link href="/sell" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+          <Link href="/sell" className="btn btn-primary">
             新規出品
           </Link>
         </div>
@@ -315,8 +318,8 @@ export default function MyListingsPage() {
                   onClick={() => setActiveTab(tab.key as StatusTab)}
                   className={`py-4 px-4 border-b-2 font-medium text-sm whitespace-nowrap flex-shrink-0 transition-colors ${
                     activeTab === tab.key
-                      ? 'border-green-500 text-green-600 bg-green-50'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 hover:bg-gray-50'
+                      ? 'border-b-2 border-[var(--primary-green)] text-[var(--primary-green)] bg-[var(--primary-green)]/5'
+                      : 'border-transparent text-[var(--neutral-600)] hover:text-[var(--neutral-800)] hover:border-[var(--neutral-300)] hover:bg-[var(--neutral-100)]'
                   }`}
                 >
                   {tab.label} ({getTabCount(tab.key as StatusTab)})
@@ -341,7 +344,7 @@ export default function MyListingsPage() {
               ドレスを出品して、ここで管理しましょう
             </p>
             <div className="mt-6">
-              <Link href="/sell" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+              <Link href="/sell" className="btn btn-primary">
                 新規出品
               </Link>
             </div>
@@ -371,7 +374,7 @@ export default function MyListingsPage() {
                         <div className="flex-1">
                           <Link 
                             href={`/products/${listing.dress.id}`}
-                            className="block hover:text-green-600 transition-colors"
+                            className="block hover:text-[var(--primary-green)] transition-colors"
                           >
                             <h3 className="font-semibold text-gray-900 text-lg truncate">
                               {listing.dress.title}
@@ -380,7 +383,7 @@ export default function MyListingsPage() {
                           <p className="text-sm text-gray-600 mt-1">
                             {listing.dress.brand} • サイズ {listing.dress.size}
                           </p>
-                          <p className="text-lg font-bold text-green-600 mt-2">
+                          <p className="text-lg font-bold text-[var(--primary-green)] mt-2">
                             ¥{listing.dress.price.toLocaleString()}
                           </p>
                         </div>
@@ -406,11 +409,11 @@ export default function MyListingsPage() {
                     </div>
                     
                     {/* アクションボタン */}
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-[var(--space-2)]">
                       <button 
                         onClick={() => handleEdit(listing.id)}
                         disabled={actionLoading === listing.id}
-                        className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors disabled:opacity-50"
+                        className="btn btn-sm btn-primary"
                       >
                         <Edit className="w-4 h-4" />
                         編集
@@ -420,7 +423,7 @@ export default function MyListingsPage() {
                         <button 
                           onClick={() => setShowStopModal(listing.id)}
                           disabled={actionLoading === listing.id}
-                          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition-colors disabled:opacity-50"
+                          className="btn btn-sm bg-[var(--accent-gold)] hover:bg-[var(--accent-gold)]/90 text-white"
                         >
                           <Package className="w-4 h-4" />
                           停止
@@ -431,7 +434,7 @@ export default function MyListingsPage() {
                         <button 
                           onClick={() => handleToggleStatus(listing.id, listing.status)}
                           disabled={actionLoading === listing.id}
-                          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:opacity-50"
+                          className="btn btn-sm bg-[var(--primary-green-light)] hover:bg-[var(--primary-green)] text-white"
                         >
                           <Play className="w-4 h-4" />
                           再開
@@ -442,7 +445,7 @@ export default function MyListingsPage() {
                         <button 
                           onClick={() => handlePublish(listing.id)}
                           disabled={actionLoading === listing.id}
-                          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors disabled:opacity-50"
+                          className="btn btn-sm bg-[var(--primary-green-light)] hover:bg-[var(--primary-green)] text-white"
                         >
                           <Play className="w-4 h-4" />
                           公開
@@ -452,7 +455,7 @@ export default function MyListingsPage() {
                       <button 
                         onClick={() => setShowDeleteModal(listing.id)}
                         disabled={actionLoading === listing.id}
-                        className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:opacity-50"
+                        className="btn btn-sm bg-[var(--neutral-500)] hover:bg-[var(--neutral-600)] text-white"
                       >
                         <Trash2 className="w-4 h-4" />
                         削除
@@ -482,7 +485,7 @@ export default function MyListingsPage() {
                     <div className="flex-1 min-w-0">
                       <Link 
                         href={`/products/${listing.dress.id}`}
-                        className="block hover:text-green-600 transition-colors"
+                        className="block hover:text-[var(--primary-green)] transition-colors"
                       >
                         <h3 className="font-semibold text-gray-900 text-sm leading-tight mb-1">
                           {listing.dress.title}
@@ -491,7 +494,7 @@ export default function MyListingsPage() {
                       <p className="text-xs text-gray-600 mb-1">
                         {listing.dress.brand} • {listing.dress.size}
                       </p>
-                      <p className="text-lg font-bold text-green-600">
+                      <p className="text-lg font-bold text-[var(--primary-green)]">
                         ¥{listing.dress.price.toLocaleString()}
                       </p>
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium mt-1 ${getStatusStyle(listing.status)}`}>
@@ -521,7 +524,7 @@ export default function MyListingsPage() {
                     <button 
                       onClick={() => handleEdit(listing.id)}
                       disabled={actionLoading === listing.id}
-                      className="flex-1 bg-green-500 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors disabled:opacity-50"
+                      className="btn btn-primary flex-1"
                     >
                       編集
                     </button>
@@ -530,7 +533,7 @@ export default function MyListingsPage() {
                       <button 
                         onClick={() => setShowStopModal(listing.id)}
                         disabled={actionLoading === listing.id}
-                        className="flex-1 bg-yellow-500 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-yellow-600 transition-colors disabled:opacity-50"
+                        className="btn flex-1 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold)]/90 text-white"
                       >
                         停止
                       </button>
@@ -540,7 +543,7 @@ export default function MyListingsPage() {
                       <button 
                         onClick={() => handleToggleStatus(listing.id, listing.status)}
                         disabled={actionLoading === listing.id}
-                        className="flex-1 bg-blue-500 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors disabled:opacity-50"
+                        className="btn flex-1 bg-[var(--primary-green-light)] hover:bg-[var(--primary-green)] text-white"
                       >
                         再開
                       </button>
@@ -550,7 +553,7 @@ export default function MyListingsPage() {
                       <button 
                         onClick={() => handlePublish(listing.id)}
                         disabled={actionLoading === listing.id}
-                        className="flex-1 bg-blue-500 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors disabled:opacity-50"
+                        className="btn flex-1 bg-[var(--primary-green-light)] hover:bg-[var(--primary-green)] text-white"
                       >
                         公開
                       </button>
@@ -559,7 +562,7 @@ export default function MyListingsPage() {
                     <button 
                       onClick={() => setShowDeleteModal(listing.id)}
                       disabled={actionLoading === listing.id}
-                      className="flex-1 bg-red-500 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50"
+                      className="btn flex-1 bg-[var(--neutral-500)] hover:bg-[var(--neutral-600)] text-white"
                     >
                       削除
                     </button>
@@ -586,14 +589,14 @@ export default function MyListingsPage() {
               <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => setShowStopModal(null)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+                  className="btn btn-ghost"
                 >
                   キャンセル
                 </button>
                 <button
                   onClick={() => handleToggleStatus(showStopModal, 'active')}
                   disabled={actionLoading === showStopModal}
-                  className="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition-colors disabled:opacity-50"
+                  className="btn bg-[var(--accent-gold)] hover:bg-[var(--accent-gold)]/90 text-white"
                 >
                   停止する
                 </button>
@@ -607,8 +610,8 @@ export default function MyListingsPage() {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg max-w-md w-full p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                  <Trash2 className="w-5 h-5 text-red-600" />
+                <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                  <Trash2 className="w-5 h-5 text-gray-600" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">商品を削除しますか？</h3>
@@ -616,8 +619,8 @@ export default function MyListingsPage() {
                 </div>
               </div>
               
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-6">
-                <p className="text-sm text-red-800">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-6">
+                <p className="text-sm text-gray-700">
                   ⚠️ 削除されたデータは復元できません
                 </p>
               </div>
@@ -625,14 +628,14 @@ export default function MyListingsPage() {
               <div className="flex gap-3 justify-end">
                 <button
                   onClick={() => setShowDeleteModal(null)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+                  className="btn btn-ghost"
                 >
                   キャンセル
                 </button>
                 <button
                   onClick={() => handleDelete(showDeleteModal)}
                   disabled={actionLoading === showDeleteModal}
-                  className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors disabled:opacity-50"
+                  className="btn bg-[var(--neutral-500)] hover:bg-[var(--neutral-600)] text-white"
                 >
                   削除する
                 </button>
@@ -642,5 +645,6 @@ export default function MyListingsPage() {
         )}
       </div>
     </div>
+    </>
   )
 }

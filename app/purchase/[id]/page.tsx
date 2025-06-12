@@ -10,6 +10,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import Header from '@/components/Header';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -156,7 +157,9 @@ export default function PurchasePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         <h1 className="text-2xl font-bold mb-8">購入手続き</h1>
 
@@ -317,5 +320,6 @@ export default function PurchasePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { dressesAPI } from '@/lib/supabase'
 import type { Dress } from '@/lib/supabase'
+import Header from '@/components/Header'
 
 interface SellFormData {
   images: File[]
@@ -274,7 +275,7 @@ export default function EditListingPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primary-green)]"></div>
           <p className="mt-4 text-gray-600">読み込み中...</p>
         </div>
       </div>
@@ -293,7 +294,7 @@ export default function EditListingPage() {
           <p className="text-gray-600 mb-4">{error}</p>
           <Link 
             href="/mypage/listings"
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+            className="btn btn-primary"
           >
             出品管理に戻る
           </Link>
@@ -303,13 +304,15 @@ export default function EditListingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 py-8">
       <div className="px-4 sm:px-6 lg:px-8">
         {/* 戻るボタン */}
         <div className="mb-6">
           <Link 
             href="/mypage/listings"
-            className="inline-flex items-center text-gray-600 hover:text-green-600 transition-colors duration-200"
+            className="inline-flex items-center text-gray-600 hover:text-[var(--primary-green)] transition-colors duration-200"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             <span className="text-sm font-medium">出品管理に戻る</span>
@@ -336,5 +339,6 @@ export default function EditListingPage() {
         )}
       </div>
     </div>
+    </>
   )
 }

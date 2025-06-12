@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { CurrencyYenIcon, TruckIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import AuthGuard from '@/components/AuthGuard';
+import Header from '@/components/Header';
 
 interface Sale {
   id: string;
@@ -121,8 +122,10 @@ export default function SalesPage() {
   };
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-gray-50">
+    <>
+      <Header />
+      <AuthGuard>
+        <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold mb-8">売上管理</h1>
 
@@ -344,6 +347,7 @@ export default function SalesPage() {
         </div>
       )}
       </div>
-    </AuthGuard>
+      </AuthGuard>
+    </>
   );
 }

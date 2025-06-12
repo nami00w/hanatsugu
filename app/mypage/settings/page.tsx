@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useAuth } from '@/contexts/AuthContext'
 import { bankAccountAPI, profileAPI, type BankAccount } from '@/lib/supabase'
 import AuthGuard from '@/components/AuthGuard'
+import Header from '@/components/Header'
 
 export default function SettingsPage() {
   const { user, signOut } = useAuth()
@@ -172,8 +173,10 @@ export default function SettingsPage() {
   }
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-gray-50">
+    <>
+      <Header />
+      <AuthGuard>
+        <div className="min-h-screen bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* ヘッダー */}
           <div className="flex items-center gap-4 mb-8">
@@ -523,6 +526,7 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-    </AuthGuard>
+      </AuthGuard>
+    </>
   )
 }

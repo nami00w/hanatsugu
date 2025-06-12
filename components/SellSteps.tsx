@@ -349,9 +349,9 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
                 <div
                   className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm font-medium ${
                     step.completed
-                      ? 'bg-pink-600 border-pink-600 text-white'
+                      ? 'bg-[var(--primary-green)] border-[var(--primary-green)] text-white'
                       : step.current
-                      ? 'border-pink-600 text-pink-600 bg-white'
+                      ? 'border-[var(--primary-green)] text-[var(--primary-green)] bg-white'
                       : 'border-gray-300 text-gray-400 bg-white'
                   }`}
                 >
@@ -363,7 +363,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
                 </div>
                 <div className="ml-3 hidden sm:block">
                   <p className={`text-sm font-medium ${
-                    step.current ? 'text-pink-600' : 'text-gray-500'
+                    step.current ? 'text-[var(--primary-green)]' : 'text-gray-500'
                   }`}>
                     {step.title}
                   </p>
@@ -376,7 +376,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
                 <div className="flex-1 mx-4">
                   <div className="h-0.5 bg-gray-200">
                     <div
-                      className={`h-full bg-pink-600 transition-all duration-300 ${
+                      className={`h-full bg-[var(--primary-green)] transition-all duration-300 ${
                         step.completed ? 'w-full' : 'w-0'
                       }`}
                     />
@@ -389,7 +389,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
         
         {/* モバイル用ステップ表示 */}
         <div className="sm:hidden text-center">
-          <p className="text-sm font-medium text-pink-600">
+          <p className="text-sm font-medium text-[var(--primary-green)]">
             {steps[currentStep - 1].title}
           </p>
           <p className="text-xs text-gray-400">
@@ -426,13 +426,13 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
             <div className="flex space-x-3">
               <button
                 onClick={loadDraft}
-                className="flex-1 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+                className="btn btn-primary flex-1"
               >
                 復元する
               </button>
               <button
                 onClick={deleteDraft}
-                className="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                className="btn btn-ghost flex-1"
               >
                 新規作成
               </button>
@@ -456,7 +456,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
           </div>
           <button
             onClick={saveDraft}
-            className="flex items-center px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="btn btn-ghost btn-sm"
           >
             <Save className="w-4 h-4 mr-1" />
             下書き保存
@@ -471,10 +471,10 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
           type="button"
           onClick={handlePrev}
           disabled={currentStep === 1}
-          className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+          className={`btn btn-ghost ${
             currentStep === 1
-              ? 'text-gray-400 cursor-not-allowed'
-              : 'text-gray-700 hover:bg-gray-100'
+              ? 'opacity-50 cursor-not-allowed'
+              : ''
           }`}
         >
           <ChevronLeft className="w-4 h-4 mr-1" />
@@ -491,7 +491,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
               type="button"
               onClick={() => handleSubmit(true)}
               disabled={loading}
-              className="flex items-center px-4 py-2 text-sm font-medium border border-gray-300 rounded-lg transition-colors hover:bg-gray-50 disabled:cursor-not-allowed"
+              className="btn btn-ghost"
             >
               <Save className="w-4 h-4 mr-1" />
               下書き保存
@@ -500,10 +500,10 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
               type="button"
               onClick={() => handleSubmit(false)}
               disabled={loading || !validateStep(4)}
-              className={`flex items-center px-6 py-2 text-sm font-medium rounded-lg transition-colors ${
+              className={`btn ${
                 loading || !validateStep(4)
                   ? 'bg-gray-400 text-white cursor-not-allowed'
-                  : 'bg-green-600 text-white hover:bg-green-700'
+                  : 'btn-primary'
               }`}
             >
               {loading ? (isEditMode ? '更新中...' : '出品中...') : (isEditMode ? '更新して公開' : '公開して出品')}
@@ -514,10 +514,10 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
             type="button"
             onClick={handleNext}
             disabled={!validateStep(currentStep)}
-            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            className={`btn ${
               !validateStep(currentStep)
                 ? 'bg-gray-400 text-white cursor-not-allowed'
-                : 'bg-green-600 text-white hover:bg-green-700'
+                : 'btn-primary'
             }`}
           >
             次へ

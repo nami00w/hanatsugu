@@ -7,6 +7,7 @@ import SellSteps from '@/components/SellSteps'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
+import Header from '@/components/Header'
 
 interface SellFormData {
   images: File[]
@@ -310,7 +311,9 @@ export default function SellPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 py-8">
       <div className="px-4 sm:px-6 lg:px-8">
         {/* 戻るボタン */}
         <div className="mb-6">
@@ -339,5 +342,6 @@ export default function SellPage() {
         />
       </div>
     </div>
+    </>
   )
 }
