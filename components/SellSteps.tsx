@@ -68,12 +68,14 @@ interface SellStepsProps {
   error: string
   setError: (error: string) => void
   uploadProgress: number
+  initialData?: FormData
+  isEditMode?: boolean
 }
 
-export default function SellSteps({ onSubmit, loading, error, setError, uploadProgress }: SellStepsProps) {
+export default function SellSteps({ onSubmit, loading, error, setError, uploadProgress, initialData, isEditMode = false }: SellStepsProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [showDraftModal, setShowDraftModal] = useState(false)
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormData>(initialData || {
     images: [],
     previews: [],
     size: '',
@@ -501,10 +503,10 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
               className={`flex items-center px-6 py-2 text-sm font-medium rounded-lg transition-colors ${
                 loading || !validateStep(4)
                   ? 'bg-gray-400 text-white cursor-not-allowed'
-                  : 'bg-pink-600 text-white hover:bg-pink-700'
+                  : 'bg-green-600 text-white hover:bg-green-700'
               }`}
             >
-              {loading ? '出品中...' : '公開して出品'}
+              {loading ? (isEditMode ? '更新中...' : '出品中...') : (isEditMode ? '更新して公開' : '公開して出品')}
             </button>
           </div>
         ) : (
@@ -515,7 +517,7 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
             className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
               !validateStep(currentStep)
                 ? 'bg-gray-400 text-white cursor-not-allowed'
-                : 'bg-pink-600 text-white hover:bg-pink-700'
+                : 'bg-green-600 text-white hover:bg-green-700'
             }`}
           >
             次へ

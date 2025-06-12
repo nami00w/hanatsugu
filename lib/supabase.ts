@@ -232,7 +232,7 @@ export const dressesAPI = {
   // 出品データ作成
   async createDress(dressData: Omit<Dress, 'id' | 'created_at' | 'updated_at'>): Promise<string | null> {
     const { data, error } = await supabase
-      .from('dresses')
+      .from('listings')
       .insert([dressData])
       .select('id')
       .single()
@@ -247,32 +247,48 @@ export const dressesAPI = {
 
   // 出品データ更新
   async updateDress(dressId: string, updates: Partial<Dress>): Promise<boolean> {
-    const { error } = await supabase
-      .from('dresses')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', dressId)
+    console.log('🔄 updateDress called with:', { dressId, updates })
     
-    if (error) {
-      console.error('Error updating dress:', error)
+    try {
+      const { error } = await supabase
+        .from('listings')
+        .update({ ...updates, updated_at: new Date().toISOString() })
+        .eq('id', dressId)
+    
+      if (error) {
+        console.error('❌ Error updating dress:', error)
+        return false
+      }
+      
+      console.log('✅ Successfully updated dress:', dressId)
+      return true
+    } catch (err) {
+      console.error('❌ Exception in updateDress:', err)
       return false
     }
-    
-    return true
   },
 
   // 出品データ削除
   async deleteDress(dressId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from('dresses')
-      .delete()
-      .eq('id', dressId)
+    console.log('🗑️ deleteDress called with:', dressId)
     
-    if (error) {
-      console.error('Error deleting dress:', error)
+    try {
+      const { error } = await supabase
+        .from('listings')
+        .delete()
+        .eq('id', dressId)
+      
+      if (error) {
+        console.error('❌ Error deleting dress:', error)
+        return false
+      }
+      
+      console.log('✅ Successfully deleted dress:', dressId)
+      return true
+    } catch (err) {
+      console.error('❌ Exception in deleteDress:', err)
       return false
     }
-    
-    return true
   },
 
   // 単一出品データ取得
