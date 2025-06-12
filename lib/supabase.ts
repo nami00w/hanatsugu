@@ -59,32 +59,58 @@ export const favoritesAPI = {
 
   // お気に入り追加
   async addFavorite(userId: string, dressId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from('favorites')
-      .insert([{ user_id: userId, dress_id: dressId }])
+    console.log('🕐 API addFavorite 開始:', { userId, dressId, timestamp: new Date().toLocaleTimeString() })
     
-    if (error) {
-      console.error('Error adding favorite:', error)
+    try {
+      const { error } = await Promise.race([
+        supabase
+          .from('favorites')
+          .insert([{ user_id: userId, dress_id: dressId }]),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('API timeout')), 10000) // 10秒タイムアウト
+        )
+      ]) as any
+      
+      if (error) {
+        console.error('Error adding favorite:', error)
+        return false
+      }
+      
+      console.log('✅ API addFavorite 完了:', { timestamp: new Date().toLocaleTimeString() })
+      return true
+    } catch (error) {
+      console.error('❌ API addFavorite エラー:', error)
       return false
     }
-    
-    return true
   },
 
   // お気に入り削除
   async removeFavorite(userId: string, dressId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from('favorites')
-      .delete()
-      .eq('user_id', userId)
-      .eq('dress_id', dressId)
+    console.log('🕐 API removeFavorite 開始:', { userId, dressId, timestamp: new Date().toLocaleTimeString() })
     
-    if (error) {
-      console.error('Error removing favorite:', error)
+    try {
+      const { error } = await Promise.race([
+        supabase
+          .from('favorites')
+          .delete()
+          .eq('user_id', userId)
+          .eq('dress_id', dressId),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('API timeout')), 10000) // 10秒タイムアウト
+        )
+      ]) as any
+      
+      if (error) {
+        console.error('Error removing favorite:', error)
+        return false
+      }
+      
+      console.log('✅ API removeFavorite 完了:', { timestamp: new Date().toLocaleTimeString() })
+      return true
+    } catch (error) {
+      console.error('❌ API removeFavorite エラー:', error)
       return false
     }
-    
-    return true
   },
 
   // お気に入り状態確認

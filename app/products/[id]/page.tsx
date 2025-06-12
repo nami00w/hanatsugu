@@ -512,12 +512,12 @@ export default function ProductDetailPage() {
       {/* パンくずリスト */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <nav className="flex text-sm text-gray-600">
-            <Link href="/" className="hover:text-gray-800">トップ</Link>
-            <span className="mx-2">›</span>
-            <Link href={`/search?brand=${dress.brand}`} className="hover:text-gray-800">{dress.brand}</Link>
-            <span className="mx-2">›</span>
-            <span className="text-gray-800">{dress.title}</span>
+          <nav className="flex text-xs sm:text-sm text-gray-600 items-center">
+            <Link href="/" className="hover:text-gray-800 flex-shrink-0">トップ</Link>
+            <span className="mx-1 sm:mx-2 flex-shrink-0">›</span>
+            <Link href={`/search?brand=${dress.brand}`} className="hover:text-gray-800 flex-shrink-0 truncate">{dress.brand}</Link>
+            <span className="mx-1 sm:mx-2 flex-shrink-0">›</span>
+            <span className="text-gray-800 truncate">{dress.title}</span>
           </nav>
         </div>
       </div>
@@ -553,11 +553,11 @@ export default function ProductDetailPage() {
             <div className="flex-1">
               <div 
                 className="relative bg-gray-100 rounded-lg overflow-hidden cursor-zoom-in group 
-                          w-full aspect-[3/4] 
-                          lg:aspect-[3/4]"
+                          w-full aspect-[2/3] 
+                          lg:aspect-[2/3]"
                 style={{
-                  maxHeight: 'min(45vh, calc(100vw - 2rem))',
-                  minHeight: '250px'
+                  maxHeight: 'min(65vh, calc(100vw - 2rem))',
+                  minHeight: '300px'
                 }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}

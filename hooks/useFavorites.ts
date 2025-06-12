@@ -1,12 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { favoritesAPI } from '@/lib/supabase'
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<string[]>([])
+  const [updateTrigger, setUpdateTrigger] = useState(0)
+  const [forceUpdate, setForceUpdate] = useState(0)
+  const favoritesRef = useRef<string[]>([])
   const { user, isAuthenticated } = useAuth()
+
+  // favoritesRefを常に同期
+  useEffect(() => {
+    favoritesRef.current = favorites
+  }, [favorites])
 
   useEffect(() => {
     const loadFavorites = async () => {
@@ -27,46 +35,63 @@ export function useFavorites() {
     loadFavorites()
   }, [isAuthenticated, user])
 
-  const toggleFavorite = async (dressId: string | number) => {
+  const toggleFavorite = useCallback(async (dressId: string | number) => {
+    console.log('🔄 toggleFavorite called:', { dressId, isAuthenticated, user: !!user })
+    
     if (!isAuthenticated || !user) {
+      console.log('❌ 認証エラー - ログインが必要')
       return false // ログインが必要
     }
 
     const normalizedDressId = dressId.toString()
-    const isCurrentlyFavorite = favorites.includes(normalizedDressId)
 
     try {
-      // まずUIを即座に更新（楽観的アップデート）
-      const newFavorites = isCurrentlyFavorite
-        ? favorites.filter(id => id !== normalizedDressId)
-        : [...favorites, normalizedDressId]
+      // 現在の状態を確認
+      const isCurrentlyFavorite = favorites.includes(normalizedDressId)
       
-      setFavorites(newFavorites)
-
-      // Supabase APIを呼び出し
+      console.log('🎯 シンプル更新開始:', { normalizedDressId, isCurrentlyFavorite, action: isCurrentlyFavorite ? 'remove' : 'add' })
+      
+      // 1. まず状態を即座に更新
+      if (isCurrentlyFavorite) {
+        setFavorites(prev => prev.filter(id => id !== normalizedDressId))
+      } else {
+        setFavorites(prev => [...prev, normalizedDressId])
+      }
+      
+      console.log('⚡ UI即座更新完了')
+      
+      // 2. APIを実行（失敗時は戻す）
       const success = isCurrentlyFavorite
         ? await favoritesAPI.removeFavorite(user.id, normalizedDressId)
         : await favoritesAPI.addFavorite(user.id, normalizedDressId)
 
       if (!success) {
-        // 失敗した場合、UIを元に戻す
-        setFavorites(favorites)
+        console.log('❌ API失敗 - 状態を元に戻します')
+        // 失敗時は元の状態に戻す
+        if (isCurrentlyFavorite) {
+          setFavorites(prev => [...prev, normalizedDressId])
+        } else {
+          setFavorites(prev => prev.filter(id => id !== normalizedDressId))
+        }
         return false
       }
 
-      // カスタムイベントを発火して他のコンポーネントに通知
-      window.dispatchEvent(new CustomEvent('favoritesChange', { 
-        detail: { favorites: newFavorites } 
-      }))
-
+      console.log('✅ 完全成功')
       return true
     } catch (error) {
-      console.error('Toggle favorite failed:', error)
-      // エラーの場合、UIを元に戻す
-      setFavorites(favorites)
+      console.error('❌ Toggle favorite failed:', error)
+      // エラーの場合、状態を再読み込み
+      if (user) {
+        try {
+          const userFavorites = await favoritesAPI.getFavorites(user.id)
+          setFavorites(userFavorites)
+        } catch (reloadError) {
+          console.error('❌ Failed to reload favorites:', reloadError)
+        }
+      }
       return false
     }
-  }
+  }, [isAuthenticated, user, favorites])
 
   const isFavorite = (dressId: string | number) => {
     const normalizedDressId = dressId.toString()
@@ -75,11 +100,24 @@ export function useFavorites() {
 
   const favoritesCount = isAuthenticated ? favorites.length : 0
 
+  // favoritesCountの変化を追跡
+  useEffect(() => {
+    console.log('🔢 useFavorites: favoritesCount calculated:', { 
+      favoritesCount, 
+      favoritesLength: favorites.length, 
+      isAuthenticated,
+      favorites,
+      timestamp: new Date().toLocaleTimeString()
+    })
+  }, [favoritesCount, favorites, isAuthenticated])
+
   return {
     favorites,
     isLoggedIn: isAuthenticated,
     favoritesCount,
     toggleFavorite,
-    isFavorite
+    isFavorite,
+    updateTrigger, // Headerの強制更新用
+    forceUpdate   // 追加の強制更新用
   }
 }

@@ -3,13 +3,15 @@
 import { useState, useEffect } from 'react'
 import { User, Heart, Eye, Package, Settings, Clock, List, DollarSign } from 'lucide-react'
 import Link from 'next/link'
+import Header from '@/components/Header'
+import AuthGuard from '@/components/AuthGuard'
 import { useFavorites } from '@/hooks/useFavorites'
 import { useAuth } from '@/contexts/AuthContext'
 import type { UserStats, ViewHistoryItem, MyListing } from '@/lib/types'
 
 export default function MyPage() {
-  const { isLoggedIn, favoritesCount } = useFavorites()
-  const { user, isAuthenticated } = useAuth()
+  const { favoritesCount } = useFavorites()
+  const { user } = useAuth()
   const [userStats, setUserStats] = useState<UserStats>({
     listingsCount: 0,
     favoritesCount: 0,
@@ -33,8 +35,6 @@ export default function MyPage() {
   }
 
   useEffect(() => {
-    if (!isLoggedIn) return
-
     // localStorage から統計情報を取得
     const viewHistory: ViewHistoryItem[] = JSON.parse(localStorage.getItem('viewHistory') || '[]')
     const myListings: MyListing[] = JSON.parse(localStorage.getItem('myListings') || '[]')
@@ -50,51 +50,29 @@ export default function MyPage() {
       totalViews,
       totalInquiries
     })
-  }, [isLoggedIn, favoritesCount])
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <User className="mx-auto h-12 w-12 text-gray-400" />
-            <h2 className="mt-4 text-lg font-medium text-gray-900">ログインが必要です</h2>
-            <p className="mt-2 text-sm text-gray-600">
-              マイページを表示するにはログインしてください
-            </p>
-            <div className="mt-6 flex justify-center gap-4">
-              <Link href="/auth/login" className="btn-primary">
-                ログイン
-              </Link>
-              <Link href="/auth/signup" className="btn-secondary">
-                新規登録
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  }, [favoritesCount])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* ヘッダー */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center gap-4 sm:gap-6">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center">
-              <User className="w-8 h-8 sm:w-10 sm:h-10 text-gray-500" />
-            </div>
-            <div className="flex-1">
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{userInfo.name}</h1>
-              <p className="text-sm text-gray-600">{userInfo.email}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                {userInfo.joinDate} • 評価 ⭐ {userInfo.rating} • 取引完了 {userInfo.totalSales}件
-              </p>
+    <AuthGuard>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        {/* ユーザー情報ヘッダー */}
+        <div className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-full flex items-center justify-center">
+                <User className="w-8 h-8 sm:w-10 sm:h-10 text-gray-500" />
+              </div>
+              <div className="flex-1">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{userInfo.name}</h1>
+                <p className="text-sm text-gray-600">{userInfo.email}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {userInfo.joinDate} • 評価 ⭐ {userInfo.rating} • 取引完了 {userInfo.totalSales}件
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -276,6 +254,6 @@ export default function MyPage() {
           </div>
         </div>
       </div>
-    </div>
+    </AuthGuard>
   )
 }
