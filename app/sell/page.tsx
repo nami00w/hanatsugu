@@ -6,6 +6,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import SellSteps from '@/components/SellSteps'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 interface SellFormData {
   images: File[]
@@ -25,6 +26,20 @@ interface SellFormData {
   description: string
   price: string
   originalPrice: string
+  ownerHistory: string
+  bust: string
+  waist: string
+  hip: string
+  features: string
+  silhouette: string
+  neckline: string
+  sleeveStyle: string
+  skirtLength: string
+  modelName: string
+  manufactureYear: string
+  wearCount: string
+  isCleaned: boolean
+  acceptOffers: boolean
 }
 
 export default function SellPage() {
@@ -130,26 +145,15 @@ export default function SellPage() {
         return
       }
       // ユーザー確認
-      let userId: string
-      const dummyAuth = localStorage.getItem('dummyAuth')
-      console.log('dummyAuth:', dummyAuth)
-      
-      if (dummyAuth) {
-        // ダミー認証の場合
-        userId = localStorage.getItem('dummyUserId') || 'dummy-user-id'
-        console.log('ダミー認証使用 - userId:', userId)
-      } else {
-        // 実際の認証の場合
-        console.log('Supabase認証確認中...')
-        const { data: { user } } = await supabase.auth.getUser()
-        console.log('Supabase user:', user)
-        if (!user) {
-          console.log('ユーザー未認証 - ログインページへリダイレクト')
-          router.push('/auth/login')
-          return
-        }
-        userId = user.id
+      console.log('Supabase認証確認中...')
+      const { data: { user } } = await supabase.auth.getUser()
+      console.log('Supabase user:', user)
+      if (!user) {
+        console.log('ユーザー未認証 - ログインページへリダイレクト')
+        router.push('/auth/login')
+        return
       }
+      const userId = user.id
 
       // 画像をアップロード
       const imageUrls: string[] = []
@@ -214,7 +218,7 @@ export default function SellPage() {
         category: formData.category,
         owner_history: formData.ownerHistory,
         images: imageUrls,
-        seller_id: userId,
+        user_id: userId,
         status: isDraft ? 'draft' : 'published',
         // カスタム採寸情報
         measurements: formData.customMeasurements.bust || formData.customMeasurements.waist || 
@@ -290,7 +294,7 @@ export default function SellPage() {
     }
   }
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="flex flex-col items-center">

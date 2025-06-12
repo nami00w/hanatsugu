@@ -13,6 +13,7 @@ import { useShareProduct } from '@/hooks/useShareProduct'
 import { useViewHistory } from '@/hooks/useViewHistory'
 import ShareModal from '@/components/ShareModal'
 import RelatedProductsCarousel from '@/components/RelatedProductsCarousel'
+import { supabase } from '@/lib/supabase'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -181,27 +182,101 @@ export default function ProductDetailPage() {
   ], [])
 
   useEffect(() => {
-    // ダミーデータから商品を取得
-    const foundDress = dummyDresses.find(d => d.id === params.id)
-    setDress(foundDress as DressWithSeller || null)
-    setLoading(false)
-    
-    // 商品が見つかった場合、閲覧履歴に追加
-    if (foundDress) {
-      // 少し遅延させて履歴に追加（ページ表示完了後）
-      setTimeout(() => {
-        addToHistory({
-          id: foundDress.id,
-          title: foundDress.title,
-          brand: foundDress.brand,
-          price: foundDress.price,
-          images: foundDress.images,
-          size: foundDress.size,
-          condition: foundDress.condition
-        })
-      }, 1000)
+    const fetchDress = async () => {
+      try {
+        setLoading(true)
+        
+        // Supabaseから商品データを取得
+        const { data: listingData, error: listingError } = await supabase
+          .from('listings')
+          .select('*')
+          .eq('id', params.id)
+          .eq('status', 'published')
+          .single()
+
+        if (listingError) {
+          console.error('商品取得エラー:', listingError)
+          setDress(null)
+          setLoading(false)
+          return
+        }
+
+        if (listingData) {
+          // プロファイル情報を別途取得
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('id, full_name')
+            .eq('id', listingData.user_id)
+            .single()
+
+          // データを DressWithSeller 形式に変換
+          const dressData: DressWithSeller = {
+            id: listingData.id,
+            title: listingData.title,
+            description: listingData.description || '',
+            price: listingData.price,
+            original_price: listingData.original_price,
+            images: listingData.images || [],
+            size: listingData.size,
+            brand: listingData.brand,
+            condition: listingData.condition,
+            color: listingData.color,
+            category: listingData.category,
+            seller_id: listingData.user_id,
+            created_at: listingData.created_at,
+            updated_at: listingData.updated_at,
+            seller: {
+              id: listingData.user_id,
+              email: '',
+              name: profileData?.full_name || '出品者',
+              avatar_url: '',
+              bio: '',
+              created_at: '',
+              updated_at: ''
+            },
+            owner_history: listingData.owner_history,
+            measurements: listingData.measurements,
+            features: listingData.features,
+            silhouette: listingData.silhouette,
+            neckline: listingData.neckline,
+            sleeve_style: listingData.sleeve_style,
+            skirt_length: listingData.skirt_length,
+            model_name: listingData.model_name,
+            manufacture_year: listingData.manufacture_year,
+            wear_count: listingData.wear_count,
+            is_cleaned: listingData.is_cleaned,
+            accept_offers: listingData.accept_offers
+          }
+          
+          setDress(dressData)
+          
+          // 閲覧履歴に追加（一度だけ）
+          setTimeout(() => {
+            addToHistory({
+              id: dressData.id,
+              title: dressData.title,
+              brand: dressData.brand,
+              price: dressData.price,
+              images: dressData.images,
+              size: dressData.size,
+              condition: dressData.condition
+            })
+          }, 100)
+        } else {
+          setDress(null)
+        }
+      } catch (error) {
+        console.error('商品取得エラー:', error)
+        setDress(null)
+      } finally {
+        setLoading(false)
+      }
     }
-  }, [params.id, dummyDresses, addToHistory])
+
+    if (params.id) {
+      fetchDress()
+    }
+  }, [params.id])
 
   // 関連商品用のデータ（ProductListと同じ構造＋各ブランドに複数商品）
   const allProducts = useMemo(() => [
@@ -410,17 +485,23 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">読み込み中...</div>
-      </div>
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-lg">読み込み中...</div>
+        </div>
+      </>
     )
   }
 
   if (!dress) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">商品が見つかりませんでした</div>
-      </div>
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-lg">商品が見つかりませんでした</div>
+        </div>
+      </>
     )
   }
 
@@ -460,6 +541,7 @@ export default function ProductDetailPage() {
                       src={image}
                       alt={`${dress.title} ${index + 1}`}
                       fill
+                      sizes="100px"
                       className="object-cover"
                     />
                   </button>
@@ -487,6 +569,7 @@ export default function ProductDetailPage() {
                       src={dress.images[selectedImage]}
                       alt={dress.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform group-hover:scale-105"
                       priority
                       onClick={() => setShowImageModal(true)}
