@@ -670,7 +670,7 @@ export default function ProductDetailPage() {
           <div className="lg:relative mt-3 lg:mt-0">
             <div className="lg:sticky lg:top-8 lg:h-fit space-y-4 lg:space-y-8">
               <div>
-                <h1 className="text-lg sm:text-xl lg:text-3xl font-bold mb-1 lg:mb-3 text-gray-800 leading-tight">{dress.title}</h1>
+                <h1 className="product-title-mobile font-bold mb-1 lg:mb-3 text-gray-800 leading-tight">{dress.title}</h1>
                 <p className="text-sm lg:text-lg text-gray-600 mb-2 lg:mb-4">{dress.brand}</p>
                 
                 {/* 価格 */}

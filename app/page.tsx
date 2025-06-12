@@ -108,7 +108,7 @@ function HomeContent() {
               大切なドレスに、<br className="mobile-break" />次の<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">物語</span>を
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-subtitle text-gray-600 leading-relaxed">
-              あなたの特別な一着が、次の花嫁の特別な一日を彩ります
+              あなたの特別な一着が、<br className="sm:hidden" />次の花嫁の特別な一日を彩ります
             </p>
             
             {/* 検索バー */}

@@ -355,39 +355,6 @@ export default function MyPage() {
                 )}
               </div>
 
-              {/* モバイル版ナビゲーション */}
-              <div className="lg:hidden">
-                <div className="bg-white rounded-lg shadow-sm p-4">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">メニュー</h2>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link
-                      href="/mypage/listings"
-                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                    >
-                      <Package className="w-4 h-4" />
-                      出品管理
-                    </Link>
-                    <Link
-                      href="/favorites"
-                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                    >
-                      <Heart className="w-4 h-4" />
-                      お気に入り
-                    </Link>
-                    <Link
-                      href="/mypage/history"
-                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
-                    >
-                      <Clock className="w-4 h-4" />
-                      閲覧履歴
-                    </Link>
-                    <button className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md text-left">
-                      <Settings className="w-4 h-4" />
-                      設定
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
