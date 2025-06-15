@@ -134,7 +134,7 @@ export default function PricingStep({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <Banknote className="mx-auto h-12 w-12 text-pink-600 mb-4" />
+        <Banknote className="mx-auto h-12 w-12 text-[var(--primary-green)] mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           価格設定と出品確認
         </h3>
@@ -219,7 +219,7 @@ export default function PricingStep({
                 id="isCleaned"
                 checked={isCleaned}
                 onChange={(e) => handleInputChange('isCleaned', e.target.checked)}
-                className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                className="h-4 w-4 text-[var(--primary-green)] focus:ring-green-500 border-gray-300 rounded"
               />
               <label htmlFor="isCleaned" className="ml-2 text-sm text-gray-700">
                 クリーニング済み
@@ -232,7 +232,7 @@ export default function PricingStep({
                 id="acceptOffers"
                 checked={acceptOffers}
                 onChange={(e) => handleInputChange('acceptOffers', e.target.checked)}
-                className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                className="h-4 w-4 text-[var(--primary-green)] focus:ring-green-500 border-gray-300 rounded"
               />
               <label htmlFor="acceptOffers" className="ml-2 text-sm text-gray-700">
                 価格交渉可
@@ -329,7 +329,7 @@ export default function PricingStep({
           <div className="bg-white rounded-lg p-4 border border-gray-200">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-gray-600">販売価格</span>
-              <span className="text-lg font-bold text-pink-600">¥{parseInt(price).toLocaleString()}</span>
+              <span className="text-lg font-bold text-[var(--primary-green)]">¥{parseInt(price).toLocaleString()}</span>
             </div>
             
             {originalPrice && (
@@ -373,7 +373,7 @@ export default function PricingStep({
                     className="object-cover"
                   />
                   {index === 0 && (
-                    <div className="absolute top-1 left-1 bg-pink-600 text-white text-xs px-1 py-0.5 rounded text-[10px]">
+                    <div className="absolute top-1 left-1 bg-[var(--primary-green)] text-white text-xs px-1 py-0.5 rounded text-[10px]">
                       メイン
                     </div>
                   )}
@@ -418,7 +418,7 @@ export default function PricingStep({
       </div>
 
       {/* 出品オプション */}
-      <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 border border-green-200">
         <h4 className="text-lg font-semibold text-gray-900 mb-4">出品オプション</h4>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

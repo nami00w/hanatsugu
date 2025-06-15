@@ -12,6 +12,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, displayName: string) => Promise<{ success: boolean; error?: string }>;
   signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signOut: () => Promise<void>;
+  refreshUser: () => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -146,6 +147,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // ユーザー情報を手動でリフレッシュする関数
+  const refreshUser = async () => {
+    try {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error('Error refreshing user:', error);
+        return;
+      }
+      setUser(user);
+      console.log('✅ User information refreshed:', user?.user_metadata);
+    } catch (error) {
+      console.error('Exception in refreshUser:', error);
+    }
+  };
+
   const value = {
     session,
     user,
@@ -153,6 +169,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signIn,
     signOut,
+    refreshUser,
     isAuthenticated: !!session,
   };
 

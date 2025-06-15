@@ -44,7 +44,7 @@ export default function SizeMeasurementStep({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <Ruler className="mx-auto h-12 w-12 text-pink-600 mb-4" />
+        <Ruler className="mx-auto h-12 w-12 text-[var(--primary-green)] mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           サイズ・採寸情報
         </h3>

@@ -11,7 +11,7 @@ function CompletePageContent() {
   const isDraft = searchParams.get('draft') === 'true'
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
           
@@ -20,7 +20,7 @@ function CompletePageContent() {
             <div className="relative">
               <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
               <div className="absolute -top-2 -right-2 animate-bounce">
-                <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 bg-[var(--primary-green)] rounded-full flex items-center justify-center">
                   <Heart className="w-3 h-3 text-white" />
                 </div>
               </div>
@@ -51,16 +51,16 @@ function CompletePageContent() {
             {listingId && !isDraft && (
               <Link
                 href={`/products/${listingId}`}
-                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-pink-300 hover:shadow-lg transition-all group"
+                className="bg-white rounded-xl p-6 border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all group"
               >
                 <div className="flex items-center mb-3">
-                  <Eye className="w-6 h-6 text-pink-600 mr-3" />
+                  <Eye className="w-6 h-6 text-[var(--primary-green)] mr-3" />
                   <h3 className="text-lg font-semibold text-gray-900">商品を確認</h3>
                 </div>
                 <p className="text-gray-600 text-sm mb-3">
                   出品した商品がどのように表示されるか確認できます
                 </p>
-                <div className="text-pink-600 text-sm font-medium group-hover:text-pink-700">
+                <div className="text-[var(--primary-green)] text-sm font-medium group-hover:text-green-700">
                   商品ページを見る →
                 </div>
               </Link>
@@ -127,8 +127,8 @@ function CompletePageContent() {
               {isDraft ? (
                 <>
                   <div className="flex items-start">
-                    <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-pink-600">1</span>
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--primary-green)]">1</span>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">写真や説明文を確認</p>
@@ -136,8 +136,8 @@ function CompletePageContent() {
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-pink-600">2</span>
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--primary-green)]">2</span>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">価格設定を最終チェック</p>
@@ -145,8 +145,8 @@ function CompletePageContent() {
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <div className="w-6 h-6 bg-pink-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                      <span className="text-xs font-medium text-pink-600">3</span>
+                    <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                      <span className="text-xs font-medium text-[var(--primary-green)]">3</span>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">公開して購入者を待つ</p>
@@ -192,7 +192,7 @@ function CompletePageContent() {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/"
-              className="flex-1 bg-pink-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-pink-700 transition-colors flex items-center justify-center"
+              className="flex-1 bg-[var(--primary-green)] text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center"
             >
               <Home className="w-5 h-5 mr-2" />
               ホームに戻る
@@ -200,7 +200,7 @@ function CompletePageContent() {
             
             <Link
               href="/sell"
-              className="flex-1 bg-white text-pink-600 px-6 py-3 rounded-lg font-medium border border-pink-600 hover:bg-pink-50 transition-colors text-center"
+              className="flex-1 bg-white text-[var(--primary-green)] px-6 py-3 rounded-lg font-medium border border-[var(--primary-green)] hover:bg-green-50 transition-colors text-center"
             >
               他の商品も出品する
             </Link>
@@ -210,7 +210,7 @@ function CompletePageContent() {
           <div className="text-center mt-8 p-4 bg-gray-50 rounded-lg">
             <p className="text-sm text-gray-600">
               ご不明な点がございましたら、
-              <Link href="/support" className="text-pink-600 hover:text-pink-700 underline">
+              <Link href="/support" className="text-[var(--primary-green)] hover:text-green-700 underline">
                 サポートセンター
               </Link>
               までお気軽にお問い合わせください。
@@ -226,8 +226,8 @@ function CompletePageContent() {
 export default function SellCompletePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primary-green)]"></div>
       </div>
     }>
       <CompletePageContent />

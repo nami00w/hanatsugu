@@ -95,7 +95,7 @@ export default function BrandDetailsStep({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <Tag className="mx-auto h-12 w-12 text-pink-600 mb-4" />
+        <Tag className="mx-auto h-12 w-12 text-[var(--primary-green)] mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           ブランド・商品詳細
         </h3>
@@ -231,7 +231,7 @@ export default function BrandDetailsStep({
                 value="first"
                 checked={ownerHistory === 'first'}
                 onChange={() => handleInputChange('ownerHistory', 'first')}
-                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+                className="mt-1 h-4 w-4 text-[var(--primary-green)] focus:ring-green-500 border-gray-300"
               />
               <div className="ml-3">
                 <span className="block text-sm font-medium text-gray-700">ファーストオーナー</span>
@@ -245,7 +245,7 @@ export default function BrandDetailsStep({
                 value="second"
                 checked={ownerHistory === 'second'}
                 onChange={() => handleInputChange('ownerHistory', 'second')}
-                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+                className="mt-1 h-4 w-4 text-[var(--primary-green)] focus:ring-green-500 border-gray-300"
               />
               <div className="ml-3">
                 <span className="block text-sm font-medium text-gray-700">セカンドオーナー</span>
@@ -259,7 +259,7 @@ export default function BrandDetailsStep({
                 value="third_plus"
                 checked={ownerHistory === 'third_plus'}
                 onChange={() => handleInputChange('ownerHistory', 'third_plus')}
-                className="mt-1 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+                className="mt-1 h-4 w-4 text-[var(--primary-green)] focus:ring-green-500 border-gray-300"
               />
               <div className="ml-3">
                 <span className="block text-sm font-medium text-gray-700">サードオーナー以上</span>

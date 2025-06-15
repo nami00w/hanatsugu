@@ -65,7 +65,7 @@ function SortableImage({ id, preview, index, onRemove }: SortableImageProps) {
             className="object-cover"
           />
           {index === 0 && (
-            <div className="absolute top-2 left-2 bg-pink-600 text-white text-xs px-2 py-1 rounded">
+            <div className="absolute top-2 left-2 bg-[var(--primary-green)] text-white text-xs px-2 py-1 rounded">
               メイン画像
             </div>
           )}
@@ -215,7 +215,7 @@ export default function PhotoUploadStep({
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <Camera className="mx-auto h-12 w-12 text-pink-600 mb-4" />
+        <Camera className="mx-auto h-12 w-12 text-[var(--primary-green)] mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
           ドレスの写真をアップロード
         </h3>
@@ -229,8 +229,8 @@ export default function PhotoUploadStep({
           {...getRootProps()}
           className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-200 ${
             isDragActive 
-              ? 'border-pink-500 bg-pink-50 scale-[1.02]' 
-              : 'border-gray-300 hover:border-pink-400 hover:bg-gray-50'
+              ? 'border-[var(--primary-green)] bg-green-50 scale-[1.02]' 
+              : 'border-gray-300 hover:border-green-400 hover:bg-gray-50'
           }`}
         >
           <input {...getInputProps()} />
@@ -267,7 +267,7 @@ export default function PhotoUploadStep({
                 {images.length < 10 && (
                   <div
                     {...getRootProps()}
-                    className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-pink-400 transition-colors bg-gray-50 hover:bg-gray-100"
+                    className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-green-400 transition-colors bg-gray-50 hover:bg-gray-100"
                   >
                     <input {...getInputProps()} />
                     <div className="text-center">

@@ -56,18 +56,42 @@ export default function MessageDetailPage() {
         if (conversationData) {
           // 相手のプロフィール情報を取得
           const otherUserId = conversationData.buyer_id === user.id ? conversationData.seller_id : conversationData.buyer_id
-          const { data: otherUserProfile } = await supabase
-            .from('profiles')
-            .select('full_name')
-            .eq('id', otherUserId)
-            .maybeSingle()
+          
+          // profilesテーブルとauth.usersテーブル両方から取得を試す
+          let otherUserName = 'ユーザー'
+          
+          try {
+            // まずprofilesテーブルから取得
+            const { data: profileData } = await supabase
+              .from('profiles')
+              .select('full_name')
+              .eq('id', otherUserId)
+              .maybeSingle()
+            
+            if (profileData?.full_name) {
+              otherUserName = profileData.full_name
+            } else {
+              // profilesテーブルにない場合は、auth.usersのuser_metadataから取得
+              const { data: { user: otherUser } } = await supabase.auth.admin.getUserById(otherUserId)
+              if (otherUser?.user_metadata?.display_name) {
+                otherUserName = otherUser.user_metadata.display_name
+              } else if (otherUser?.email) {
+                // display_nameがない場合はemailの@より前を使用
+                otherUserName = otherUser.email.split('@')[0]
+              }
+            }
+          } catch (error) {
+            console.warn('Failed to fetch other user name:', error)
+            // エラー時は匿名表示
+            otherUserName = `ユーザー${otherUserId.slice(-4)}`
+          }
 
           const conversationWithDetails = {
             ...conversationData,
             dress_title: conversationData.listings?.title,
             dress_image: conversationData.listings?.images?.[0],
             dress_price: conversationData.listings?.price,
-            other_user_name: otherUserProfile?.full_name || 'ユーザー',
+            other_user_name: otherUserName,
             last_message: null,
             unread_count: 0
           }
@@ -95,6 +119,15 @@ export default function MessageDetailPage() {
     // メッセージが更新されたらスクロールを最下部に移動
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  useEffect(() => {
+    // 初回表示時に最下部へスクロール（入力欄が見えるように）
+    if (!loading && conversation) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 100) // 短いディレイでレンダリング完了を待つ
+    }
+  }, [loading, conversation])
 
   useEffect(() => {
     // 画面サイズに応じてtextareaの行数を調整

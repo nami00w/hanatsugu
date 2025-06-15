@@ -755,7 +755,128 @@ export default function ProductDetailPage() {
                     <span className="text-sm text-gray-600 block mb-1">カテゴリー</span>
                     <p className="font-semibold text-gray-800">{dress.category}</p>
                   </div>
+                  {dress.silhouette && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">シルエット</span>
+                      <p className="font-semibold text-gray-800">{dress.silhouette}</p>
+                    </div>
+                  )}
+                  {dress.neckline && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">ネックライン</span>
+                      <p className="font-semibold text-gray-800">{dress.neckline}</p>
+                    </div>
+                  )}
+                  {dress.sleeve_style && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">袖スタイル</span>
+                      <p className="font-semibold text-gray-800">{dress.sleeve_style}</p>
+                    </div>
+                  )}
+                  {dress.skirt_length && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">スカート丈</span>
+                      <p className="font-semibold text-gray-800">{dress.skirt_length}</p>
+                    </div>
+                  )}
+                  {dress.model_name && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">モデル名</span>
+                      <p className="font-semibold text-gray-800">{dress.model_name}</p>
+                    </div>
+                  )}
+                  {dress.manufacture_year && (
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">製造年</span>
+                      <p className="font-semibold text-gray-800">{dress.manufacture_year}年</p>
+                    </div>
+                  )}
                 </div>
+
+                {/* 採寸情報 */}
+                {dress.measurements && Object.values(dress.measurements).some(v => v) && (
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <h4 className="text-md font-semibold text-gray-800 mb-3">採寸情報</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      {dress.measurements.bust && (
+                        <div>
+                          <span className="text-sm text-gray-600 block mb-1">バスト</span>
+                          <p className="font-semibold text-gray-800">{dress.measurements.bust}cm</p>
+                        </div>
+                      )}
+                      {dress.measurements.waist && (
+                        <div>
+                          <span className="text-sm text-gray-600 block mb-1">ウエスト</span>
+                          <p className="font-semibold text-gray-800">{dress.measurements.waist}cm</p>
+                        </div>
+                      )}
+                      {dress.measurements.hip && (
+                        <div>
+                          <span className="text-sm text-gray-600 block mb-1">ヒップ</span>
+                          <p className="font-semibold text-gray-800">{dress.measurements.hip}cm</p>
+                        </div>
+                      )}
+                      {dress.measurements.length && (
+                        <div>
+                          <span className="text-sm text-gray-600 block mb-1">総丈</span>
+                          <p className="font-semibold text-gray-800">{dress.measurements.length}cm</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* 着用情報 */}
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <h4 className="text-md font-semibold text-gray-800 mb-3">着用情報</h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {dress.owner_history && (
+                      <div>
+                        <span className="text-sm text-gray-600 block mb-1">オーナー履歴</span>
+                        <p className="font-semibold text-gray-800">
+                          {dress.owner_history === 'first' && 'ファーストオーナー'}
+                          {dress.owner_history === 'second' && 'セカンドオーナー'}
+                          {dress.owner_history === 'third_plus' && 'サードオーナー以上'}
+                        </p>
+                      </div>
+                    )}
+                    {dress.wear_count && (
+                      <div>
+                        <span className="text-sm text-gray-600 block mb-1">着用回数</span>
+                        <p className="font-semibold text-gray-800">{dress.wear_count}</p>
+                      </div>
+                    )}
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">クリーニング</span>
+                      <p className="font-semibold text-gray-800">
+                        {dress.is_cleaned ? 'クリーニング済み' : '未クリーニング'}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-gray-600 block mb-1">価格交渉</span>
+                      <p className="font-semibold text-gray-800">
+                        {dress.accept_offers ? '価格交渉可' : '価格交渉不可'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 特徴 */}
+                {dress.features && dress.features.length > 0 && (
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <h4 className="text-md font-semibold text-gray-800 mb-3">特徴</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {(Array.isArray(dress.features) ? dress.features : dress.features.split(', ')).map((feature: string, index: number) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-[var(--primary-green)]/10 text-[var(--primary-green)] rounded-full text-sm font-medium"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* 商品説明 */}

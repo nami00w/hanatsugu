@@ -10,7 +10,7 @@ import AuthGuard from '@/components/AuthGuard'
 import Header from '@/components/Header'
 
 export default function SettingsPage() {
-  const { user, signOut } = useAuth()
+  const { user, signOut, refreshUser } = useAuth()
   const [activeTab, setActiveTab] = useState<'profile' | 'account' | 'bank'>('profile')
   const [loading, setLoading] = useState(false)
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([])
@@ -90,9 +90,11 @@ export default function SettingsPage() {
         alert('プロフィールを更新しました')
         // ローカル状態をクリア
         setProfileImage(null)
+        setProfileImagePreview('')
         
-        // ページをリロードして最新情報を反映
-        window.location.reload()
+        // ユーザー情報をリフレッシュして即座反映
+        await refreshUser()
+        console.log('✅ Profile updated and user info refreshed successfully!')
       } else {
         alert('プロフィールの更新に失敗しました')
       }

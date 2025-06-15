@@ -63,23 +63,34 @@ export default function SearchBar() {
     }
   }
 
-  // ブランド検索
+  // デバウンス用のタイマー
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // ブランド検索（デバウンス付き）
   const handleBrandSearch = async (searchTerm: string) => {
+    // 既存のタイマーをクリア
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current)
+    }
+
     if (!searchTerm.trim()) {
       setBrandSearchResults([])
       return
     }
 
-    setIsSearchingBrands(true)
-    try {
-      const result = await searchBrands(searchTerm.trim(), 10)
-      setBrandSearchResults(result.brands)
-    } catch (error) {
-      console.error('Brand search error:', error)
-      setBrandSearchResults([])
-    } finally {
-      setIsSearchingBrands(false)
-    }
+    // デバウンス: 300ms後に検索実行
+    searchTimeoutRef.current = setTimeout(async () => {
+      setIsSearchingBrands(true)
+      try {
+        const result = await searchBrands(searchTerm.trim(), 10)
+        setBrandSearchResults(result.brands)
+      } catch (error) {
+        console.error('Brand search error:', error)
+        setBrandSearchResults([])
+      } finally {
+        setIsSearchingBrands(false)
+      }
+    }, 300)
   }
 
   // 人気ブランドを取得
@@ -96,7 +107,7 @@ export default function SearchBar() {
     loadPopularBrands()
   }, [])
 
-  // 外部クリックでドロップダウンを閉じる
+  // 外部クリックでドロップダウンを閉じる & クリーンアップ
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -105,7 +116,15 @@ export default function SearchBar() {
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    
+    // クリーンアップ関数
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      // タイマーもクリーンアップ
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+      }
+    }
   }, [])
 
   const handleSearch = () => {
