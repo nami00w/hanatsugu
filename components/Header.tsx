@@ -69,23 +69,9 @@ export default function Header() {
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setShowAccountDropdown(!showAccountDropdown)}
-                    className="p-1 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100"
+                    className="p-2 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100"
                   >
-                    <div className="w-8 h-8 bg-gray-100 rounded-full overflow-hidden">
-                      {user?.user_metadata?.avatar_url ? (
-                        <Image
-                          src={user.user_metadata.avatar_url}
-                          alt="プロフィール"
-                          width={32}
-                          height={32}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <User className="w-4 h-4 text-gray-400" />
-                        </div>
-                      )}
-                    </div>
+                    <User className="w-6 h-6" />
                   </button>
                   
                   {/* モバイル用ドロップダウンメニュー */}
@@ -163,21 +149,7 @@ export default function Header() {
                   onClick={() => setShowAccountDropdown(!showAccountDropdown)}
                   className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100"
                 >
-                  <div className="w-8 h-8 bg-gray-100 rounded-full overflow-hidden flex-shrink-0">
-                    {user?.user_metadata?.avatar_url ? (
-                      <Image
-                        src={user.user_metadata.avatar_url}
-                        alt="プロフィール"
-                        width={32}
-                        height={32}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <User className="w-4 h-4 text-gray-400" />
-                      </div>
-                    )}
-                  </div>
+                  <User className="w-5 h-5" />
                   <span>{displayName}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform ${showAccountDropdown ? 'rotate-180' : ''}`} />
                 </button>
