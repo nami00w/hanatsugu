@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
+import { useMessages } from '@/hooks/useMessages'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -14,33 +15,22 @@ interface ContactModalProps {
 export default function ContactModal({ isOpen, onClose, dressId, dressTitle, sellerId }: ContactModalProps) {
   const [message, setMessage] = useState('')
   const [sending, setSending] = useState(false)
-  const supabase = createClient()
+  const router = useRouter()
+  const { createOrGetConversation, sendMessage } = useMessages()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSending(true)
 
     try {
-      const { data: { user } } = await supabase.auth.getUser()
+      // 会話を作成または取得
+      const conversationId = await createOrGetConversation(dressId, sellerId)
       
-      if (!user) {
-        alert('お問い合わせにはログインが必要です')
-        return
-      }
+      // メッセージを送信
+      await sendMessage(conversationId, message)
 
-      const { error } = await supabase
-        .from('messages')
-        .insert({
-          sender_id: user.id,
-          recipient_id: sellerId,
-          dress_id: dressId,
-          message: message
-        })
-
-      if (error) throw error
-
-      alert('お問い合わせを送信しました')
-      setMessage('')
+      // メッセージ画面に遷移
+      router.push(`/mypage/messages/${conversationId}`)
       onClose()
     } catch (error) {
       console.error('Error sending message:', error)
@@ -76,7 +66,7 @@ export default function ContactModal({ isOpen, onClose, dressId, dressTitle, sel
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="出品者へのメッセージを入力してください"
-            className="w-full border border-gray-300 rounded-lg p-3 min-h-[150px] focus:outline-none focus:border-pink-500"
+            className="w-full border border-gray-300 rounded-lg p-3 min-h-[150px] focus:outline-none focus:border-[var(--primary-green)]"
             required
           />
 
@@ -91,7 +81,7 @@ export default function ContactModal({ isOpen, onClose, dressId, dressTitle, sel
             <button
               type="submit"
               disabled={sending}
-              className="flex-1 bg-pink-600 text-white py-2 rounded-lg hover:bg-pink-700 transition-colors disabled:bg-gray-400"
+              className="flex-1 bg-[var(--primary-green)] text-white py-2 rounded-lg hover:bg-[var(--primary-green-dark)] transition-colors disabled:bg-gray-400"
             >
               {sending ? '送信中...' : '送信する'}
             </button>

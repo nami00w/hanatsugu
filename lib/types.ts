@@ -54,24 +54,30 @@ export interface SizeMapping {
 }
 
 export const sizeMapping: Record<string, SizeMapping> = {
-  'XS': { gou: '7号', us: 'US 0-2' },
-  'S': { gou: '9号', us: 'US 2-4' },
-  'M': { gou: '11号', us: 'US 6-8' },
-  'L': { gou: '13号', us: 'US 10-12' },
-  'XL': { gou: '15号', us: 'US 14-16' },
-  'XXL': { gou: '17号', us: 'US 18-20' }
+  'XS': { gou: '5号', us: 'US00-0' },
+  'S': { gou: '7号', us: 'US0-2' },
+  'S+': { gou: '9号', us: 'US2-4' },
+  'M': { gou: '11号', us: 'US6-8' },
+  'M+': { gou: '13号', us: 'US8-10' },
+  'L': { gou: '15号', us: 'US10-12' },
+  'L+': { gou: '17号', us: 'US12-14' },
+  'XL': { gou: '19号', us: 'US14-16' },
+  'XXL': { gou: '21号', us: 'US16-18' }
 }
 
 // サイズ表示用のユーティリティ関数
 export const formatSizeDisplay = (size: string, context: 'detail' | 'card' | 'filter') => {
   // 既存の号数のみのサイズ（例：9号、11号）をS・M・Lに変換
   const gouToSize: Record<string, string> = {
-    '7号': 'XS',
-    '9号': 'S', 
+    '5号': 'XS',
+    '7号': 'S',
+    '9号': 'S+', 
     '11号': 'M',
-    '13号': 'L',
-    '15号': 'XL',
-    '17号': 'XXL'
+    '13号': 'M+',
+    '15号': 'L',
+    '17号': 'L+',
+    '19号': 'XL',
+    '21号': 'XXL'
   }
 
   // すでにS・M・L形式の場合はそのまま使用

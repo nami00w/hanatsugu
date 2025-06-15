@@ -15,17 +15,7 @@ export function useShareProduct() {
     setIsSharing(true)
     
     try {
-      // Web Share API対応チェック（モバイル優先）
-      if (navigator.share && /Mobi|Android/i.test(navigator.userAgent)) {
-        await navigator.share({
-          title: shareData.title,
-          text: shareData.text,
-          url: shareData.url,
-        })
-        return { success: true, method: 'native' }
-      }
-      
-      // Web Share API非対応またはPC：SNS選択モーダル表示
+      // 常にSNS選択モーダルを表示するように変更
       return { success: false, method: 'fallback' }
       
     } catch (error) {

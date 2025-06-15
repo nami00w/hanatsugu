@@ -107,7 +107,7 @@ export default function BrandCarousel() {
                 </div>
 
                 {/* ブランド名 */}
-                <h3 className="text-sm lg:text-base font-medium text-gray-800 group-hover:text-pink-600 transition-colors duration-200">
+                <h3 className="text-sm lg:text-base font-medium text-gray-800 group-hover:text-[var(--primary-green)] transition-colors duration-200">
                   {brand.name}
                 </h3>
               </div>
@@ -115,20 +115,6 @@ export default function BrandCarousel() {
           </div>
         </div>
 
-        {/* レスポンシブ用のドット表示（モバイル） */}
-        <div className="flex justify-center mt-8 lg:hidden">
-          <div className="flex space-x-2">
-            {Array.from({ length: Math.ceil(brands.length / 3) }).map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                  index === Math.floor(currentIndex / 3) ? 'bg-pink-600' : 'bg-gray-300'
-                }`}
-                onClick={() => setCurrentIndex(index * 3)}
-              />
-            ))}
-          </div>
-        </div>
       </div>
 
       <style jsx>{`

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { searchBrands, getPopularBrands, type Brand } from '@/lib/brandAPI'
 
 export interface SearchFilters {
   brand: string
@@ -13,7 +14,18 @@ export interface SearchFilters {
 //   onSearch: (filters: SearchFilters) => void
 // }
 
-const SIZES = ['', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '5号', '7号', '9号', '11号', '13号', '15号', '17号']
+const SIZES = [
+  { value: '', label: 'サイズを選択' },
+  { value: 'XS', label: 'XS (5号・US00-0)' },
+  { value: 'S', label: 'S (7号・US0-2)' },
+  { value: 'S+', label: 'S (9号・US2-4)' },
+  { value: 'M', label: 'M (11号・US6-8)' },
+  { value: 'M+', label: 'M (13号・US8-10)' },
+  { value: 'L', label: 'L (15号・US10-12)' },
+  { value: 'L+', label: 'L (17号・US12-14)' },
+  { value: 'XL', label: 'XL (19号・US14-16)' },
+  { value: 'XXL', label: 'XXL (21号・US16-18)' }
+]
 const PRICE_OPTIONS = [
   { value: '', label: '価格上限' },
   { value: '50000', label: '5万円以下' },
@@ -24,12 +36,7 @@ const PRICE_OPTIONS = [
   { value: '1000000', label: '100万円以下' },
 ]
 
-const POPULAR_BRANDS = [
-  'VERA WANG', 'Pronovias', 'ANTONIO RIVA', 'Temperley London',
-  'JENNY PACKHAM', 'Marchesa', 'Oscar de la Renta', 'Monique Lhuillier',
-  'Carolina Herrera', 'Elie Saab', 'Reem Acra', 'Hayley Paige',
-  'Tadashi Shoji', 'Maggie Sottero', 'Allure Bridals', "David's Bridal"
-]
+// 動的にブランドを取得するため、静的なリストは削除
 
 export default function SearchBar() {
   const router = useRouter()
@@ -43,10 +50,51 @@ export default function SearchBar() {
   })
   
   const [showBrandDropdown, setShowBrandDropdown] = useState(false)
+  const [brandSearchResults, setBrandSearchResults] = useState<Brand[]>([])
+  const [popularBrands, setPopularBrands] = useState<Brand[]>([])
+  const [isSearchingBrands, setIsSearchingBrands] = useState(false)
 
   const handleInputChange = (field: keyof SearchFilters, value: string) => {
     setFilters(prev => ({ ...prev, [field]: value }))
+    
+    // ブランド入力の場合は検索を実行
+    if (field === 'brand') {
+      handleBrandSearch(value)
+    }
   }
+
+  // ブランド検索
+  const handleBrandSearch = async (searchTerm: string) => {
+    if (!searchTerm.trim()) {
+      setBrandSearchResults([])
+      return
+    }
+
+    setIsSearchingBrands(true)
+    try {
+      const result = await searchBrands(searchTerm.trim(), 10)
+      setBrandSearchResults(result.brands)
+    } catch (error) {
+      console.error('Brand search error:', error)
+      setBrandSearchResults([])
+    } finally {
+      setIsSearchingBrands(false)
+    }
+  }
+
+  // 人気ブランドを取得
+  useEffect(() => {
+    const loadPopularBrands = async () => {
+      try {
+        const brands = await getPopularBrands(12)
+        setPopularBrands(brands)
+      } catch (error) {
+        console.error('Popular brands fetch error:', error)
+      }
+    }
+
+    loadPopularBrands()
+  }, [])
 
   // 外部クリックでドロップダウンを閉じる
   useEffect(() => {
@@ -77,8 +125,10 @@ export default function SearchBar() {
     }
   }
 
-  const handleBrandSelect = (brand: string) => {
-    setFilters(prev => ({ ...prev, brand }))
+  const handleBrandSelect = (brand: Brand | string) => {
+    const brandName = typeof brand === 'string' ? brand : (brand.japanese_name || brand.canonical_name)
+    setFilters(prev => ({ ...prev, brand: brandName }))
+    setBrandSearchResults([])
     setShowBrandDropdown(false)
   }
 
@@ -102,20 +152,57 @@ export default function SearchBar() {
             {/* ブランドドロップダウン（モバイル用） */}
             {showBrandDropdown && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
-                <div className="p-3 border-b border-gray-100">
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">人気ブランド</h4>
-                </div>
-                <div className="p-2">
-                  {POPULAR_BRANDS.map((brand) => (
-                    <button
-                      key={brand}
-                      onClick={() => handleBrandSelect(brand)}
-                      className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
-                    >
-                      {brand}
-                    </button>
-                  ))}
-                </div>
+                {isSearchingBrands && (
+                  <div className="p-3 text-center">
+                    <div className="text-sm text-gray-500">検索中...</div>
+                  </div>
+                )}
+                
+                {/* 検索結果 */}
+                {brandSearchResults.length > 0 && (
+                  <>
+                    <div className="p-3 border-b border-gray-100">
+                      <h4 className="text-sm font-medium text-gray-700">検索結果</h4>
+                    </div>
+                    <div className="p-2">
+                      {brandSearchResults.map((brand) => (
+                        <button
+                          key={brand.id}
+                          onClick={() => handleBrandSelect(brand)}
+                          className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
+                        >
+                          <div className="font-medium">{brand.japanese_name || brand.canonical_name}</div>
+                          {brand.japanese_name && brand.canonical_name !== brand.japanese_name && (
+                            <div className="text-xs text-gray-500">{brand.canonical_name}</div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+                
+                {/* 人気ブランド（検索中でない場合のみ表示） */}
+                {!isSearchingBrands && brandSearchResults.length === 0 && popularBrands.length > 0 && (
+                  <>
+                    <div className="p-3 border-b border-gray-100">
+                      <h4 className="text-sm font-medium text-gray-700">人気ブランド</h4>
+                    </div>
+                    <div className="p-2">
+                      {popularBrands.map((brand) => (
+                        <button
+                          key={brand.id}
+                          onClick={() => handleBrandSelect(brand)}
+                          className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
+                        >
+                          <div className="font-medium">{brand.japanese_name || brand.canonical_name}</div>
+                          {brand.japanese_name && brand.canonical_name !== brand.japanese_name && (
+                            <div className="text-xs text-gray-500">{brand.canonical_name}</div>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             )}
           </div>
@@ -149,20 +236,57 @@ export default function SearchBar() {
           {/* ブランドドロップダウン */}
           {showBrandDropdown && (
             <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
-              <div className="p-3 border-b border-gray-100">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">人気ブランド</h4>
-              </div>
-              <div className="p-2">
-                {POPULAR_BRANDS.map((brand) => (
-                  <button
-                    key={brand}
-                    onClick={() => handleBrandSelect(brand)}
-                    className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
-                  >
-                    {brand}
-                  </button>
-                ))}
-              </div>
+              {isSearchingBrands && (
+                <div className="p-3 text-center">
+                  <div className="text-sm text-gray-500">検索中...</div>
+                </div>
+              )}
+              
+              {/* 検索結果 */}
+              {brandSearchResults.length > 0 && (
+                <>
+                  <div className="p-3 border-b border-gray-100">
+                    <h4 className="text-sm font-medium text-gray-700">検索結果</h4>
+                  </div>
+                  <div className="p-2">
+                    {brandSearchResults.map((brand) => (
+                      <button
+                        key={brand.id}
+                        onClick={() => handleBrandSelect(brand)}
+                        className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
+                      >
+                        <div className="font-medium">{brand.japanese_name || brand.canonical_name}</div>
+                        {brand.japanese_name && brand.canonical_name !== brand.japanese_name && (
+                          <div className="text-xs text-gray-500">{brand.canonical_name}</div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+              
+              {/* 人気ブランド（検索中でない場合のみ表示） */}
+              {!isSearchingBrands && brandSearchResults.length === 0 && popularBrands.length > 0 && (
+                <>
+                  <div className="p-3 border-b border-gray-100">
+                    <h4 className="text-sm font-medium text-gray-700">人気ブランド</h4>
+                  </div>
+                  <div className="p-2">
+                    {popularBrands.map((brand) => (
+                      <button
+                        key={brand.id}
+                        onClick={() => handleBrandSelect(brand)}
+                        className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
+                      >
+                        <div className="font-medium">{brand.japanese_name || brand.canonical_name}</div>
+                        {brand.japanese_name && brand.canonical_name !== brand.japanese_name && (
+                          <div className="text-xs text-gray-500">{brand.canonical_name}</div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>
@@ -174,10 +298,9 @@ export default function SearchBar() {
             onChange={(e) => handleInputChange('size', e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base bg-white"
           >
-            <option value="">サイズを選択</option>
-            {SIZES.slice(1).map((size) => (
-              <option key={size} value={size}>
-                {size}
+            {SIZES.map((size) => (
+              <option key={size.value} value={size.value}>
+                {size.label}
               </option>
             ))}
           </select>

@@ -8,6 +8,7 @@ import MobileFilterModal from '@/components/MobileFilterModal'
 import Header from '@/components/Header'
 import SearchBar from '@/components/SearchBar'
 import BrandCarousel from '@/components/BrandCarousel'
+import { SlidersHorizontal } from 'lucide-react'
 
 // Dynamic rendering を強制
 export const dynamic = 'force-dynamic'
@@ -116,14 +117,12 @@ function HomeContent() {
               <SearchBar />
               
               {/* 詳細フィルターボタン */}
-              <div className="mt-6">
+              <div className="mt-6 text-center">
                 <button
                   onClick={() => router.push('/search')}
-                  className="btn-secondary text-sm rounded-full"
+                  className="bg-white border-2 border-[var(--primary-green)] text-[var(--primary-green)] px-4 py-3 rounded-lg hover:bg-[var(--primary-green)] hover:text-white transition-colors duration-200 flex items-center gap-2 text-sm font-medium mx-auto"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                  </svg>
+                  <SlidersHorizontal className="w-4 h-4" />
                   詳細フィルター
                 </button>
               </div>

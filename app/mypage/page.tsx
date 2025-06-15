@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { User, Heart, Eye, Package, Settings, Clock, List, DollarSign } from 'lucide-react'
+import { User, Heart, Eye, Package, Settings, Clock, List, DollarSign, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/Header'
@@ -166,6 +166,16 @@ export default function MyPage() {
                   </li>
                   <li>
                     <Link
+                      href="/mypage/messages"
+                      className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      メッセージ
+                      {/* TODO: 未読数バッジ */}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/mypage/listings"
                       className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
                     >
@@ -243,6 +253,17 @@ export default function MyPage() {
               <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">クイックアクセス</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <Link
+                    href="/mypage/messages"
+                    className="p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors relative"
+                  >
+                    <MessageSquare className="w-6 h-6 text-primary mb-2" />
+                    <h3 className="font-medium text-gray-900 mb-1">メッセージ</h3>
+                    <p className="text-sm text-gray-600">お問い合わせ・連絡</p>
+                    {/* TODO: 未読数バッジ */}
+                    {/* <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">3</span> */}
+                  </Link>
+                  
                   <Link
                     href="/sell"
                     className="p-4 border border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
