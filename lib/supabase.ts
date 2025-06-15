@@ -633,21 +633,43 @@ export const profileAPI = {
         return 'https://images.unsplash.com/photo-1494790108755-2616b612d4c0?w=400&h=400&fit=crop&crop=face'
       }
       
+      // まず利用可能なバケットを確認
+      const { data: buckets } = await supabase.storage.listBuckets()
+      const availableBucket = buckets?.find(bucket => 
+        bucket.name === 'profile-images' || bucket.name === 'avatars' || bucket.name === 'images'
+      )?.name || 'profile-images'
+
+      console.log('📂 Using storage bucket:', availableBucket)
+
       const { error: uploadError } = await supabase.storage
-        .from('profile-images')
+        .from(availableBucket)
         .upload(fileName, file, {
           cacheControl: '3600',
           upsert: true
         })
 
       if (uploadError) {
-        console.error('❌ Error uploading profile image:', uploadError)
+        console.error('❌ Error uploading profile image:', {
+          message: uploadError.message,
+          details: uploadError,
+          fileName,
+          fileSize: file.size,
+          fileType: file.type,
+          bucket: availableBucket,
+          availableBuckets: buckets?.map(b => b.name)
+        })
+        
+        // バケットが見つからない場合は開発環境として扱う
+        if (uploadError.message.includes('Bucket not found')) {
+          console.log('📊 Storage bucket not found, using dummy image for development')
+        }
+        
         // エラー時は開発用に固定URLを返す
         return 'https://images.unsplash.com/photo-1494790108755-2616b612d4c0?w=400&h=400&fit=crop&crop=face'
       }
 
       const { data: { publicUrl } } = supabase.storage
-        .from('profile-images')
+        .from(availableBucket)
         .getPublicUrl(fileName)
 
       console.log('✅ Profile image uploaded:', publicUrl)
@@ -663,6 +685,12 @@ export const profileAPI = {
   async updateProfile(userId: string, updates: {
     display_name?: string
     avatar_url?: string
+    bio?: string
+    location?: string
+    birth_year?: number | null
+    phone?: string
+    interests?: string[]
+    profile_completed?: boolean
   }): Promise<boolean> {
     try {
       console.log('👤 Updating user profile:', { userId, updates })
@@ -673,8 +701,19 @@ export const profileAPI = {
         return true
       }
       
+      // auth.user_metadataに保存するデータ
+      const authUpdates: any = {}
+      if (updates.display_name !== undefined) authUpdates.display_name = updates.display_name
+      if (updates.avatar_url !== undefined) authUpdates.avatar_url = updates.avatar_url
+      if (updates.bio !== undefined) authUpdates.bio = updates.bio
+      if (updates.location !== undefined) authUpdates.location = updates.location
+      if (updates.birth_year !== undefined) authUpdates.birth_year = updates.birth_year
+      if (updates.phone !== undefined) authUpdates.phone = updates.phone
+      if (updates.interests !== undefined) authUpdates.interests = updates.interests
+      if (updates.profile_completed !== undefined) authUpdates.profile_completed = updates.profile_completed
+
       const { error } = await supabase.auth.updateUser({
-        data: updates
+        data: authUpdates
       })
 
       if (error) {

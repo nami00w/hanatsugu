@@ -130,9 +130,34 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ✅ サインアップフォームのリダイレクト対応
 ✅ エラーハンドリングの日本語対応
 
-## 今後の拡張案
+## ソーシャルログイン設定
 
-- パスワードリセット機能の実装
-- プロフィール情報の追加入力画面
-- メール変更機能の実装
-- ソーシャルログイン（Google/Apple）の追加
+### Google OAuth設定
+1. [Google Cloud Console](https://console.cloud.google.com) でプロジェクト作成
+2. `APIs & Services` → `Credentials` → `OAuth 2.0 Client IDs` を作成
+3. **Application type**: Web application
+4. **Authorized redirect URIs**: `https://your-project-id.supabase.co/auth/v1/callback`
+5. Supabaseの `Authentication` → `Providers` → `Google` で設定:
+   ```
+   Enabled: ON
+   Client ID: [Google Cloud Consoleで取得]
+   Client Secret: [Google Cloud Consoleで取得]
+   ```
+
+### OAuth同意画面の設定
+- **User Type**: External
+- **App name**: Hanatsugu
+- **Scopes**: email, profile, openid
+
+## 実装済み機能（完了）
+
+✅ AuthContextでのメール認証スキップ機能削除  
+✅ `/auth/verify-email` メール確認待ち画面
+✅ `/auth/welcome` 登録完了画面  
+✅ メール再送信機能
+✅ サインアップフォームのリダイレクト対応
+✅ エラーハンドリングの日本語対応
+✅ パスワードリセット機能の実装
+✅ プロフィール情報の追加入力画面
+✅ メール変更機能の実装
+✅ ソーシャルログイン（Google）の追加

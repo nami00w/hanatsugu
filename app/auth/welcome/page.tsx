@@ -106,11 +106,18 @@ export default function WelcomePage() {
 
             {/* クイックアクション */}
             <div className="space-y-4">
+              <Link
+                href="/auth/profile-setup"
+                className="w-full inline-flex items-center justify-center bg-[var(--primary-green)] text-white py-4 px-6 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+              >
+                プロフィールを完成させる
+              </Link>
+              
               <button
                 onClick={handleGetStarted}
-                className="w-full bg-[var(--primary-green)] text-white py-4 px-6 rounded-xl font-semibold text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+                className="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-xl font-medium hover:bg-gray-200 transition-colors"
               >
-                さっそく始める
+                後で設定する
               </button>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

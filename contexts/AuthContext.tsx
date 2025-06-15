@@ -16,6 +16,8 @@ interface AuthContextType {
   resendConfirmationEmail: (email: string) => Promise<{ success: boolean; error?: string }>;
   resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
   updatePassword: (password: string) => Promise<{ success: boolean; error?: string }>;
+  updateEmail: (newEmail: string) => Promise<{ success: boolean; error?: string }>;
+  signInWithGoogle: () => Promise<{ success: boolean; error?: string }>;
   isAuthenticated: boolean;
 }
 
@@ -223,6 +225,54 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // メールアドレス更新
+  const updateEmail = async (newEmail: string) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        email: newEmail
+      });
+
+      if (error) {
+        console.error('Update email error:', error);
+        if (error.message.includes('Email address is invalid')) {
+          return { success: false, error: '有効なメールアドレスを入力してください' };
+        }
+        if (error.message.includes('Email already exists')) {
+          return { success: false, error: 'このメールアドレスは既に使用されています' };
+        }
+        return { success: false, error: 'メールアドレスの更新に失敗しました' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Exception in updateEmail:', error);
+      return { success: false, error: 'メールアドレス更新処理中にエラーが発生しました' };
+    }
+  };
+
+  // Googleログイン
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/welcome`
+        }
+      });
+
+      if (error) {
+        console.error('Google sign in error:', error);
+        return { success: false, error: 'Googleログインに失敗しました' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Exception in signInWithGoogle:', error);
+      return { success: false, error: 'Googleログイン処理中にエラーが発生しました' };
+    }
+  };
+
+
   const value = {
     session,
     user,
@@ -234,6 +284,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     resendConfirmationEmail,
     resetPassword,
     updatePassword,
+    updateEmail,
+    signInWithGoogle,
     isAuthenticated: !!session,
   };
 

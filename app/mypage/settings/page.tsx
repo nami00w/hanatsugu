@@ -19,6 +19,11 @@ export default function SettingsPage() {
   const [displayName, setDisplayName] = useState('')
   const [profileImage, setProfileImage] = useState<File | null>(null)
   const [profileImagePreview, setProfileImagePreview] = useState('')
+  const [bio, setBio] = useState('')
+  const [location, setLocation] = useState('')
+  const [birthYear, setBirthYear] = useState('')
+  const [phone, setPhone] = useState('')
+  const [interests, setInterests] = useState<string[]>([])
   
   // アカウント設定
   const [currentPassword, setCurrentPassword] = useState('')
@@ -37,6 +42,12 @@ export default function SettingsPage() {
   useEffect(() => {
     if (user) {
       setDisplayName(user.user_metadata?.display_name || user.email?.split('@')[0] || '')
+      setBio(user.user_metadata?.bio || '')
+      setLocation(user.user_metadata?.location || '')
+      setBirthYear(user.user_metadata?.birth_year?.toString() || '')
+      setPhone(user.user_metadata?.phone || '')
+      setInterests(user.user_metadata?.interests || [])
+      
       // 既存のプロフィール画像があれば設定
       if (user.user_metadata?.avatar_url) {
         setProfileImagePreview(user.user_metadata.avatar_url)
@@ -83,7 +94,12 @@ export default function SettingsPage() {
       // プロフィール情報を更新
       const success = await profileAPI.updateProfile(user.id, {
         display_name: displayName,
-        avatar_url: avatarUrl
+        avatar_url: avatarUrl,
+        bio,
+        location,
+        birth_year: birthYear ? parseInt(birthYear) : null,
+        phone,
+        interests
       })
 
       if (success) {
@@ -321,20 +337,97 @@ export default function SettingsPage() {
                       />
                     </div>
 
-                    {/* メールアドレス（読み取り専用） */}
+                    {/* 自己紹介 */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        自己紹介
+                      </label>
+                      <textarea
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                        placeholder="自己紹介を入力"
+                        maxLength={500}
+                      />
+                      <p className="text-xs text-gray-500 mt-1">{bio.length}/500文字</p>
+                    </div>
+
+                    {/* 居住地域 */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        居住地域
+                      </label>
+                      <select
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                      >
+                        <option value="">選択してください</option>
+                        <option value="北海道">北海道</option>
+                        <option value="東北">東北</option>
+                        <option value="関東">関東</option>
+                        <option value="中部">中部</option>
+                        <option value="関西">関西</option>
+                        <option value="中国">中国</option>
+                        <option value="四国">四国</option>
+                        <option value="九州・沖縄">九州・沖縄</option>
+                      </select>
+                    </div>
+
+                    {/* 生まれ年・電話番号 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          生まれ年
+                        </label>
+                        <select
+                          value={birthYear}
+                          onChange={(e) => setBirthYear(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                        >
+                          <option value="">選択してください</option>
+                          {Array.from({ length: 50 }, (_, i) => {
+                            const year = 2005 - i
+                            return (
+                              <option key={year} value={year}>{year}年</option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          電話番号
+                        </label>
+                        <input
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                          placeholder="090-1234-5678"
+                        />
+                      </div>
+                    </div>
+
+                    {/* メールアドレス */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
                         メールアドレス
                       </label>
-                      <input
-                        type="email"
-                        value={user?.email || ''}
-                        disabled
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
-                      />
-                      <p className="text-xs text-gray-500 mt-1">
-                        メールアドレスの変更はサポートまでお問い合わせください
-                      </p>
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="email"
+                          value={user?.email || ''}
+                          disabled
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
+                        />
+                        <Link
+                          href="/auth/change-email"
+                          className="px-3 py-2 text-sm text-[var(--primary-green)] border border-[var(--primary-green)] rounded-md hover:bg-green-50 transition-colors"
+                        >
+                          変更
+                        </Link>
+                      </div>
                     </div>
 
                     <button
