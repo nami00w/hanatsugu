@@ -27,13 +27,13 @@ export function useFavorites() {
         const userFavorites = await favoritesAPI.getFavorites(user.id)
         setFavorites(userFavorites)
       } catch (error) {
-        console.error('Failed to load favorites:', error)
+        console.error('Error fetching favorites:', error)
         setFavorites([])
       }
     }
 
     loadFavorites()
-  }, [isAuthenticated, user])
+  }, [isAuthenticated, user?.id]) // user全体ではなくuser.idのみを依存関係に
 
   const toggleFavorite = useCallback(async (dressId: string | number) => {
     console.log('🔄 toggleFavorite called:', { dressId, isAuthenticated, user: !!user })

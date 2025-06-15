@@ -44,17 +44,26 @@ export interface Favorite {
 export const favoritesAPI = {
   // お気に入り一覧取得
   async getFavorites(userId: string): Promise<string[]> {
-    const { data, error } = await supabase
-      .from('favorites')
-      .select('dress_id')
-      .eq('user_id', userId)
-    
-    if (error) {
+    try {
+      const { data, error } = await supabase
+        .from('favorites')
+        .select('dress_id')
+        .eq('user_id', userId)
+      
+      if (error) {
+        // テーブルが存在しない場合は空配列を返す
+        if (error.message.includes('relation "public.favorites" does not exist')) {
+          console.warn('Favorites table does not exist yet')
+          return []
+        }
+        throw error
+      }
+      
+      return data?.map(fav => fav.dress_id) || []
+    } catch (error) {
       console.error('Error fetching favorites:', error)
       return []
     }
-    
-    return data?.map(item => item.dress_id) || []
   },
 
   // お気に入り追加

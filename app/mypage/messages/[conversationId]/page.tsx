@@ -8,125 +8,115 @@ import { useParams } from 'next/navigation'
 import Header from '@/components/Header'
 import AuthGuard from '@/components/AuthGuard'
 import { useAuth } from '@/contexts/AuthContext'
+import { useMessages, type Message, type Conversation } from '@/hooks/useMessages'
+import { supabase } from '@/lib/supabase'
 
-interface Message {
-  id: string
-  conversation_id: string
-  sender_id: string
-  sender_name: string
-  content: string
-  created_at: string
-  is_read: boolean
-}
-
-interface Conversation {
-  id: string
-  participants: string[]
-  participant_names: string[]
-  dress_id?: string
-  dress_title?: string
-  dress_image?: string
-  dress_price?: number
-}
 
 export default function MessageDetailPage() {
   const { conversationId } = useParams()
   const { user } = useAuth()
+  const { fetchMessages, sendMessage, markMessagesAsRead, conversations } = useMessages()
   const [conversation, setConversation] = useState<Conversation | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
+  const [textareaRows, setTextareaRows] = useState(3)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // ダミーデータ
-  const dummyConversation: Conversation = {
-    id: conversationId as string,
-    participants: ['user1', 'user2'],
-    participant_names: ['田中 美咲', '佐藤 花子'],
-    dress_id: '1',
-    dress_title: 'VERA WANG Liesel エレガントドレス',
-    dress_image: 'https://images.unsplash.com/photo-1594552072238-b8a33785b261?w=400&h=600&fit=crop',
-    dress_price: 128000
-  }
-
-  const dummyMessages: Message[] = [
-    {
-      id: '1',
-      conversation_id: conversationId as string,
-      sender_id: 'user2',
-      sender_name: '田中 美咲',
-      content: 'こんにちは。VERA WANGのドレスについてお聞きしたいことがあります。',
-      created_at: '2024-01-15T10:00:00Z',
-      is_read: true
-    },
-    {
-      id: '2',
-      conversation_id: conversationId as string,
-      sender_id: 'user1',
-      sender_name: '佐藤 花子',
-      content: 'こんにちは！お問い合わせありがとうございます。どのようなことでしょうか？',
-      created_at: '2024-01-15T10:05:00Z',
-      is_read: true
-    },
-    {
-      id: '3',
-      conversation_id: conversationId as string,
-      sender_id: 'user2',
-      sender_name: '田中 美咲',
-      content: 'サイズ調整は可能でしょうか？9号なのですが、少しウエストを詰めたいと思っています。',
-      created_at: '2024-01-15T10:10:00Z',
-      is_read: true
-    },
-    {
-      id: '4',
-      conversation_id: conversationId as string,
-      sender_id: 'user1',
-      sender_name: '佐藤 花子',
-      content: 'はい、サイズ調整は可能です。信頼できるドレス専門の仕立て屋さんをご紹介できます。費用は別途かかりますが、5,000円〜15,000円程度が相場です。',
-      created_at: '2024-01-15T10:15:00Z',
-      is_read: true
-    },
-    {
-      id: '5',
-      conversation_id: conversationId as string,
-      sender_id: 'user2',
-      sender_name: '田中 美咲',
-      content: 'ありがとうございます。それでは購入を検討させていただきます。もう少し詳しく教えていただけますでしょうか？',
-      created_at: '2024-01-15T10:30:00Z',
-      is_read: false
-    }
-  ]
 
   useEffect(() => {
-    // TODO: 実際の実装ではSupabaseから会話とメッセージを取得
-    setConversation(dummyConversation)
-    setMessages(dummyMessages)
-    setLoading(false)
-  }, [conversationId])
+    const loadConversationAndMessages = async () => {
+      if (!conversationId || !user) return
+      
+      try {
+        setLoading(true)
+        
+        // 会話情報を直接Supabaseから取得
+        const { data: conversationData, error: convError } = await supabase
+          .from('conversations')
+          .select(`
+            *,
+            listings:dress_id (
+              title,
+              images,
+              price
+            )
+          `)
+          .eq('id', conversationId)
+          .single()
+
+        if (convError) {
+          console.error('Conversation not found:', convError)
+          setConversation(null)
+          setLoading(false)
+          return
+        }
+
+        if (conversationData) {
+          // 相手のプロフィール情報を取得
+          const otherUserId = conversationData.buyer_id === user.id ? conversationData.seller_id : conversationData.buyer_id
+          const { data: otherUserProfile } = await supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', otherUserId)
+            .maybeSingle()
+
+          const conversationWithDetails = {
+            ...conversationData,
+            dress_title: conversationData.listings?.title,
+            dress_image: conversationData.listings?.images?.[0],
+            dress_price: conversationData.listings?.price,
+            other_user_name: otherUserProfile?.full_name || 'ユーザー',
+            last_message: null,
+            unread_count: 0
+          }
+
+          setConversation(conversationWithDetails)
+        }
+        
+        // メッセージを取得
+        const messagesData = await fetchMessages(conversationId as string)
+        setMessages(messagesData)
+        
+        // メッセージを既読にする
+        await markMessagesAsRead(conversationId as string)
+      } catch (error) {
+        console.error('Failed to load conversation:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadConversationAndMessages()
+  }, [conversationId, user?.id]) // 依存関係を最小限に
 
   useEffect(() => {
     // メッセージが更新されたらスクロールを最下部に移動
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  useEffect(() => {
+    // 画面サイズに応じてtextareaの行数を調整
+    const updateTextareaRows = () => {
+      setTextareaRows(window.innerWidth < 768 ? 2 : 3)
+    }
+    
+    updateTextareaRows()
+    window.addEventListener('resize', updateTextareaRows)
+    return () => window.removeEventListener('resize', updateTextareaRows)
+  }, [])
+
   const handleSendMessage = async () => {
-    if (!newMessage.trim() || sending || !user) return
+    if (!newMessage.trim() || sending || !user || !conversationId) return
 
     setSending(true)
     
     try {
-      // TODO: 実際の実装ではSupabaseにメッセージを保存
-      const message: Message = {
-        id: `temp-${Date.now()}`,
-        conversation_id: conversationId as string,
-        sender_id: user.id,
-        sender_name: user.user_metadata?.display_name || 'あなた',
-        content: newMessage.trim(),
-        created_at: new Date().toISOString(),
-        is_read: false
-      }
-
+      // メッセージを送信
+      const message = await sendMessage(conversationId as string, newMessage.trim())
+      
+      // メッセージ一覧を更新
       setMessages(prev => [...prev, message])
       setNewMessage('')
     } catch (error) {
@@ -154,8 +144,7 @@ export default function MessageDetailPage() {
   }
 
   const getOtherParticipantName = () => {
-    // TODO: 実際の実装では現在のユーザー以外の参加者名を返す
-    return conversation?.participant_names[0] || 'ユーザー'
+    return conversation?.other_user_name || 'ユーザー'
   }
 
   if (loading) {
@@ -188,9 +177,9 @@ export default function MessageDetailPage() {
     <>
       <Header />
       <AuthGuard>
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="h-screen bg-gray-50 flex flex-col">
           {/* ヘッダー */}
-          <div className="bg-white border-b border-gray-200 px-4 py-4">
+          <div className="bg-white border-b border-gray-200 px-4 py-4 flex-shrink-0">
             <div className="max-w-4xl mx-auto flex items-center gap-4">
               <Link 
                 href="/mypage/messages"
@@ -256,10 +245,10 @@ export default function MessageDetailPage() {
           </div>
 
           {/* メッセージエリア */}
-          <div className="flex-1 overflow-hidden">
-            <div className="max-w-4xl mx-auto h-full flex flex-col">
+          <div className="flex-1 flex flex-col min-h-0">
+            <div className="max-w-4xl mx-auto w-full h-full flex flex-col">
               {/* メッセージ履歴 */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
                 {messages.map((message) => {
                   const isMyMessage = message.sender_id === user?.id
                   return (
@@ -298,8 +287,9 @@ export default function MessageDetailPage() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* メッセージ入力エリア */}
-              <div className="bg-white border-t border-gray-200 p-4">
+              {/* メッセージ入力エリア - 固定位置 */}
+              <div className="bg-white border-t border-gray-200 p-4 flex-shrink-0" 
+                   style={{ paddingBottom: `calc(1rem + env(safe-area-inset-bottom))` }}>
                 <div className="flex gap-3">
                   <div className="flex-1">
                     <textarea
@@ -307,15 +297,15 @@ export default function MessageDetailPage() {
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="メッセージを入力..."
-                      className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)] focus:border-transparent"
-                      rows={3}
+                      className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)] focus:border-transparent text-base"
+                      rows={textareaRows}
                       disabled={sending}
                     />
                   </div>
                   <button
                     onClick={handleSendMessage}
                     disabled={!newMessage.trim() || sending}
-                    className="self-end p-3 bg-[var(--primary-green)] text-white rounded-lg hover:bg-[var(--primary-green-dark)] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="self-end p-3 bg-[var(--primary-green)] text-white rounded-lg hover:bg-[var(--primary-green-dark)] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed min-w-[48px] min-h-[48px] flex items-center justify-center"
                   >
                     <Send className="w-5 h-5" />
                   </button>

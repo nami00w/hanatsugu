@@ -679,14 +679,9 @@ export default function ProductDetailPage() {
                     ¥{dress.price.toLocaleString()}
                   </span>
                   {dress.original_price && (
-                    <>
-                      <span className="text-sm sm:text-base lg:text-xl text-gray-500 line-through">
-                        ¥{dress.original_price.toLocaleString()}
-                      </span>
-                      <span className="bg-red-100 text-red-800 text-xs lg:text-sm font-medium px-1.5 py-0.5 lg:px-2 lg:py-1 rounded">
-                        {Math.round((1 - dress.price / dress.original_price) * 100)}% OFF
-                      </span>
-                    </>
+                    <span className="text-sm sm:text-base lg:text-xl text-gray-500 line-through">
+                      ¥{dress.original_price.toLocaleString()}
+                    </span>
                   )}
                 </div>
 

@@ -7,108 +7,14 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import AuthGuard from '@/components/AuthGuard'
 import { useAuth } from '@/contexts/AuthContext'
+import { useMessages, type Conversation } from '@/hooks/useMessages'
 
-interface Message {
-  id: string
-  conversation_id: string
-  sender_id: string
-  sender_name: string
-  receiver_id: string
-  receiver_name: string
-  content: string
-  created_at: string
-  is_read: boolean
-  dress_id?: string
-  dress_title?: string
-  dress_image?: string
-}
-
-interface Conversation {
-  id: string
-  participants: string[]
-  participant_names: string[]
-  last_message: Message
-  unread_count: number
-  dress_id?: string
-  dress_title?: string
-  dress_image?: string
-}
 
 export default function MessagesPage() {
   const { user } = useAuth()
   const [activeTab, setActiveTab] = useState<'received' | 'sent'>('received')
-  const [conversations, setConversations] = useState<Conversation[]>([])
-  const [loading, setLoading] = useState(true)
+  const { conversations, loading, error } = useMessages()
 
-  // ダミーデータ（実際の実装ではSupabaseから取得）
-  const dummyConversations: Conversation[] = [
-    {
-      id: '1',
-      participants: ['user1', 'user2'],
-      participant_names: ['田中 美咲', '佐藤 花子'],
-      last_message: {
-        id: 'msg1',
-        conversation_id: '1',
-        sender_id: 'user2',
-        sender_name: '田中 美咲',
-        receiver_id: 'user1',
-        receiver_name: '佐藤 花子',
-        content: 'VERA WANGのドレスについてお聞きしたいことがあります。サイズ調整は可能でしょうか？',
-        created_at: '2024-01-15T10:30:00Z',
-        is_read: false
-      },
-      unread_count: 2,
-      dress_id: '1',
-      dress_title: 'VERA WANG Liesel エレガントドレス',
-      dress_image: 'https://images.unsplash.com/photo-1594552072238-b8a33785b261?w=80&h=80&fit=crop'
-    },
-    {
-      id: '2',
-      participants: ['user1', 'user3'],
-      participant_names: ['山田 麗子', '鈴木 愛美'],
-      last_message: {
-        id: 'msg2',
-        conversation_id: '2',
-        sender_id: 'user1',
-        sender_name: '山田 麗子',
-        receiver_id: 'user3',
-        receiver_name: '鈴木 愛美',
-        content: 'ありがとうございます。検討いたします。',
-        created_at: '2024-01-14T15:45:00Z',
-        is_read: true
-      },
-      unread_count: 0,
-      dress_id: '3',
-      dress_title: 'ANTONIO RIVA Gemma クラシックドレス',
-      dress_image: 'https://images.unsplash.com/photo-1522653216850-4f1415a174fb?w=80&h=80&fit=crop'
-    },
-    {
-      id: '3',
-      participants: ['user1', 'user4'],
-      participant_names: ['高橋 真美', '佐々木 恵'],
-      last_message: {
-        id: 'msg3',
-        conversation_id: '3',
-        sender_id: 'user4',
-        sender_name: '高橋 真美',
-        receiver_id: 'user1',
-        receiver_name: '佐々木 恵',
-        content: 'こんにちは。こちらのドレスはまだ販売中でしょうか？',
-        created_at: '2024-01-13T09:20:00Z',
-        is_read: false
-      },
-      unread_count: 1,
-      dress_id: '5',
-      dress_title: 'JENNY PACKHAM Hermione グラマラスドレス',
-      dress_image: 'https://images.unsplash.com/photo-1522621032211-ac0031dfbddc?w=80&h=80&fit=crop'
-    }
-  ]
-
-  useEffect(() => {
-    // TODO: 実際の実装ではSupabaseからメッセージを取得
-    setConversations(dummyConversations)
-    setLoading(false)
-  }, [user])
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -125,11 +31,12 @@ export default function MessagesPage() {
   }
 
   const getOtherParticipantName = (conversation: Conversation) => {
-    // TODO: 実際の実装では現在のユーザー以外の参加者名を返す
-    return conversation.participant_names[0]
+    return conversation.other_user_name || 'ユーザー'
   }
 
   const filteredConversations = conversations.filter(conversation => {
+    if (!conversation.last_message) return false
+    
     if (activeTab === 'received') {
       // 受信メッセージ：最後のメッセージが自分以外から送信されたもの
       return conversation.last_message.sender_id !== user?.id
@@ -184,9 +91,9 @@ export default function MessagesPage() {
                   }`}
                 >
                   受信メッセージ
-                  {conversations.filter(c => c.last_message.sender_id !== user?.id && c.unread_count > 0).length > 0 && (
+                  {conversations.filter(c => c.last_message && c.last_message.sender_id !== user?.id && c.unread_count > 0).length > 0 && (
                     <span className="ml-2 bg-red-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">
-                      {conversations.filter(c => c.last_message.sender_id !== user?.id && c.unread_count > 0).length}
+                      {conversations.filter(c => c.last_message && c.last_message.sender_id !== user?.id && c.unread_count > 0).length}
                     </span>
                   )}
                 </button>
@@ -204,7 +111,12 @@ export default function MessagesPage() {
 
               {/* メッセージ一覧 */}
               <div className="divide-y divide-gray-200">
-                {filteredConversations.length === 0 ? (
+                {error && (
+                  <div className="text-center py-12">
+                    <p className="text-red-500">{error}</p>
+                  </div>
+                )}
+                {!error && filteredConversations.length === 0 ? (
                   <div className="text-center py-12">
                     <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500">

@@ -44,7 +44,23 @@ export function useMessages() {
       setLoading(true)
       setError(null)
 
-      // 会話一覧を取得（商品情報とプロフィール情報を含む）
+      // テーブルの存在確認
+      const { data: tableCheck, error: tableError } = await supabase
+        .from('conversations')
+        .select('id')
+        .limit(1)
+
+      if (tableError) {
+        console.error('Conversations table not found or accessible:', tableError)
+        if (tableError.message.includes('relation "public.conversations" does not exist')) {
+          setError('メッセージ機能を使用するには、データベースのセットアップが必要です。管理者にお問い合わせください。')
+          setConversations([])
+          return
+        }
+        throw tableError
+      }
+
+      // 会話一覧を取得（商品情報のみ、プロフィール情報は別途取得）
       const { data: conversationsData, error: conversationsError } = await supabase
         .from('conversations')
         .select(`
@@ -53,20 +69,17 @@ export function useMessages() {
             title,
             images,
             price
-          ),
-          buyer_profile:buyer_id (
-            full_name
-          ),
-          seller_profile:seller_id (
-            full_name
           )
         `)
         .or(`buyer_id.eq.${user.id},seller_id.eq.${user.id}`)
         .order('updated_at', { ascending: false })
 
-      if (conversationsError) throw conversationsError
+      if (conversationsError) {
+        console.error('Conversations query error:', conversationsError)
+        throw conversationsError
+      }
 
-      // 各会話の最新メッセージと未読数を取得
+      // 各会話の最新メッセージ、未読数、プロフィール情報を取得
       const conversationsWithMessages = await Promise.all(
         (conversationsData || []).map(async (conversation) => {
           // 最新メッセージを取得
@@ -76,7 +89,7 @@ export function useMessages() {
             .eq('conversation_id', conversation.id)
             .order('created_at', { ascending: false })
             .limit(1)
-            .single()
+            .maybeSingle()
 
           // 未読数を取得（自分以外が送信した未読メッセージ）
           const { count: unreadCount } = await supabase
@@ -86,6 +99,14 @@ export function useMessages() {
             .neq('sender_id', user.id)
             .eq('is_read', false)
 
+          // 相手のプロフィール情報を取得
+          const otherUserId = conversation.buyer_id === user.id ? conversation.seller_id : conversation.buyer_id
+          const { data: otherUserProfile } = await supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', otherUserId)
+            .maybeSingle()
+
           return {
             ...conversation,
             last_message: latestMessage,
@@ -93,10 +114,7 @@ export function useMessages() {
             dress_title: conversation.listings?.title,
             dress_image: conversation.listings?.images?.[0],
             dress_price: conversation.listings?.price,
-            other_user_name: 
-              conversation.buyer_id === user.id 
-                ? conversation.seller_profile?.full_name 
-                : conversation.buyer_profile?.full_name
+            other_user_name: otherUserProfile?.full_name || 'ユーザー'
           }
         })
       )
@@ -104,7 +122,8 @@ export function useMessages() {
       setConversations(conversationsWithMessages)
     } catch (err) {
       console.error('Error fetching conversations:', err)
-      setError('会話の取得に失敗しました')
+      console.error('Error details:', JSON.stringify(err, null, 2))
+      setError(`会話の取得に失敗しました: ${err instanceof Error ? err.message : 'Unknown error'}`)
     } finally {
       setLoading(false)
     }
@@ -119,11 +138,17 @@ export function useMessages() {
         .eq('conversation_id', conversationId)
         .order('created_at', { ascending: true })
 
-      if (error) throw error
+      if (error) {
+        console.error('Messages query error:', error)
+        if (error.message.includes('relation "public.messages" does not exist')) {
+          throw new Error('メッセージ機能を使用するには、データベースのセットアップが必要です。')
+        }
+        throw error
+      }
       return data || []
     } catch (err) {
       console.error('Error fetching messages:', err)
-      throw new Error('メッセージの取得に失敗しました')
+      throw new Error(`メッセージの取得に失敗しました: ${err instanceof Error ? err.message : 'Unknown error'}`)
     }
   }
 
@@ -156,13 +181,20 @@ export function useMessages() {
 
     try {
       // 既存の会話を確認
-      const { data: existingConversation } = await supabase
+      const { data: existingConversation, error: fetchError } = await supabase
         .from('conversations')
         .select('id')
         .eq('dress_id', dressId)
         .eq('buyer_id', user.id)
         .eq('seller_id', sellerId)
-        .single()
+        .maybeSingle()
+
+      if (fetchError) {
+        console.error('Error fetching existing conversation:', fetchError)
+        if (fetchError.message.includes('relation "public.conversations" does not exist')) {
+          throw new Error('メッセージ機能を使用するには、データベースのセットアップが必要です。')
+        }
+      }
 
       if (existingConversation) {
         return existingConversation.id
@@ -179,11 +211,14 @@ export function useMessages() {
         .select('id')
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Error creating conversation:', error)
+        throw error
+      }
       return newConversation.id
     } catch (err) {
       console.error('Error creating conversation:', err)
-      throw new Error('会話の作成に失敗しました')
+      throw new Error(`会話の作成に失敗しました: ${err instanceof Error ? err.message : 'Unknown error'}`)
     }
   }
 

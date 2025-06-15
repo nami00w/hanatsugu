@@ -138,11 +138,6 @@ export default function DressCard({
         
         <div className="flex items-center justify-between text-sm text-gray-500 pt-1">
           <span>サイズ {formatSizeDisplay(size, 'card')}</span>
-          {originalPrice && originalPrice > price && (
-            <span className="text-green-600">
-              Save {Math.round((1 - price / originalPrice) * 100)}%
-            </span>
-          )}
         </div>
         
         <div className="flex items-center gap-2 pt-1">
