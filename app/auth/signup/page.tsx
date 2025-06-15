@@ -34,8 +34,11 @@ export default function SignupPage() {
 
     const result = await signUp(email, password, name)
     
-    if (result.success) {
-      // 登録成功 - 開発環境では自動的にログイン状態になる
+    if (result.success && result.needsEmailVerification) {
+      // メール認証が必要な場合、確認画面にリダイレクト
+      router.push(`/auth/verify-email?email=${encodeURIComponent(result.email || email)}`)
+    } else if (result.success) {
+      // 登録成功（メール認証不要の場合）
       router.push('/')
     } else {
       setError(result.error || '登録に失敗しました')

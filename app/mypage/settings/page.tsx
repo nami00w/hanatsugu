@@ -10,7 +10,7 @@ import AuthGuard from '@/components/AuthGuard'
 import Header from '@/components/Header'
 
 export default function SettingsPage() {
-  const { user, signOut, refreshUser } = useAuth()
+  const { user, signOut, refreshUser, updatePassword } = useAuth()
   const [activeTab, setActiveTab] = useState<'profile' | 'account' | 'bank'>('profile')
   const [loading, setLoading] = useState(false)
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([])
@@ -88,12 +88,22 @@ export default function SettingsPage() {
 
       if (success) {
         alert('プロフィールを更新しました')
-        // ローカル状態をクリア
-        setProfileImage(null)
-        setProfileImagePreview('')
         
         // ユーザー情報をリフレッシュして即座反映
         await refreshUser()
+        
+        // 成功時は新しい画像URLでプレビューを更新（キャッシュバスティング付き）
+        if (avatarUrl) {
+          // Unsplash画像（開発環境のダミー）にはキャッシュバスティングを追加しない
+          const previewUrl = avatarUrl.includes('unsplash.com') 
+            ? avatarUrl 
+            : `${avatarUrl}?t=${Date.now()}`
+          setProfileImagePreview(previewUrl)
+        }
+        
+        // アップロード用のFile objectはクリア
+        setProfileImage(null)
+        
         console.log('✅ Profile updated and user info refreshed successfully!')
       } else {
         alert('プロフィールの更新に失敗しました')
@@ -107,8 +117,8 @@ export default function SettingsPage() {
   }
 
   const handlePasswordChange = async () => {
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      alert('すべての項目を入力してください')
+    if (!newPassword || !confirmPassword) {
+      alert('新しいパスワードを入力してください')
       return
     }
     
@@ -124,11 +134,16 @@ export default function SettingsPage() {
     
     setLoading(true)
     try {
-      // TODO: パスワード変更APIを実装
-      alert('パスワードを変更しました')
-      setCurrentPassword('')
-      setNewPassword('')
-      setConfirmPassword('')
+      const result = await updatePassword(newPassword)
+      
+      if (result.success) {
+        alert('パスワードを変更しました')
+        setCurrentPassword('')
+        setNewPassword('')
+        setConfirmPassword('')
+      } else {
+        alert(result.error || 'パスワードの変更に失敗しました')
+      }
     } catch (error) {
       console.error('Password change error:', error)
       alert('パスワードの変更に失敗しました')
@@ -353,7 +368,12 @@ export default function SettingsPage() {
                             value={currentPassword}
                             onChange={(e) => setCurrentPassword(e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            placeholder="※Supabaseでは新しいパスワードのみで変更可能"
+                            disabled
                           />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Supabaseの仕様により、現在のパスワード確認は不要です
+                          </p>
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">

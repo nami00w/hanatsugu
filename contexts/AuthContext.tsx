@@ -9,10 +9,13 @@ interface AuthContextType {
   session: Session | null;
   user: User | null;
   loading: boolean;
-  signUp: (email: string, password: string, displayName: string) => Promise<{ success: boolean; error?: string }>;
+  signUp: (email: string, password: string, displayName: string) => Promise<{ success: boolean; error?: string; needsEmailVerification?: boolean; email?: string }>;
   signIn: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
+  resendConfirmationEmail: (email: string) => Promise<{ success: boolean; error?: string }>;
+  resetPassword: (email: string) => Promise<{ success: boolean; error?: string }>;
+  updatePassword: (password: string) => Promise<{ success: boolean; error?: string }>;
   isAuthenticated: boolean;
 }
 
@@ -80,18 +83,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { success: false, error: error.message };
       }
 
-      // 開発環境では自動ログイン（メール確認不要）
-      if (data.user && !data.session) {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-        if (signInError) {
-          return { success: false, error: 'アカウント作成後のログインに失敗しました' };
-        }
-      }
-
-      return { success: true };
+      // メール認証が完了するまでセッションは作成されない
+      return { 
+        success: true, 
+        needsEmailVerification: true,
+        email: email 
+      };
     } catch (error) {
       console.error('SignUp error:', error);
       return { success: false, error: '登録処理中にエラーが発生しました' };
@@ -162,6 +159,70 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // メール認証の再送信
+  const resendConfirmationEmail = async (email: string) => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/welcome`
+        }
+      });
+
+      if (error) {
+        console.error('Resend confirmation error:', error);
+        return { success: false, error: 'メールの再送信に失敗しました' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Exception in resendConfirmationEmail:', error);
+      return { success: false, error: 'メールの再送信中にエラーが発生しました' };
+    }
+  };
+
+  // パスワードリセット
+  const resetPassword = async (email: string) => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`
+      });
+
+      if (error) {
+        console.error('Reset password error:', error);
+        return { success: false, error: 'パスワードリセットメールの送信に失敗しました' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Exception in resetPassword:', error);
+      return { success: false, error: 'パスワードリセット処理中にエラーが発生しました' };
+    }
+  };
+
+  // パスワード更新
+  const updatePassword = async (password: string) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: password
+      });
+
+      if (error) {
+        console.error('Update password error:', error);
+        if (error.message.includes('Password should be at least')) {
+          return { success: false, error: 'パスワードは6文字以上で入力してください' };
+        }
+        return { success: false, error: 'パスワードの更新に失敗しました' };
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error('Exception in updatePassword:', error);
+      return { success: false, error: 'パスワード更新処理中にエラーが発生しました' };
+    }
+  };
+
   const value = {
     session,
     user,
@@ -170,6 +231,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signOut,
     refreshUser,
+    resendConfirmationEmail,
+    resetPassword,
+    updatePassword,
     isAuthenticated: !!session,
   };
 
