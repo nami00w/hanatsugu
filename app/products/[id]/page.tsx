@@ -751,10 +751,6 @@ export default function ProductDetailPage() {
                     <span className="text-sm text-gray-600 block mb-1">状態</span>
                     <p className="font-semibold text-gray-800">{dress.condition}</p>
                   </div>
-                  <div>
-                    <span className="text-sm text-gray-600 block mb-1">カテゴリー</span>
-                    <p className="font-semibold text-gray-800">{dress.category}</p>
-                  </div>
                   {dress.silhouette && (
                     <div>
                       <span className="text-sm text-gray-600 block mb-1">シルエット</span>

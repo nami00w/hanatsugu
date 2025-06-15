@@ -75,7 +75,7 @@ interface SellStepsProps {
 export default function SellSteps({ onSubmit, loading, error, setError, uploadProgress, initialData, isEditMode = false }: SellStepsProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [showDraftModal, setShowDraftModal] = useState(false)
-  const [formData, setFormData] = useState<FormData>(initialData || {
+  const [formData, setFormData] = useState<FormData>({
     images: [],
     previews: [],
     size: '',
@@ -107,6 +107,14 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
     category: 'mermaid',
     customMeasurements: {}
   })
+
+  // 初期データが変更されたときにフォームデータを更新
+  React.useEffect(() => {
+    if (initialData) {
+      console.log('🔄 初期データを設定中:', initialData)
+      setFormData(initialData)
+    }
+  }, [initialData])
 
   const steps: Step[] = [
     {
@@ -189,11 +197,11 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return formData.images.length > 0
+        // 画像がアップロード済み、または既存画像（previews）がある場合
+        return formData.images.length > 0 || formData.previews.length > 0
       case 2:
-        // サイズ必須 + バスト・ウエスト・ヒップのうち最低2つ
-        const measurements = [formData.bust, formData.waist, formData.hip].filter(m => m.trim() !== '')
-        return formData.size !== '' && measurements.length >= 2
+        // サイズのみ必須（スリーサイズは任意）
+        return formData.size !== ''
       case 3:
         return formData.title.trim() !== '' && formData.brand.trim() !== '' && 
                formData.color.trim() !== '' && formData.condition !== '' && formData.ownerHistory !== ''
@@ -207,12 +215,13 @@ export default function SellSteps({ onSubmit, loading, error, setError, uploadPr
   const getRequiredFieldsCount = (step: number): { completed: number; total: number } => {
     switch (step) {
       case 1:
-        return { completed: formData.images.length > 0 ? 1 : 0, total: 1 }
+        // 画像がアップロード済み、または既存画像がある場合
+        const hasImages = formData.images.length > 0 || formData.previews.length > 0
+        return { completed: hasImages ? 1 : 0, total: 1 }
       case 2:
-        const measurements = [formData.bust, formData.waist, formData.hip].filter(m => m.trim() !== '')
+        // サイズのみ必須
         const sizeCompleted = formData.size !== '' ? 1 : 0
-        const measurementsCompleted = measurements.length >= 2 ? 1 : 0
-        return { completed: sizeCompleted + measurementsCompleted, total: 2 }
+        return { completed: sizeCompleted, total: 1 }
       case 3:
         const step3Fields = [formData.title, formData.brand, formData.color, formData.condition, formData.ownerHistory]
         const completed3 = step3Fields.filter(field => typeof field === 'string' ? field.trim() !== '' : field !== '').length

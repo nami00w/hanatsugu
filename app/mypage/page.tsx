@@ -142,7 +142,7 @@ export default function MyPage() {
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{userInfo.name}</h1>
                 <p className="text-sm text-gray-600">{userInfo.email}</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  {userInfo.joinDate} • 評価 ⭐ {userInfo.rating} • 取引完了 {userInfo.totalSales}件
+                  {userInfo.joinDate}
                 </p>
               </div>
             </div>

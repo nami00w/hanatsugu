@@ -81,17 +81,17 @@ export default function SizeMeasurementStep({
         </div>
       </div>
 
-      {/* 必須採寸 */}
+      {/* 詳細採寸（任意） */}
       <div className="bg-gray-50 rounded-xl p-6">
-        <h4 className="text-lg font-semibold text-gray-900 mb-4">必須採寸</h4>
+        <h4 className="text-lg font-semibold text-gray-900 mb-4">詳細採寸（任意）</h4>
         <p className="text-sm text-gray-600 mb-6">
-          バスト・ウエスト・ヒップのうち、最低2つの採寸が必要です
+          より詳細な採寸情報があると購入者により安心していただけます
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              バスト（cm） <span className="text-red-500">*</span>
+              バスト（cm）
             </label>
             <input
               type="number"
@@ -104,7 +104,7 @@ export default function SizeMeasurementStep({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              ウエスト（cm） <span className="text-red-500">*</span>
+              ウエスト（cm）
             </label>
             <input
               type="number"
@@ -117,7 +117,7 @@ export default function SizeMeasurementStep({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              ヒップ（cm） <span className="text-red-500">*</span>
+              ヒップ（cm）
             </label>
             <input
               type="number"
@@ -212,12 +212,15 @@ export default function SizeMeasurementStep({
               </tr>
             </thead>
             <tbody className="divide-y divide-blue-200">
-              <tr><td className="py-1">XS (7号・US 0-2)</td><td>79cm</td><td>58cm</td><td>82cm</td></tr>
-              <tr><td className="py-1">S (9号・US 2-4)</td><td>82cm</td><td>61cm</td><td>85cm</td></tr>
-              <tr><td className="py-1">M (11号・US 6-8)</td><td>85cm</td><td>64cm</td><td>88cm</td></tr>
-              <tr><td className="py-1">L (13号・US 10-12)</td><td>88cm</td><td>67cm</td><td>91cm</td></tr>
-              <tr><td className="py-1">XL (15号・US 14-16)</td><td>91cm</td><td>70cm</td><td>94cm</td></tr>
-              <tr><td className="py-1">XXL (17号・US 18-20)</td><td>94cm</td><td>73cm</td><td>97cm</td></tr>
+              <tr><td className="py-1">XS (5号・US00-0)</td><td>76cm</td><td>55cm</td><td>79cm</td></tr>
+              <tr><td className="py-1">S (7号・US0-2)</td><td>79cm</td><td>58cm</td><td>82cm</td></tr>
+              <tr><td className="py-1">S+ (9号・US2-4)</td><td>82cm</td><td>61cm</td><td>85cm</td></tr>
+              <tr><td className="py-1">M (11号・US6-8)</td><td>85cm</td><td>64cm</td><td>88cm</td></tr>
+              <tr><td className="py-1">M+ (13号・US8-10)</td><td>88cm</td><td>67cm</td><td>91cm</td></tr>
+              <tr><td className="py-1">L (15号・US10-12)</td><td>91cm</td><td>70cm</td><td>94cm</td></tr>
+              <tr><td className="py-1">L+ (17号・US12-14)</td><td>94cm</td><td>73cm</td><td>97cm</td></tr>
+              <tr><td className="py-1">XL (19号・US14-16)</td><td>97cm</td><td>76cm</td><td>100cm</td></tr>
+              <tr><td className="py-1">XXL (21号・US16-18)</td><td>100cm</td><td>79cm</td><td>103cm</td></tr>
             </tbody>
           </table>
         </div>

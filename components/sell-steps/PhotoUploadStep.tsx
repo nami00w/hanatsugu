@@ -97,6 +97,7 @@ export default function PhotoUploadStep({
   error, 
   setError 
 }: PhotoUploadStepProps) {
+  console.log('📸 PhotoUploadStep - images:', images.length, 'previews:', previews.length, previews)
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -224,7 +225,7 @@ export default function PhotoUploadStep({
         </p>
       </div>
 
-      {images.length === 0 ? (
+      {images.length === 0 && previews.length === 0 ? (
         <div
           {...getRootProps()}
           className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-200 ${
@@ -250,7 +251,7 @@ export default function PhotoUploadStep({
             onDragEnd={handleDragEnd}
           >
             <SortableContext
-              items={images.map((_, index) => `image-${index}`)}
+              items={previews.map((_, index) => `image-${index}`)}
               strategy={rectSortingStrategy}
             >
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -264,7 +265,7 @@ export default function PhotoUploadStep({
                   />
                 ))}
                 
-                {images.length < 10 && (
+                {previews.length < 10 && (
                   <div
                     {...getRootProps()}
                     className="aspect-square border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-green-400 transition-colors bg-gray-50 hover:bg-gray-100"

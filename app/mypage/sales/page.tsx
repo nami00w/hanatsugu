@@ -5,113 +5,146 @@ import Image from 'next/image';
 import { CurrencyYenIcon, TruckIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import AuthGuard from '@/components/AuthGuard';
 import Header from '@/components/Header';
+import { useAuth } from '@/contexts/AuthContext';
+import { salesAPI, dressesAPI, type Sale } from '@/lib/supabase';
 
-interface Sale {
-  id: string;
-  orderId: string;
-  productId: string;
-  productTitle: string;
-  productImage: string;
-  amount: number;
-  platformFee: number;
-  netAmount: number;
-  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'completed' | 'withdrawn';
-  buyerName: string;
-  orderDate: string;
-  completedDate?: string;
+// 拡張されたSale型（表示用）
+interface SaleWithDetails extends Sale {
+  listing?: {
+    title: string;
+    images: string[];
+  };
+  buyer?: {
+    display_name?: string;
+    email: string;
+  };
 }
 
 export default function SalesPage() {
-  const [sales, setSales] = useState<Sale[]>([]);
+  const { user } = useAuth();
+  const [sales, setSales] = useState<SaleWithDetails[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [filter, setFilter] = useState<'all' | 'pending' | 'completed' | 'withdrawn'>('all');
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [selectedSales, setSelectedSales] = useState<string[]>([]);
 
-  // ダミーデータ
+  // 実際のデータを取得
   useEffect(() => {
-    setSales([
-      {
-        id: '1',
-        orderId: 'ORDER-001',
-        productId: '1',
-        productTitle: 'VERA WANG Liesel エレガントドレス',
-        productImage: 'https://images.unsplash.com/photo-1594552072238-b8a33785b261',
-        amount: 128000,
-        platformFee: 19200,
-        netAmount: 108800,
-        status: 'completed',
-        buyerName: '山田 花子',
-        orderDate: '2024-03-01',
-        completedDate: '2024-03-08'
-      },
-      {
-        id: '2',
-        orderId: 'ORDER-002',
-        productId: '2',
-        productTitle: 'Pronovias Draco ロマンチックドレス',
-        productImage: 'https://images.unsplash.com/photo-1565378781267-616ed0977ce5',
-        amount: 95000,
-        platformFee: 14250,
-        netAmount: 80750,
-        status: 'shipped',
-        buyerName: '佐藤 美咲',
-        orderDate: '2024-03-10'
-      },
-      {
-        id: '3',
-        orderId: 'ORDER-003',
-        productId: '3',
-        productTitle: 'ANTONIO RIVA Gemma クラシックドレス',
-        productImage: 'https://images.unsplash.com/photo-1522653216850-4f1415a174fb',
-        amount: 168000,
-        platformFee: 25200,
-        netAmount: 142800,
-        status: 'withdrawn',
-        buyerName: '鈴木 理恵',
-        orderDate: '2024-02-15',
-        completedDate: '2024-02-22'
+    const loadSalesData = async () => {
+      if (!user) return;
+      
+      setLoading(true);
+      try {
+        // 全ての売上データを取得
+        const salesData = await salesAPI.getRecentSales(user.id, 50); // 最大50件
+        
+        // 各売上に商品情報と購入者情報を付加
+        const salesWithDetails = await Promise.all(
+          salesData.map(async (sale) => {
+            try {
+              // 商品情報を取得
+              const listing = await dressesAPI.getDressById(sale.listing_id);
+              
+              // 購入者情報を取得（プライバシー保護のため限定的な情報のみ）
+              const buyerName = `購入者${sale.buyer_id.slice(-4)}`; // IDの末尾4桁でマスク
+              
+              return {
+                ...sale,
+                listing: listing ? {
+                  title: listing.title,
+                  images: listing.images
+                } : undefined,
+                buyer: {
+                  display_name: buyerName,
+                  email: '****@****' // メールアドレスはマスク
+                }
+              };
+            } catch (err) {
+              console.error('Error loading sale details:', err);
+              return {
+                ...sale,
+                listing: {
+                  title: '商品情報取得エラー',
+                  images: []
+                },
+                buyer: {
+                  display_name: '購入者',
+                  email: '****@****'
+                }
+              };
+            }
+          })
+        );
+        
+        setSales(salesWithDetails);
+        setError('');
+      } catch (err) {
+        console.error('Failed to load sales:', err);
+        setError('売上データの取得に失敗しました');
+        // エラー時はダミーデータを表示
+        setSales([
+          {
+            id: 'demo-1',
+            user_id: user.id,
+            listing_id: 'demo-listing-1',
+            amount: 128000,
+            platform_fee: 19200,
+            net_amount: 108800,
+            status: 'completed',
+            buyer_id: 'demo-buyer-1',
+            created_at: '2024-03-01T00:00:00Z',
+            completed_at: '2024-03-08T00:00:00Z',
+            listing: {
+              title: 'VERA WANG Liesel エレガントドレス',
+              images: ['https://images.unsplash.com/photo-1594552072238-b8a33785b261']
+            },
+            buyer: {
+              display_name: '山田 花子',
+              email: 'buyer@example.com'
+            }
+          }
+        ]);
+      } finally {
+        setLoading(false);
       }
-    ]);
-  }, []);
+    };
+
+    loadSalesData();
+  }, [user]);
 
   const filteredSales = sales.filter(sale => {
     if (filter === 'all') return true;
-    if (filter === 'pending') return ['pending', 'paid', 'shipped', 'delivered'].includes(sale.status);
+    if (filter === 'pending') return sale.status === 'pending';
     if (filter === 'completed') return sale.status === 'completed';
-    if (filter === 'withdrawn') return sale.status === 'withdrawn';
+    if (filter === 'withdrawn') return sale.status === 'cancelled'; // cancelledを振込済として扱う
     return true;
   });
 
   const totalAvailable = sales
     .filter(s => s.status === 'completed')
-    .reduce((sum, s) => sum + s.netAmount, 0);
+    .reduce((sum, s) => sum + s.net_amount, 0);
 
   const totalPending = sales
-    .filter(s => ['pending', 'paid', 'shipped', 'delivered'].includes(s.status))
-    .reduce((sum, s) => sum + s.netAmount, 0);
+    .filter(s => s.status === 'pending')
+    .reduce((sum, s) => sum + s.net_amount, 0);
 
   const getStatusLabel = (status: Sale['status']) => {
     const labels = {
-      pending: '支払済',
-      paid: '支払済',
-      shipped: '発送済',
-      delivered: '配達済',
+      pending: '処理中',
       completed: '振込可能',
-      withdrawn: '振込済'
+      cancelled: '振込済'
     };
-    return labels[status];
+    return labels[status] || status;
   };
 
   const getStatusColor = (status: Sale['status']) => {
     const colors = {
       pending: 'bg-yellow-100 text-yellow-800',
-      paid: 'bg-yellow-100 text-yellow-800',
-      shipped: 'bg-blue-100 text-blue-800',
-      delivered: 'bg-purple-100 text-purple-800',
       completed: 'bg-green-100 text-green-800',
-      withdrawn: 'bg-gray-100 text-gray-800'
+      cancelled: 'bg-gray-100 text-gray-800'
     };
-    return colors[status];
+    return colors[status] || 'bg-gray-100 text-gray-600';
   };
 
   const handleWithdraw = () => {
@@ -123,6 +156,16 @@ export default function SalesPage() {
 
   return (
     <>
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--primary-green)] mx-auto mb-4"></div>
+              <p>売上データを読み込み中...</p>
+            </div>
+          </div>
+        </div>
+      )}
       <Header />
       <AuthGuard>
         <div className="min-h-screen bg-gray-50">
@@ -166,7 +209,7 @@ export default function SalesPage() {
                 onClick={() => setFilter('all')}
                 className={`px-4 py-2 rounded-md text-sm font-medium ${
                   filter === 'all' 
-                    ? 'bg-pink-500 text-white' 
+                    ? 'bg-[var(--primary-green)] text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -176,7 +219,7 @@ export default function SalesPage() {
                 onClick={() => setFilter('pending')}
                 className={`px-4 py-2 rounded-md text-sm font-medium ${
                   filter === 'pending' 
-                    ? 'bg-pink-500 text-white' 
+                    ? 'bg-[var(--primary-green)] text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -186,7 +229,7 @@ export default function SalesPage() {
                 onClick={() => setFilter('completed')}
                 className={`px-4 py-2 rounded-md text-sm font-medium ${
                   filter === 'completed' 
-                    ? 'bg-pink-500 text-white' 
+                    ? 'bg-[var(--primary-green)] text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -196,7 +239,7 @@ export default function SalesPage() {
                 onClick={() => setFilter('withdrawn')}
                 className={`px-4 py-2 rounded-md text-sm font-medium ${
                   filter === 'withdrawn' 
-                    ? 'bg-pink-500 text-white' 
+                    ? 'bg-[var(--primary-green)] text-white' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -207,7 +250,7 @@ export default function SalesPage() {
             {totalAvailable > 0 && (
               <button
                 onClick={() => setShowWithdrawModal(true)}
-                className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+                className="bg-[var(--primary-green)] text-white px-4 py-2 rounded-md hover:bg-[var(--primary-green-dark)] transition-colors"
               >
                 振込申請
               </button>
@@ -217,60 +260,73 @@ export default function SalesPage() {
 
         {/* 売上リスト */}
         <div className="space-y-4">
-          {filteredSales.map((sale) => (
-            <div key={sale.id} className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-start gap-4">
-                <div className="relative w-20 h-20 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
-                  <Image
-                    src={sale.productImage}
-                    alt={sale.productTitle}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold">{sale.productTitle}</h3>
-                      <p className="text-sm text-gray-600">購入者: {sale.buyerName}</p>
-                      <p className="text-sm text-gray-600">注文日: {sale.orderDate}</p>
-                      {sale.completedDate && (
-                        <p className="text-sm text-gray-600">完了日: {sale.completedDate}</p>
-                      )}
+          {error && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <p className="text-yellow-800">{error}</p>
+              <p className="text-sm text-yellow-600 mt-1">デモデータを表示しています</p>
+            </div>
+          )}
+          
+          {filteredSales.length === 0 ? (
+            <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+              <CurrencyYenIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">売上がありません</h3>
+              <p className="text-gray-600">商品が売れると、ここに売上履歴が表示されます。</p>
+            </div>
+          ) : (
+            filteredSales.map((sale) => (
+              <div key={sale.id} className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-start gap-4">
+                  <div className="relative w-20 h-20 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
+                    {sale.listing?.images?.[0] ? (
+                      <Image
+                        src={sale.listing.images[0]}
+                        alt={sale.listing.title || '商品画像'}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="text-gray-400 text-xs text-center">画像なし</div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="font-semibold">{sale.listing?.title || '商品情報不明'}</h3>
+                        <p className="text-sm text-gray-600">購入者: {sale.buyer?.display_name || '購入者'}</p>
+                        <p className="text-sm text-gray-600">注文日: {new Date(sale.created_at).toLocaleDateString('ja-JP')}</p>
+                        {sale.completed_at && (
+                          <p className="text-sm text-gray-600">完了日: {new Date(sale.completed_at).toLocaleDateString('ja-JP')}</p>
+                        )}
+                      </div>
+                      
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(sale.status)}`}>
+                        {getStatusLabel(sale.status)}
+                      </span>
                     </div>
                     
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(sale.status)}`}>
-                      {getStatusLabel(sale.status)}
-                    </span>
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t">
-                    <div>
-                      <p className="text-sm text-gray-600">販売価格</p>
-                      <p className="font-semibold">¥{sale.amount.toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">手数料(15%)</p>
-                      <p className="font-semibold text-red-600">-¥{sale.platformFee.toLocaleString()}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">受取金額</p>
-                      <p className="font-semibold text-green-600">¥{sale.netAmount.toLocaleString()}</p>
+                    <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t">
+                      <div>
+                        <p className="text-sm text-gray-600">販売価格</p>
+                        <p className="font-semibold">¥{sale.amount.toLocaleString()}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">手数料(15%)</p>
+                        <p className="font-semibold text-red-600">-¥{sale.platform_fee.toLocaleString()}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">受取金額</p>
+                        <p className="font-semibold text-[var(--primary-green)]">¥{sale.net_amount.toLocaleString()}</p>
+                      </div>
                     </div>
                   </div>
-                  
-                  {sale.status === 'shipped' && (
-                    <div className="mt-4">
-                      <button className="text-pink-500 hover:text-pink-600 text-sm font-medium">
-                        追跡番号を入力
-                      </button>
-                    </div>
-                  )}
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 
@@ -291,7 +347,7 @@ export default function SalesPage() {
                 <input
                   type="text"
                   placeholder="例: みずほ銀行"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
                 />
               </div>
               
@@ -300,7 +356,7 @@ export default function SalesPage() {
                 <input
                   type="text"
                   placeholder="例: 渋谷支店"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
                 />
               </div>
               
@@ -309,7 +365,7 @@ export default function SalesPage() {
                 <input
                   type="text"
                   placeholder="1234567"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
                 />
               </div>
               
@@ -318,7 +374,7 @@ export default function SalesPage() {
                 <input
                   type="text"
                   placeholder="ヤマダ ハナコ"
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--primary-green)]"
                 />
               </div>
             </div>
@@ -332,7 +388,7 @@ export default function SalesPage() {
             <div className="flex gap-3">
               <button
                 onClick={handleWithdraw}
-                className="flex-1 bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors"
+                className="flex-1 bg-[var(--primary-green)] text-white py-2 rounded-md hover:bg-[var(--primary-green-dark)] transition-colors"
               >
                 申請する
               </button>

@@ -18,8 +18,8 @@ interface ProductFilterProps {
 }
 
 // 新しいサイズシステム: S・M・L + 号数対応
-const MAIN_SIZES = Object.keys(sizeMapping) // ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-const GOU_SIZES = ['7号', '9号', '11号', '13号', '15号', '17号']
+const MAIN_SIZES = Object.keys(sizeMapping) // ['XS', 'S', 'S+', 'M', 'M+', 'L', 'L+', 'XL', 'XXL']
+const GOU_SIZES = ['5号', '7号', '9号', '11号', '13号', '15号', '17号', '19号', '21号']
 const CONDITIONS = ['新品・未使用', '未使用に近い', '目立った傷や汚れなし', 'やや傷や汚れあり']
 
 export default function ProductFilter({ onFilterChange, initialFilters, isModal = false, onClose }: ProductFilterProps) {
