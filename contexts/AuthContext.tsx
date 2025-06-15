@@ -25,9 +25,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // 初期セッションの取得
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        console.error('Error getting session:', error);
+      }
       setSession(session);
       setUser(session?.user ?? null);
+      setLoading(false);
+    }).catch((error) => {
+      console.error('Error getting session:', error);
+      setSession(null);
+      setUser(null);
       setLoading(false);
     });
 
@@ -117,11 +125,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      // セッション状態を先にクリア
+      setSession(null);
+      setUser(null);
+      
+      // ローカルストレージからも削除
+      if (typeof window !== 'undefined') {
+        window.localStorage.removeItem('supabase.auth.token');
+        window.localStorage.removeItem('supabase.auth.refreshToken');
+      }
+      
+      // Supabaseのサインアウト（エラーを無視）
+      await supabase.auth.signOut({ scope: 'local' });
+      
       router.push('/');
-    } catch (error) {
-      console.error('SignOut error:', error);
+    } catch (error: any) {
+      console.warn('SignOut warning (ignored):', error.message);
+      // エラーが発生してもリダイレクトは実行
+      router.push('/');
     }
   };
 

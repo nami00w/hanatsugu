@@ -31,8 +31,13 @@ export default function Header() {
   }, [])
 
   const handleLogout = async () => {
-    await signOut()
-    setShowAccountDropdown(false)
+    try {
+      await signOut()
+    } catch (error) {
+      console.warn('Logout warning (ignored):', error)
+    } finally {
+      setShowAccountDropdown(false)
+    }
   }
 
   const displayName = user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'ユーザー'

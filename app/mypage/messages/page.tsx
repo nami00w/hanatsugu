@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import React from 'react'
 import { MessageSquare, User, Clock, ArrowLeft, Package } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -12,7 +12,6 @@ import { useMessages, type Conversation } from '@/hooks/useMessages'
 
 export default function MessagesPage() {
   const { user } = useAuth()
-  const [activeTab, setActiveTab] = useState<'received' | 'sent'>('received')
   const { conversations, loading, error } = useMessages()
 
 
@@ -33,18 +32,6 @@ export default function MessagesPage() {
   const getOtherParticipantName = (conversation: Conversation) => {
     return conversation.other_user_name || 'ユーザー'
   }
-
-  const filteredConversations = conversations.filter(conversation => {
-    if (!conversation.last_message) return false
-    
-    if (activeTab === 'received') {
-      // 受信メッセージ：最後のメッセージが自分以外から送信されたもの
-      return conversation.last_message.sender_id !== user?.id
-    } else {
-      // 送信メッセージ：最後のメッセージが自分から送信されたもの  
-      return conversation.last_message.sender_id === user?.id
-    }
-  })
 
   if (loading) {
     return (
@@ -73,41 +60,21 @@ export default function MessagesPage() {
               >
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Link>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">メッセージ</h1>
-                <p className="text-sm text-gray-600">お問い合わせとやり取り</p>
+              <div className="flex items-center gap-3">
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900">メッセージ</h1>
+                  <p className="text-sm text-gray-600">お問い合わせとやり取り</p>
+                </div>
+                {conversations.filter(c => c.unread_count > 0).length > 0 && (
+                  <span className="bg-red-500 text-white text-sm font-medium rounded-full w-6 h-6 flex items-center justify-center">
+                    {conversations.reduce((total, c) => total + c.unread_count, 0)}
+                  </span>
+                )}
               </div>
             </div>
 
-            {/* タブナビゲーション */}
+            {/* メッセージ一覧 */}
             <div className="bg-white rounded-lg shadow-sm mb-6">
-              <div className="flex border-b border-gray-200">
-                <button
-                  onClick={() => setActiveTab('received')}
-                  className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
-                    activeTab === 'received'
-                      ? 'text-[var(--primary-green)] border-b-2 border-[var(--primary-green)]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  受信メッセージ
-                  {conversations.filter(c => c.last_message && c.last_message.sender_id !== user?.id && c.unread_count > 0).length > 0 && (
-                    <span className="ml-2 bg-red-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">
-                      {conversations.filter(c => c.last_message && c.last_message.sender_id !== user?.id && c.unread_count > 0).length}
-                    </span>
-                  )}
-                </button>
-                <button
-                  onClick={() => setActiveTab('sent')}
-                  className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
-                    activeTab === 'sent'
-                      ? 'text-[var(--primary-green)] border-b-2 border-[var(--primary-green)]'
-                      : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  送信メッセージ
-                </button>
-              </div>
 
               {/* メッセージ一覧 */}
               <div className="divide-y divide-gray-200">
@@ -116,15 +83,15 @@ export default function MessagesPage() {
                     <p className="text-red-500">{error}</p>
                   </div>
                 )}
-                {!error && filteredConversations.length === 0 ? (
+                {!error && conversations.length === 0 ? (
                   <div className="text-center py-12">
                     <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                     <p className="text-gray-500">
-                      {activeTab === 'received' ? '受信したメッセージはありません' : '送信したメッセージはありません'}
+                      メッセージはありません
                     </p>
                   </div>
                 ) : (
-                  filteredConversations.map((conversation) => (
+                  conversations.map((conversation) => (
                     <Link
                       key={conversation.id}
                       href={`/mypage/messages/${conversation.id}`}
