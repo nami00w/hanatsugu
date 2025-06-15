@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, RefreshCw, CheckCircle } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import Header from '@/components/Header'
 
-export default function VerifyEmailPage() {
+function VerifyEmailForm() {
   const searchParams = useSearchParams()
   const email = searchParams.get('email') || ''
   const { resendConfirmationEmail } = useAuth()
@@ -149,5 +149,23 @@ export default function VerifyEmailPage() {
         </div>
       </div>
     </>
+  )
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={
+      <>
+        <Header />
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--primary-green)] mx-auto mb-4"></div>
+            <p>読み込み中...</p>
+          </div>
+        </div>
+      </>
+    }>
+      <VerifyEmailForm />
+    </Suspense>
   )
 }

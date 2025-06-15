@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { User, Camera, MapPin, Calendar, Phone, ArrowRight, Skip } from 'lucide-react'
+import { User, Camera, MapPin, Calendar, Phone, ArrowRight, ChevronRight } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { profileAPI } from '@/lib/supabase'
 import AuthGuard from '@/components/AuthGuard'
@@ -325,7 +325,7 @@ export default function ProfileSetupPage() {
                   onClick={handleSkip}
                   className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1"
                 >
-                  <Skip className="w-4 h-4" />
+                  <ChevronRight className="w-4 h-4" />
                   スキップ
                 </button>
               </div>
